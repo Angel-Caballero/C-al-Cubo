@@ -1,5 +1,7 @@
 package aiss.model.deezer;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Data
 {
     private String readable;
@@ -12,7 +14,8 @@ public class Data
 
     private String link;
 
-    private String explicit_content_cover;
+    @JsonProperty("explicit_content_cover")
+    private String explicitContentCover;
 
     private String title;
 
@@ -84,14 +87,16 @@ public class Data
         this.link = link;
     }
 
-    public String getExplicit_content_cover ()
+    @JsonProperty("explicit_content_cover")
+    public String getExplicitContentCover ()
     {
-        return explicit_content_cover;
+        return explicitContentCover;
     }
 
-    public void setExplicit_content_cover (String explicit_content_cover)
+    @JsonProperty("explicit_content_cover")
+    public void setExplicitContentCover (String explicitContentCover)
     {
-        this.explicit_content_cover = explicit_content_cover;
+        this.explicitContentCover = explicitContentCover;
     }
 
     public String getTitle ()
@@ -197,6 +202,6 @@ public class Data
     @Override
     public String toString()
     {
-        return "ClassPojo [readable = "+readable+", preview = "+preview+", artist = "+artist+", album = "+album+", link = "+link+", explicit_content_cover = "+explicit_content_cover+", title = "+title+", title_version = "+title_version+", explicit_lyrics = "+explicit_lyrics+", type = "+type+", title_short = "+title_short+", duration = "+duration+", rank = "+rank+", id = "+id+", explicit_content_lyrics = "+explicit_content_lyrics+", time_add = "+time_add+"]";
+        return "ClassPojo [readable = "+readable+", preview = "+preview+", artist = "+artist+", album = "+album+", link = "+link+", explicit_content_cover = "+explicitContentCover+", title = "+title+", title_version = "+title_version+", explicit_lyrics = "+explicit_lyrics+", type = "+type+", title_short = "+title_short+", duration = "+duration+", rank = "+rank+", id = "+id+", explicit_content_lyrics = "+explicit_content_lyrics+", time_add = "+time_add+"]";
     }
 }

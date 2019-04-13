@@ -1,16 +1,21 @@
 package aiss.model.deezer;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Album
 {
     private String cover;
 
     private String tracklist;
 
-    private String cover_xl;
+    @JsonProperty("cover_xl")
+    private String coverXl;
 
-    private String cover_medium;
+    @JsonProperty("cover_medium")
+    private String coverMedium;
 
-    private String cover_small;
+    @JsonProperty("cover_small")
+    private String coverSmall;
 
     private String id;
 
@@ -40,34 +45,40 @@ public class Album
         this.tracklist = tracklist;
     }
 
-    public String getCover_xl ()
+    @JsonProperty("cover_xl")
+    public String getCoverXl ()
     {
-        return cover_xl;
+        return coverXl;
     }
 
-    public void setCover_xl (String cover_xl)
+    @JsonProperty("cover_xl")
+    public void setCoverXl (String coverXl)
     {
-        this.cover_xl = cover_xl;
+        this.coverXl = coverXl;
     }
 
-    public String getCover_medium ()
+    @JsonProperty("cover_medium")
+    public String getCoverMedium ()
     {
-        return cover_medium;
+        return coverMedium;
     }
 
-    public void setCover_medium (String cover_medium)
+    @JsonProperty("cover_medium")
+    public void setCoverMedium (String coverMedium)
     {
-        this.cover_medium = cover_medium;
+        this.coverMedium = coverMedium;
     }
 
-    public String getCover_small ()
+    @JsonProperty("cover_small")
+    public String getCoverSmall ()
     {
-        return cover_small;
+        return coverSmall;
     }
 
-    public void setCover_small (String cover_small)
+    @JsonProperty("cover_small")
+    public void setCoverSmall (String coverSmall)
     {
-        this.cover_small = cover_small;
+        this.coverSmall = coverSmall;
     }
 
     public String getId ()
@@ -113,6 +124,6 @@ public class Album
     @Override
     public String toString()
     {
-        return "ClassPojo [cover = "+cover+", tracklist = "+tracklist+", cover_xl = "+cover_xl+", cover_medium = "+cover_medium+", cover_small = "+cover_small+", id = "+id+", title = "+title+", type = "+type+", cover_big = "+cover_big+"]";
+        return "ClassPojo [cover = "+cover+", tracklist = "+tracklist+", cover_xl = "+coverXl+", cover_medium = "+coverMedium+", cover_small = "+coverSmall+", id = "+id+", title = "+title+", type = "+type+", cover_big = "+cover_big+"]";
     }
 }
