@@ -19,13 +19,16 @@ public class Data
 
     private String title;
 
-    private String title_version;
+    @JsonProperty("title_version")
+    private String titleVersion;
 
-    private String explicit_lyrics;
+    @JsonProperty("explicit_lyrics")
+    private String explicitLyrics;
 
     private String type;
 
-    private String title_short;
+    @JsonProperty("title_short")
+    private String titleShort;
 
     private String duration;
 
@@ -33,9 +36,11 @@ public class Data
 
     private String id;
 
-    private String explicit_content_lyrics;
+    @JsonProperty("explicit_content_lyrics")
+    private String explicitContentLyrics;
 
-    private String time_add;
+    @JsonProperty("time_add")
+    private String timeAdd;
 
     public String getReadable ()
     {
@@ -109,24 +114,28 @@ public class Data
         this.title = title;
     }
 
-    public String getTitle_version ()
+    @JsonProperty("title_version")
+    public String getTitleVersion ()
     {
-        return title_version;
+        return titleVersion;
     }
 
-    public void setTitle_version (String title_version)
+    @JsonProperty("title_version")
+    public void setTitleVersion (String titleVersion)
     {
-        this.title_version = title_version;
+        this.titleVersion = titleVersion;
     }
 
-    public String getExplicit_lyrics ()
+    @JsonProperty("explicit_lyrics")
+    public String getExplicitLyrics ()
     {
-        return explicit_lyrics;
+        return explicitLyrics;
     }
 
-    public void setExplicit_lyrics (String explicit_lyrics)
+    @JsonProperty("explicit_lyrics")
+    public void setExplicitLyrics (String explicitLyrics)
     {
-        this.explicit_lyrics = explicit_lyrics;
+        this.explicitLyrics = explicitLyrics;
     }
 
     public String getType ()
@@ -139,14 +148,16 @@ public class Data
         this.type = type;
     }
 
-    public String getTitle_short ()
+    @JsonProperty("title_short")
+    public String getTitleShort ()
     {
-        return title_short;
+        return titleShort;
     }
 
-    public void setTitle_short (String title_short)
+    @JsonProperty("title_short")
+    public void setTitleShort (String titleShort)
     {
-        this.title_short = title_short;
+        this.titleShort = titleShort;
     }
 
     public String getDuration ()
@@ -179,29 +190,33 @@ public class Data
         this.id = id;
     }
 
-    public String getExplicit_content_lyrics ()
+    @JsonProperty("explicit_content_lyrics")
+    public String getExplicitContentLyrics ()
     {
-        return explicit_content_lyrics;
+        return explicitContentLyrics;
     }
 
-    public void setExplicit_content_lyrics (String explicit_content_lyrics)
+    @JsonProperty("explicit_content_lyrics")
+    public void setExplicitContentLyrics (String explicitContentLyrics)
     {
-        this.explicit_content_lyrics = explicit_content_lyrics;
+        this.explicitContentLyrics = explicitContentLyrics;
     }
 
-    public String getTime_add ()
+    @JsonProperty("time_add")
+    public String getTimeAdd ()
     {
-        return time_add;
+        return timeAdd;
     }
 
-    public void setTime_add (String time_add)
+    @JsonProperty("time_add")
+    public void setTimeAdd (String timeAdd)
     {
-        this.time_add = time_add;
+        this.timeAdd = timeAdd;
     }
 
     @Override
     public String toString()
     {
-        return "ClassPojo [readable = "+readable+", preview = "+preview+", artist = "+artist+", album = "+album+", link = "+link+", explicit_content_cover = "+explicitContentCover+", title = "+title+", title_version = "+title_version+", explicit_lyrics = "+explicit_lyrics+", type = "+type+", title_short = "+title_short+", duration = "+duration+", rank = "+rank+", id = "+id+", explicit_content_lyrics = "+explicit_content_lyrics+", time_add = "+time_add+"]";
+        return "ClassPojo [readable = "+readable+", preview = "+preview+", artist = "+artist+", album = "+album+", link = "+link+", explicit_content_cover = "+explicitContentCover+", title = "+title+", title_version = "+titleVersion+", explicit_lyrics = "+explicitLyrics+", type = "+type+", titleShort = "+titleShort+", duration = "+duration+", rank = "+rank+", id = "+id+", explicit_content_lyrics = "+explicitContentLyrics+", timeAdd = "+timeAdd+"]";
     }
 }

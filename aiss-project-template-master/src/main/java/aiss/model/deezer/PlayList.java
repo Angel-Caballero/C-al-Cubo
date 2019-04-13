@@ -54,7 +54,8 @@ public class PlayList {
 
 	private String id;
 
-	private String picture_medium;
+	@JsonProperty("picture_medium")
+	private String pictureMedium;
 
 	@JsonProperty("nb_tracks")
 	public String getNbTracks ()
@@ -278,20 +279,22 @@ public class PlayList {
 	        this.id = id;
 	    }
 
-	    public String getPicture_medium ()
+		@JsonProperty("picture_medium")
+	    public String getPictureMedium ()
 	    {
-	        return picture_medium;
+	        return pictureMedium;
 	    }
 
-	    public void setPicture_medium (String picture_medium)
+		@JsonProperty("picture_medium")
+	    public void setPictureMedium (String pictureMedium)
 	    {
-	        this.picture_medium = picture_medium;
+	        this.pictureMedium = pictureMedium;
 	    }
 
 	    @Override
 	    public String toString()
 	    {
-	        return "ClassPojo [nb_tracks = "+nbTracks+", picture_xl = "+pictureXl+", tracklist = "+tracklist+", creator = "+ creator +", collaborative = "+collaborative+", link = "+link+", picture_small = "+pictureSmall+", description = "+description+", creation_date = "+creationDate+", title = "+title+", type = "+type+", picture = "+picture+", tracks = "+tracks+", fans = "+fans+", duration = "+duration+", is_loved_track = "+isLovedTrack+", public = "+publico+", picture_big = "+pictureBig+", checksum = "+checksum+", share = "+share+", id = "+id+", picture_medium = "+picture_medium+"]";
+	        return "ClassPojo [nb_tracks = "+nbTracks+", picture_xl = "+pictureXl+", tracklist = "+tracklist+", creator = "+ creator +", collaborative = "+collaborative+", link = "+link+", picture_small = "+pictureSmall+", description = "+description+", creation_date = "+creationDate+", title = "+title+", type = "+type+", picture = "+picture+", tracks = "+tracks+", fans = "+fans+", duration = "+duration+", is_loved_track = "+isLovedTrack+", public = "+publico+", picture_big = "+pictureBig+", checksum = "+checksum+", share = "+share+", id = "+id+", pictureMedium = "+pictureMedium+"]";
 	    }
 }
 

@@ -23,7 +23,8 @@ public class Album
 
     private String type;
 
-    private String cover_big;
+    @JsonProperty("cover_big")
+    private String coverBig;
 
     public String getCover ()
     {
@@ -111,19 +112,21 @@ public class Album
         this.type = type;
     }
 
-    public String getCover_big ()
+    @JsonProperty("cover_big")
+    public String getCoverBig ()
     {
-        return cover_big;
+        return coverBig;
     }
 
-    public void setCover_big (String cover_big)
+    @JsonProperty("cover_big")
+    public void setCoverBig (String coverBig)
     {
-        this.cover_big = cover_big;
+        this.coverBig = coverBig;
     }
 
     @Override
     public String toString()
     {
-        return "ClassPojo [cover = "+cover+", tracklist = "+tracklist+", cover_xl = "+coverXl+", cover_medium = "+coverMedium+", cover_small = "+coverSmall+", id = "+id+", title = "+title+", type = "+type+", cover_big = "+cover_big+"]";
+        return "ClassPojo [cover = "+cover+", tracklist = "+tracklist+", cover_xl = "+coverXl+", cover_medium = "+coverMedium+", cover_small = "+coverSmall+", id = "+id+", title = "+title+", type = "+type+", coverBig = "+coverBig+"]";
     }
 }
