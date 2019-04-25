@@ -3,7 +3,7 @@ package aiss.model.deezer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
-public class Data {
+public class PlayListData {
 	
 	@JsonProperty("nb_tracks")
 	private String nbTracks;

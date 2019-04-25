@@ -1,11 +1,13 @@
 package aiss.model.deezer;
 
-public class PlayListSearch{
+public class TrackSearch {
     private String next;
 
     private String total;
 
-    private PlayListData[] data;
+    private TrackData[] data;
+
+    private String checksum;
 
     public String getNext ()
     {
@@ -27,19 +29,29 @@ public class PlayListSearch{
         this.total = total;
     }
 
-    public PlayListData[] getData ()
+    public TrackData[] getData ()
     {
         return data;
     }
 
-    public void setData (PlayListData[] data)
+    public void setData (TrackData[] data)
     {
         this.data = data;
+    }
+
+    public String getChecksum ()
+    {
+        return checksum;
+    }
+
+    public void setChecksum (String checksum)
+    {
+        this.checksum = checksum;
     }
 
     @Override
     public String toString()
     {
-        return "ClassPojo [next = "+next+", total = "+total+", data = "+data+"]";
+        return "ClassPojo [next = "+next+", total = "+total+", data = "+data+", checksum = "+checksum+"]";
     }
 }
