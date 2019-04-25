@@ -1,12 +1,10 @@
 package aiss.model.deezer;
 
-public class Artist
+public class User
 {
     private String tracklist;
 
     private String name;
-
-    private String link;
 
     private String id;
 
@@ -32,16 +30,6 @@ public class Artist
         this.name = name;
     }
 
-    public String getLink ()
-    {
-        return link;
-    }
-
-    public void setLink (String link)
-    {
-        this.link = link;
-    }
-
     public String getId ()
     {
         return id;
@@ -65,6 +53,7 @@ public class Artist
     @Override
     public String toString()
     {
-        return "ClassPojo [tracklist = "+tracklist+", name = "+name+", link = "+link+", id = "+id+", type = "+type+"]";
+        return "ClassPojo [tracklist = "+tracklist+", name = "+name+", id = "+id+", type = "+type+"]";
     }
 }
+

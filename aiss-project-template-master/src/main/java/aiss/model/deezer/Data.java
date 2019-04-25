@@ -2,221 +2,211 @@ package aiss.model.deezer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Data
-{
-    private String readable;
 
-    private String preview;
+public class Data {
+	
+	@JsonProperty("nb_tracks")
+	private String nbTracks;
 
-    private Artist artist;
+	@JsonProperty("picture_xl")
+	private String pictureXl;
 
-    private Album album;
+	private String tracklist;
 
-    private String link;
+	private String link;
 
-    @JsonProperty("explicit_content_cover")
-    private String explicitContentCover;
+	@JsonProperty("picture_small")
+	private String pictureSmall;
 
-    private String title;
+	@JsonProperty("creation_date")
+	private String creationDate;
 
-    @JsonProperty("title_version")
-    private String titleVersion;
+	private String title;
 
-    @JsonProperty("explicit_lyrics")
-    private String explicitLyrics;
+	private String type;
 
-    private String type;
+	private String picture;
 
-    @JsonProperty("title_short")
-    private String titleShort;
+	@JsonProperty("public")
+	private String publico;
 
-    private String duration;
+	@JsonProperty("picture_big")
+	private String pictureBig;
 
-    private String rank;
+	private String checksum;
 
-    private String id;
+	private String id;
+	
+	 private User user;
 
-    @JsonProperty("explicit_content_lyrics")
-    private String explicitContentLyrics;
+	@JsonProperty("picture_medium")
+	private String pictureMedium;
 
-    @JsonProperty("time_add")
-    private String timeAdd;
+	@JsonProperty("nb_tracks")
+	public String getNbTracks ()
+	{
+		return nbTracks;
+	}
 
-    public String getReadable ()
-    {
-        return readable;
-    }
+	@JsonProperty("nb_tracks")
+	public void setNbTracks (String nbTracks)
+	{
+		this.nbTracks = nbTracks;
+	}
 
-    public void setReadable (String readable)
-    {
-        this.readable = readable;
-    }
+	@JsonProperty("picture_xl")
+	public String getPicture_xl ()
+	{
+		return pictureXl;
+	}
 
-    public String getPreview ()
-    {
-        return preview;
-    }
+	@JsonProperty("picture_xl")
+	public void setPictureXl (String pictureXl)
+	{
+	    this.pictureXl = pictureXl;
+	}
 
-    public void setPreview (String preview)
-    {
-        this.preview = preview;
-    }
+	public String getTracklist ()
+	{
+		return tracklist;
+	}
 
-    public Artist getArtist ()
-    {
-        return artist;
-    }
+	public void setTracklist (String tracklist)
+	{
+		this.tracklist = tracklist;
+	}
 
-    public void setArtist (Artist artist)
-    {
-        this.artist = artist;
-    }
+	    public String getLink ()
+	    {
+	        return link;
+	    }
 
-    public Album getAlbum ()
-    {
-        return album;
-    }
+	    public void setLink (String link)
+	    {
+	        this.link = link;
+	    }
 
-    public void setAlbum (Album album)
-    {
-        this.album = album;
-    }
+	    @JsonProperty("picture_small")
+	    public String getPictureSmall ()
+	    {
+	        return pictureSmall;
+	    }
 
-    public String getLink ()
-    {
-        return link;
-    }
+	    @JsonProperty("picture_small")
+	    public void setPictureSmall (String pictureSmall)
+	    {
+	        this.pictureSmall = pictureSmall;
+	    }
 
-    public void setLink (String link)
-    {
-        this.link = link;
-    }
+	    @JsonProperty("creation_date")
+	    public String getCreationDate ()
+	    {
+	        return creationDate;
+	    }
 
-    @JsonProperty("explicit_content_cover")
-    public String getExplicitContentCover ()
-    {
-        return explicitContentCover;
-    }
+	    public void setCreationDate (String creationDate)
+	    {
+	        this.creationDate = creationDate;
+	    }
 
-    @JsonProperty("explicit_content_cover")
-    public void setExplicitContentCover (String explicitContentCover)
-    {
-        this.explicitContentCover = explicitContentCover;
-    }
+	    public String getTitle ()
+	    {
+	        return title;
+	    }
 
-    public String getTitle ()
-    {
-        return title;
-    }
+	    public void setTitle (String title)
+	    {
+	        this.title = title;
+	    }
 
-    public void setTitle (String title)
-    {
-        this.title = title;
-    }
+	    public String getType ()
+	    {
+	        return type;
+	    }
 
-    @JsonProperty("title_version")
-    public String getTitleVersion ()
-    {
-        return titleVersion;
-    }
+	    public void setType (String type)
+	    {
+	        this.type = type;
+	    }
 
-    @JsonProperty("title_version")
-    public void setTitleVersion (String titleVersion)
-    {
-        this.titleVersion = titleVersion;
-    }
+	    public String getPicture ()
+	    {
+	        return picture;
+	    }
 
-    @JsonProperty("explicit_lyrics")
-    public String getExplicitLyrics ()
-    {
-        return explicitLyrics;
-    }
+	    public void setPicture (String picture)
+	    {
+	        this.picture = picture;
+	    }
 
-    @JsonProperty("explicit_lyrics")
-    public void setExplicitLyrics (String explicitLyrics)
-    {
-        this.explicitLyrics = explicitLyrics;
-    }
+	    @JsonProperty("public")
+	    public String getPublico ()
+	    {
+	        return publico;
+	    }
 
-    public String getType ()
-    {
-        return type;
-    }
+	    @JsonProperty("public")
+	    public void setPublic (String publico)
+	    {
+	        this.publico = publico;
+	    }
+	    @JsonProperty("picture_big")
+	    public String getPictureBig ()
+	    {
+	        return pictureBig;
+	    }
 
-    public void setType (String type)
-    {
-        this.type = type;
-    }
+	    @JsonProperty("picture_big")
+	    public void setPictureBig (String pictureBig)
+	    {
+	        this.pictureBig = pictureBig;
+	    }
 
-    @JsonProperty("title_short")
-    public String getTitleShort ()
-    {
-        return titleShort;
-    }
+	    public String getChecksum ()
+	    {
+	        return checksum;
+	    }
 
-    @JsonProperty("title_short")
-    public void setTitleShort (String titleShort)
-    {
-        this.titleShort = titleShort;
-    }
+	    public void setChecksum (String checksum)
+	    {
+	        this.checksum = checksum;
+	    }
 
-    public String getDuration ()
-    {
-        return duration;
-    }
+	    public String getId ()
+	    {
+	        return id;
+	    }
 
-    public void setDuration (String duration)
-    {
-        this.duration = duration;
-    }
+	    public void setId (String id)
+	    {
+	        this.id = id;
+	    }
 
-    public String getRank ()
-    {
-        return rank;
-    }
+		@JsonProperty("picture_medium")
+	    public String getPictureMedium ()
+	    {
+	        return pictureMedium;
+	    }
 
-    public void setRank (String rank)
-    {
-        this.rank = rank;
-    }
+		@JsonProperty("picture_medium")
+	    public void setPictureMedium (String pictureMedium)
+	    {
+	        this.pictureMedium = pictureMedium;
+	    }
 
-    public String getId ()
-    {
-        return id;
-    }
+	    @Override
+	    public String toString()
+	    {
+	        return "ClassPojo [nb_tracks = "+nbTracks+", picture_xl = "+pictureXl+", tracklist = "+tracklist+", link = "+link+", picture_small = "+pictureSmall+", creation_date = "+creationDate+", title = "+title+", type = "+type+", picture = "+picture+", public = "+publico+", picture_big = "+pictureBig+", checksum = "+checksum+", id = "+id+", pictureMedium = "+pictureMedium+"]";
+	    }
 
-    public void setId (String id)
-    {
-        this.id = id;
-    }
+		public User getUser() {
+			return user;
+		}
 
-    @JsonProperty("explicit_content_lyrics")
-    public String getExplicitContentLyrics ()
-    {
-        return explicitContentLyrics;
-    }
-
-    @JsonProperty("explicit_content_lyrics")
-    public void setExplicitContentLyrics (String explicitContentLyrics)
-    {
-        this.explicitContentLyrics = explicitContentLyrics;
-    }
-
-    @JsonProperty("time_add")
-    public String getTimeAdd ()
-    {
-        return timeAdd;
-    }
-
-    @JsonProperty("time_add")
-    public void setTimeAdd (String timeAdd)
-    {
-        this.timeAdd = timeAdd;
-    }
-
-    @Override
-    public String toString()
-    {
-        return "ClassPojo [readable = "+readable+", preview = "+preview+", artist = "+artist+", album = "+album+", link = "+link+", explicit_content_cover = "+explicitContentCover+", title = "+title+", title_version = "+titleVersion+", explicit_lyrics = "+explicitLyrics+", type = "+type+", titleShort = "+titleShort+", duration = "+duration+", rank = "+rank+", id = "+id+", explicit_content_lyrics = "+explicitContentLyrics+", timeAdd = "+timeAdd+"]";
-    }
+		public void setUser(User user) {
+			this.user = user;
+		}
 }
+
+

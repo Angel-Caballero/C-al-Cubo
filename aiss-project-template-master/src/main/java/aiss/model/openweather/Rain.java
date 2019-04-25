@@ -1,4 +1,4 @@
-package aiss.model.opeweather;
+package aiss.model.openweather;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
