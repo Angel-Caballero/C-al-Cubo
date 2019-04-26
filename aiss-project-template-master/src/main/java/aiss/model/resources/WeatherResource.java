@@ -14,12 +14,12 @@ public class WeatherResource{
 	  private static String URI = "api.openweathermap.org/data/2.5/weather?";
 	  private static String API_KEY = "eaddc12fe18c112838e912e6534cb747";
 		private static final Logger log = Logger.getLogger(WeatherResource.class.getName());
-	
-	public Forecast getWeather(String qCountry, String qCity)throws UnsupportedEncodingException {
+
+	public Forecast getForecast(String qCountry, String qCity)throws UnsupportedEncodingException {
 	  String country = URLEncoder.encode(qCountry, "UTF-8");
 	  String city = URLEncoder.encode(qCity, "UTF-8");
 	  String uri = URI + "q="+ city + "," + country+ "&appid=" + API_KEY;
-	
+
 	  ClientResource cr = null;
 	  Forecast weather = null;
 	  try {
@@ -29,5 +29,10 @@ public class WeatherResource{
 	    System.err.println("Error when retrieving the weather: " + cr.getResponse().getStatus());
 	  }
 	    return weather;
+	}
+
+	public String getWeather(Forecast tiempo)throws UnsupportedEncodingException {
+		Weather[] aux = tiempo.getWeather();
+		return aux[0].getMain();
 	}
 }
