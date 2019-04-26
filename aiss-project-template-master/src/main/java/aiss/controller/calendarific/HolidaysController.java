@@ -3,13 +3,13 @@ package aiss.controller.calendarific;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import aiss.model.resources.PlaylistResource;
+import aiss.model.calendarific.Calendarific;
+import aiss.model.resources.HolidaysResource;
 
 /**
  * Servlet implementation class HolidaysController
@@ -33,24 +33,26 @@ public class HolidaysController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		// Request data
-		String songId = request.getParameter("songId");
-		String playlistId = request.getParameter("playlistId");
+		String country = request.getParameter("country");
+		RequestDispatcher rd = null;
 				
-		// Add song to playlist
-		PlaylistResource plr = new PlaylistResource();
-		boolean success = plr.addSong(playlistId, songId);
+		// Search for Holidays
+		HolidaysResource hr = new HolidaysResource();
+		Calendarific calendar = hr.getHolidays(country);
 		
-		if (success) {
-			request.setAttribute("message", "Song added successfully");
-			log.log(Level.FINE, "Song with id=" + songId + " added to playlist with id=" + playlistId + ". Forwarding to playlist list view.");
+		if (calendar != null) {
+			log.log(Level.FINE, "Retrieved holidays of the country " + country + " succesfully");
+			rd = request.getRequestDispatcher("/holidays.jsp");
+			// Solamente se pasan las vacaciones del mes actual
+			request.setAttribute("holidays", hr.getHolidaysInActualMonth(calendar.getResponse().getHolidays()));
 		}
 		else {
-			request.setAttribute("message", "The song could not be added");
-			log.log(Level.FINE, "The song with id=" + songId + " could not be added to the playlist with id=" + playlistId + ". Perhaps it is duplicated. Forwarding to playlist list view.");
+			log.log(Level.SEVERE, "El calendario del pais " + country + " no tiene datos");
+			rd = request.getRequestDispatcher("/error.jsp");
 		}
 		
-		// Forward to contact list view
-		request.getRequestDispatcher("/list?playlistId=" + playlistId).forward(request, response);
+		// Forward to holidays view
+		rd.forward(request, response);
 	}
 
 	/**
