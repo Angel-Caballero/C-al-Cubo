@@ -2,8 +2,6 @@ package aiss.model.resources;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.logging.Logger;
-
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 
@@ -13,7 +11,6 @@ import aiss.model.openweather.Weather;
 public class WeatherResource{
 	  private static String URI = "api.openweathermap.org/data/2.5/weather?";
 	  private static String API_KEY = "eaddc12fe18c112838e912e6534cb747";
-		private static final Logger log = Logger.getLogger(WeatherResource.class.getName());
 
 	public Forecast getForecast(String qCountry, String qCity)throws UnsupportedEncodingException {
 	  String country = URLEncoder.encode(qCountry, "UTF-8");
@@ -31,8 +28,11 @@ public class WeatherResource{
 	    return weather;
 	}
 
-	public String getWeather(Forecast tiempo)throws UnsupportedEncodingException {
-		Weather[] aux = tiempo.getWeather();
+	public String getWeather(Forecast forecast)throws UnsupportedEncodingException {
+		Weather[] aux = forecast.getWeather();
 		return aux[0].getMain();
+	}
+	public String getCityId (Forecast forecast) {
+		return forecast.getId();
 	}
 }
