@@ -44,28 +44,59 @@ public class HolidaysResource {
 		Holidays result = null;
 		List<Holidays> holidaysList = Arrays.asList(holidays);
 		List<Holidays> aux = new ArrayList<Holidays>();
-		aux = holidaysList.stream().filter(h -> (h.getDate().getDatetime().getDay().equals(MonthDay.now().toString())) && 
-				(Integer.parseInt(h.getDate().getDatetime().getMonth()) == LocalDate.now().getMonth().getValue()))
-				.collect(Collectors.toList());
+		aux = ActualHolidayFilter(holidaysList);
 		if(!aux.isEmpty()) {
 			result = aux.get(0);
 		}else {
-			result = holidaysList.stream().filter(h -> (Integer.parseInt(h.getDate().getDatetime().getDay()) > MonthDay.now().getDayOfMonth()) && 
-					(Integer.parseInt(h.getDate().getDatetime().getMonth()) >= LocalDate.now().getMonth().getValue())).findFirst().get();
+			result = ClosestHolidayFilter(holidaysList);
 		}
 		return result;
 	}
 	
 	
+	private Holidays ClosestHolidayFilter(List<Holidays> holidaysList) {
+		List<Holidays> res = new ArrayList<Holidays>();
+		for(int pos = 0; pos < holidaysList.size(); pos++) {
+			if((Integer.parseInt(holidaysList.get(pos).getDate().getDatetime().getDay()) > MonthDay.now().getDayOfMonth()) && 
+					(Integer.parseInt(holidaysList.get(pos).getDate().getDatetime().getMonth()) >= LocalDate.now().getMonth().getValue())) {
+				res.add(holidaysList.get(pos));
+			}
+		}
+		return res.get(0);
+	}
+
+
+	private List<Holidays> ActualHolidayFilter(List<Holidays> holidaysList) {
+		List<Holidays> res = new ArrayList<Holidays>();
+		for(int pos = 0; pos < holidaysList.size(); pos++) {
+			if((holidaysList.get(pos).getDate().getDatetime().getDay().equals(MonthDay.now().toString())) && 
+				(Integer.parseInt(holidaysList.get(pos).getDate().getDatetime().getMonth()) == LocalDate.now().getMonth().getValue())) {
+				res.add(holidaysList.get(pos));
+			}
+		}
+		return res;
+	}
+
+
 	public List<Holidays> getHolidaysInActualMonth(Holidays[] holidays) throws UnsupportedEncodingException {
 		List<Holidays> holidaysList = Arrays.asList(holidays);
 		List<Holidays> result = new ArrayList<Holidays>();
-		result = holidaysList.stream().filter(h -> Integer.parseInt(h.getDate().getDatetime().getMonth()) == LocalDate.now().getMonth().getValue())
-				.collect(Collectors.toList());
+		result = ActualMonthHolidayFilter(holidaysList);
 		if(result.isEmpty()) {
 			System.err.println("There are no holidays in this month");
 		}
 		return result;
+	}
+
+
+	private List<Holidays> ActualMonthHolidayFilter(List<Holidays> holidaysList) {
+		List<Holidays> res = new ArrayList<Holidays>();
+		for(int pos = 0; pos < holidaysList.size(); pos++) {
+			if(Integer.parseInt(holidaysList.get(pos).getDate().getDatetime().getMonth()) == LocalDate.now().getMonth().getValue()) {
+				res.add(holidaysList.get(pos));
+			}
+		}
+		return res;
 	}
 	
 }
