@@ -31,7 +31,6 @@ public class WeatherController extends HttpServlet {
 		//Obtenemos los parámetros
 		String country = request.getParameter("country");
 		String city = request.getParameter("city");
-		
 		WeatherResource wr = new WeatherResource();
 		Forecast forecast = wr.getForecast(country, city);
 				
