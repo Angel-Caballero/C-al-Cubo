@@ -10,17 +10,11 @@
 
     <table>
       <tr>
-        <td colspan="2" style="font-weight:bold;">Informacion Disponible:</td>
-      </tr>
-      <tr>
-        <td><a href="/integrantes">Integrantes del Grupo</a></td>
-      </tr>
-      <tr>
-        <td><a href="/descripcion">Descripcion del Proyecto</a></td>
+        <td colspan="2" style="font-weight:bold;">Apis de OpenWeather y Calendarific:</td>
       </tr>
     </table>
     <form>
-      <input type="text" name="city" required placeholder="Ciudad"/>
+      <input type="text" name="city" placeholder="Ciudad" required/>
       <select>
 	<option value="AF">Afganistán</option>
 	<option value="AX">Islas Áland</option>
@@ -271,7 +265,20 @@
 	<option value="YE">Yemen</option>
 	<option value="ZM">Zambia</option>
 	<option value="ZW">Zimbabwe</option>
-</select>
+	</select>
+		<br></br>
+		<input type="submit" onclick='this.form.action="/integrantes";' value="Descripcion" >
+		<input type="submit" onclick='this.form.action="/integrantes";' value="Integrantes" />
+    </form>
+    <br></br>
+   <table>
+      <tr>
+        <td colspan="2" style="font-weight:bold;">Api de Deezer:</td>
+      </tr>
+    </table>
+    <form action="/integrantes">
+    	<input type="text" name="query" placeholder="Busqueda en Deezer" required/>
+    	<input type="submit" value="Buscar en Deezer"/>
     </form>
   </body>
 </html>
