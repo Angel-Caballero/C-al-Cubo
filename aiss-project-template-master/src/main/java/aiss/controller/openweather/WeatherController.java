@@ -26,6 +26,7 @@ public class WeatherController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = null;
 
+		
 		log.log(Level.INFO, "Procesando WeatherController.");
 		
 		//Obtenemos los parámetros

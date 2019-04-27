@@ -10,6 +10,16 @@
     <servlet-name>WeatherController</servlet-name>
     <url-pattern>/WeatherController</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>HolidaysController</display-name>
+    <servlet-name>HolidaysController</servlet-name>
+    <servlet-class>aiss.controller.calendarific.HolidaysController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HolidaysController</servlet-name>
+    <url-pattern>/HolidaysController</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>Descripcion</servlet-name>
     <servlet-class>aiss.DescripcionServlet</servlet-class>
