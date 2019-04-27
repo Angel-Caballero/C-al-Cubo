@@ -30,12 +30,12 @@ public class HolidaysResource {
 		
 		ClientResource cr = null;
 		Calendarific holidays = null;
-		try {
+	//	try {
 			cr = new ClientResource(uri);
 			holidays = cr.get(Calendarific.class);
-		} catch (ResourceException re) {
+		/*} catch (ResourceException re) {
 			System.err.println("Error when retrieving the holidays: " + cr.getResponse().getStatus());
-		}
+		}*/
 	    return holidays;
 	}
 	

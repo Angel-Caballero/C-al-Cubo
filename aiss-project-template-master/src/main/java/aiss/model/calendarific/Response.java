@@ -1,7 +1,7 @@
 package aiss.model.calendarific;
 
-public class Response{
-	
+public class Response
+{
     private Holidays[] holidays;
 
     public Holidays[] getHolidays ()

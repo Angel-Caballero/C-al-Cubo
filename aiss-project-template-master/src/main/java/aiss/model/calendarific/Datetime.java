@@ -1,12 +1,25 @@
 package aiss.model.calendarific;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 public class Datetime
 {
+	
     private String month;
 
     private String year;
 
     private String day;
+    
+    @JsonIgnore
+    private String hour;
+    
+    @JsonIgnore
+    private String minute;
+    
+    @JsonIgnore
+    private String second;
 
     public String getMonth ()
     {
@@ -41,6 +54,30 @@ public class Datetime
     @Override
     public String toString()
     {
-        return "ClassPojo [month = "+month+", year = "+year+", day = "+day+"]";
+        return "ClassPojo [month = "+month+", year = "+year+", day = "+day+ "hour = " + hour + "minute = " + minute + "second = " + second +"]";
     }
+
+	public String getHour() {
+		return hour;
+	}
+
+	public void setHour(String hour) {
+		this.hour = hour;
+	}
+
+	public String getMinute() {
+		return minute;
+	}
+
+	public void setMinute(String minute) {
+		this.minute = minute;
+	}
+
+	public String getSecond() {
+		return second;
+	}
+
+	public void setSecond(String second) {
+		this.second = second;
+	}
 }

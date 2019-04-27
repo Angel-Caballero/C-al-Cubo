@@ -1,7 +1,7 @@
 package aiss.model.calendarific;
 
-public class Calendarific{
-	
+public class Calendarific
+{
     private Meta meta;
 
     private Response response;

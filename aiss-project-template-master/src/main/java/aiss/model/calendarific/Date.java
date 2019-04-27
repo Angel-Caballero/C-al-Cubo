@@ -1,10 +1,12 @@
 package aiss.model.calendarific;
 
-public class Date{
-	
+public class Date
+{
     private Datetime datetime;
 
     private String iso;
+    
+    private Timezone timezone;
 
     public Datetime getDatetime ()
     {
@@ -29,6 +31,14 @@ public class Date{
     @Override
     public String toString()
     {
-        return "ClassPojo [datetime = "+datetime+", iso = "+iso+"]";
+        return "ClassPojo [datetime = "+datetime+", iso = "+iso+ ", timezone = "+timezone+ "]";
     }
+
+	public Timezone getTimezone() {
+		return timezone;
+	}
+
+	public void setTimezone(Timezone timezone) {
+		this.timezone = timezone;
+	}
 }

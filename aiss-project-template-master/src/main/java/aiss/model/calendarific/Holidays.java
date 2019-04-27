@@ -1,14 +1,22 @@
 package aiss.model.calendarific;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Holidays
 {
+	
     private Date date;
 
     private String name;
 
     private String description;
 
+    private String locations;
+
     private String[] type;
+
+    @JsonIgnore
+    private String states;
 
     public Date getDate ()
     {
@@ -40,6 +48,16 @@ public class Holidays
         this.description = description;
     }
 
+    public String getLocations ()
+    {
+        return locations;
+    }
+
+    public void setLocations (String locations)
+    {
+        this.locations = locations;
+    }
+
     public String[] getType ()
     {
         return type;
@@ -50,9 +68,19 @@ public class Holidays
         this.type = type;
     }
 
+    public String getStates ()
+    {
+        return states;
+    }
+
+    public void setStates (String states)
+    {
+        this.states = states;
+    }
+
     @Override
     public String toString()
     {
-        return "ClassPojo [date = "+date+", name = "+name+", description = "+description+", type = "+type+"]";
+        return "ClassPojo [date = "+date+", name = "+name+", description = "+description+", locations = "+locations+", type = "+type+", states = "+states+"]";
     }
 }

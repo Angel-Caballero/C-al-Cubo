@@ -35,7 +35,7 @@ public class HolidaysController extends HttpServlet{
 		// Request data
 		String country = request.getParameter("country");
 		RequestDispatcher rd = null;
-				
+		log.log(Level.INFO, "Procesando HolidaysController.");
 		// Search for Holidays
 		HolidaysResource hr = new HolidaysResource();
 		Calendarific calendar = hr.getHolidays(country);
