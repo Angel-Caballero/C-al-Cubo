@@ -10,9 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 import org.restlet.resource.ClientResource;
-import org.restlet.resource.ResourceException;
 import aiss.model.calendarific.Calendarific;
 import aiss.model.calendarific.Holidays;
 

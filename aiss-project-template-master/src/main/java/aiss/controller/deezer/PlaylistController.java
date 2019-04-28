@@ -22,7 +22,6 @@ import aiss.model.resources.TracksResource;
  */
 public class PlaylistController {
 
-	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(HolidaysController.class.getName());
     /**
      * @see HttpServlet#HttpServlet()

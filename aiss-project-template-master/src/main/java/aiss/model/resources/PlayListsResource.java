@@ -2,19 +2,12 @@ package aiss.model.resources;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.time.LocalDate;
-import java.time.MonthDay;
-import java.time.Year;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
-import aiss.model.calendarific.Calendarific;
-import aiss.model.calendarific.Holidays;
 import aiss.model.deezer.PlayListData;
 import aiss.model.deezer.PlayListSearch;
 

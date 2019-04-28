@@ -4,11 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
-
-import aiss.controller.openweather.WeatherController;
 import aiss.model.openweather.Forecast;
 import aiss.model.openweather.Weather;
 

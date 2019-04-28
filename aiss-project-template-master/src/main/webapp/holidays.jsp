@@ -9,7 +9,7 @@
 </head>
 <body>
 
-	<legend>Holidays from <c:out value="${param.country}"/></legend>
+	<h1>Holidays from <c:out value="${param.country}"/></h1>
 	<c:forEach items="${requestScope.holidays}" var="holiday">
 		<span>Holiday Name: <c:out value="${holiday.name}"/></span><br/>
 	</c:forEach>
