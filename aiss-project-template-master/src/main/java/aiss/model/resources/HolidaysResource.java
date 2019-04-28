@@ -2,11 +2,9 @@ package aiss.model.resources;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.time.LocalDate;
-import java.time.MonthDay;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,8 +19,9 @@ public class HolidaysResource {
 	private static final Logger log = Logger.getLogger(HolidaysResource.class.getName());
 	
 	public Calendarific getHolidays(String qCountry) throws UnsupportedEncodingException {
+		Integer yearAux = Calendar.YEAR;
 		String country = URLEncoder.encode(qCountry, "UTF-8");
-		String year = URLEncoder.encode(Year.now().toString(), "UTF-8");
+		String year = URLEncoder.encode(yearAux.toString(), "UTF-8");
 		String uri = URI + "country=" + country + "&year=" + year + "&api_key=" + API_KEY;
 		log.log(Level.FINE, "Calendarific URI: " + uri);
 		
@@ -55,8 +54,8 @@ public class HolidaysResource {
 	private Holidays ClosestHolidayFilter(List<Holidays> holidaysList) {
 		List<Holidays> res = new ArrayList<Holidays>();
 		for(int pos = 0; pos < holidaysList.size(); pos++) {
-			if((Integer.parseInt(holidaysList.get(pos).getDate().getDatetime().getDay()) > MonthDay.now().getDayOfMonth()) && 
-					(Integer.parseInt(holidaysList.get(pos).getDate().getDatetime().getMonth()) >= LocalDate.now().getMonth().getValue())) {
+			if((Integer.parseInt(holidaysList.get(pos).getDate().getDatetime().getDay()) > Calendar.DAY_OF_MONTH) && 
+					(Integer.parseInt(holidaysList.get(pos).getDate().getDatetime().getMonth()) >= Calendar.MONTH +1 )) {
 				res.add(holidaysList.get(pos));
 			}
 		}
@@ -67,8 +66,11 @@ public class HolidaysResource {
 	private List<Holidays> ActualHolidayFilter(List<Holidays> holidaysList) {
 		List<Holidays> res = new ArrayList<Holidays>();
 		for(int pos = 0; pos < holidaysList.size(); pos++) {
-			if((holidaysList.get(pos).getDate().getDatetime().getDay().equals(MonthDay.now().toString())) && 
-				(Integer.parseInt(holidaysList.get(pos).getDate().getDatetime().getMonth()) == LocalDate.now().getMonth().getValue())) {
+			Calendar calendar = Calendar.getInstance();
+			Integer day = calendar.get(Calendar.DAY_OF_MONTH);
+			Integer month = calendar.get(Calendar.MONTH);
+			if((holidaysList.get(pos).getDate().getDatetime().getDay().equals(day.toString())) && 
+				(Integer.parseInt(holidaysList.get(pos).getDate().getDatetime().getMonth()) == month)) {
 				res.add(holidaysList.get(pos));
 			}
 		}
@@ -90,7 +92,9 @@ public class HolidaysResource {
 	private List<Holidays> ActualMonthHolidayFilter(List<Holidays> holidaysList) {
 		List<Holidays> res = new ArrayList<Holidays>();
 		for(int pos = 0; pos < holidaysList.size(); pos++) {
-			if(Integer.parseInt(holidaysList.get(pos).getDate().getDatetime().getMonth()) == LocalDate.now().getMonth().getValue()) {
+			Calendar calendar = Calendar.getInstance();
+			Integer month = calendar.get(Calendar.MONTH);
+			if(Integer.parseInt(holidaysList.get(pos).getDate().getDatetime().getMonth()) == month) {
 				res.add(holidaysList.get(pos));
 			}
 		}
