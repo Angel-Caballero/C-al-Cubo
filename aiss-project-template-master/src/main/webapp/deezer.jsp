@@ -9,9 +9,9 @@
 </head>
 <body>
 
-	<h1>Tracks from <c:out value="${param.playlist}"/></h1>
-	<c:forEach items="${requestScope.tracks}" var="holiday">
-		<span>Holiday Name: <c:out value="${holiday.tittle}"/></span><br/>
+	<h1>Tracks from "<c:out value="${requestScope.playlist}"/>"</h1>
+	<c:forEach items="${requestScope.tracks}" var="track">
+		<span>Track Name: <c:out value="${track.title}"/></span><br/>
 	</c:forEach>
 	
 </body>

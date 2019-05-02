@@ -19,7 +19,7 @@ public class HolidaysResource {
 	private static final Logger log = Logger.getLogger(HolidaysResource.class.getName());
 	
 	public Calendarific getHolidays(String qCountry) throws UnsupportedEncodingException {
-		Integer yearAux = Calendar.YEAR;
+		Integer yearAux = Calendar.getInstance().get(Calendar.YEAR);
 		String country = URLEncoder.encode(qCountry, "UTF-8");
 		String year = URLEncoder.encode(yearAux.toString(), "UTF-8");
 		String uri = URI + "country=" + country + "&year=" + year + "&api_key=" + API_KEY;

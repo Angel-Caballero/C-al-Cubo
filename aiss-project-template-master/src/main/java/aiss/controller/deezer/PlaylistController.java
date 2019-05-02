@@ -20,8 +20,12 @@ import aiss.model.resources.TracksResource;
 /**
  * Servlet implementation class PlaylistController
  */
-public class PlaylistController {
+public class PlaylistController extends HttpServlet{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(HolidaysController.class.getName());
     /**
      * @see HttpServlet#HttpServlet()
@@ -46,20 +50,20 @@ public class PlaylistController {
 		PlayListSearch busquedaPlayList = plr.getPlayLists(query);
 		
 		if (busquedaPlayList != null) {
-			log.log(Level.FINE, "Retrieved playlists with the search query " + query + " succesfully");
+			log.log(Level.FINE, "Retrieved playlists with the search query '" + query + "' succesfully");
 			TracksResource tr = new TracksResource();
 			List<TrackData> busquedaTracks = tr.getTracks(busquedaPlayList);
 			
-			if (busquedaTracks.isEmpty()) {
+			//if (!busquedaTracks.isEmpty()) {
 				log.log(Level.FINE, "Retrieved tracks from the playlist succesfully");
 				request.setAttribute("tracks", busquedaTracks);
 				rd = request.getRequestDispatcher("/deezer.jsp");
-				request.setAttribute("playlist", PlayListsResource.getFirstPlayList(busquedaPlayList));
-			}
-			else {
+				request.setAttribute("playlist", PlayListsResource.getFirstPlayList(busquedaPlayList).getTitle());
+			//}
+			/*else {
 				log.log(Level.SEVERE, "Could not retrieve tracks from the playlist");
 				rd = request.getRequestDispatcher("/error.jsp");
-			}
+			}*/
 		}
 		else {
 			log.log(Level.SEVERE, "Could not retrieve playlists with the search query " + query + " succesfully");

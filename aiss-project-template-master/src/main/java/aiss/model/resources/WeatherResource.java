@@ -19,7 +19,7 @@ public class WeatherResource{
 	  String country = URLEncoder.encode(qCountry.toLowerCase(), "UTF-8");
 	  String city = URLEncoder.encode(qCity, "UTF-8");
 	  String uri = URI + "q="+ city + "," + country + "&appid=" + API_KEY;
-	  log.log(Level.INFO, "Procesando getForecast");
+	  log.log(Level.FINE, "Open Weather URI: " + uri);
 
 	  ClientResource cr = null;
 	  Forecast weather = null;

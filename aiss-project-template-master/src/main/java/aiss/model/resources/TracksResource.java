@@ -23,12 +23,14 @@ public class TracksResource {
 		
 		ClientResource cr = null;
 		TrackSearch search = null;
-		try {
+		//try {
 			cr = new ClientResource(uri);
 			search = cr.get(TrackSearch.class);
-		} catch (ResourceException re) {
+		/*} catch (ResourceException re) {
 			System.err.println("Error when retrieving the playlists: " + cr.getResponse().getStatus());
-		}
+		}*/
+		
+		log.log(Level.FINE, "Deezer Response: " + search);
 	    return Arrays.asList(search.getData());
 	}
 
