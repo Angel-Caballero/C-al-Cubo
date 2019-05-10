@@ -1,6 +1,9 @@
 package aiss.model.deezer;
 
 public class TrackSearch {
+	
+	private String prev;
+	
     private String next;
 
     private String total;
@@ -52,6 +55,14 @@ public class TrackSearch {
     @Override
     public String toString()
     {
-        return "ClassPojo [next = "+next+", total = "+total+", data = "+data+", checksum = "+checksum+"]";
+        return "ClassPojo [next = "+next+", prev = "+prev+", total = "+total+", data = "+data+", checksum = "+checksum+"]";
     }
+
+	public String getPrev() {
+		return prev;
+	}
+
+	public void setPrev(String prev) {
+		this.prev = prev;
+	}
 }
