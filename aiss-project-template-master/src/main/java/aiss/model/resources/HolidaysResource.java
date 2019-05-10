@@ -15,7 +15,7 @@ import aiss.model.calendarific.Holidays;
 public class HolidaysResource {
 
 	private static String URI = "https://calendarific.com/api/v2/holidays?";
-	private static String API_KEY = "e34ba387d728bc9df729b505e2d6ea74588392c9";
+	private static String API_KEY = "f14242f1e976fbf03d2e4f94c593902d6e36c570";
 	private static final Logger log = Logger.getLogger(HolidaysResource.class.getName());
 	
 	public Calendarific getHolidays(String qCountry) throws UnsupportedEncodingException {
