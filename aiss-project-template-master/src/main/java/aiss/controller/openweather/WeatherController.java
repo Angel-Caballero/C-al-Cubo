@@ -34,6 +34,8 @@ public class WeatherController extends HttpServlet {
 		String city = request.getParameter("city");
 		WeatherResource wr = new WeatherResource();
 		Forecast forecast = wr.getForecast(country, city);
+		
+		log.log(Level.FINE, "Open Weather Response: " + forecast);
 				
 		if (forecast != null) {
 			log.log(Level.FINE, "Retrieved weather of " + city + ", "+ country + " succesfully");
