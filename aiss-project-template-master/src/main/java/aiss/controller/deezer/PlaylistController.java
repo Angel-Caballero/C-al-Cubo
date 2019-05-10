@@ -54,16 +54,11 @@ public class PlaylistController extends HttpServlet{
 			TracksResource tr = new TracksResource();
 			List<TrackData> busquedaTracks = tr.getTracks(busquedaPlayList);
 			
-			//if (!busquedaTracks.isEmpty()) {
 				log.log(Level.FINE, "Retrieved tracks from the playlist succesfully");
 				request.setAttribute("tracks", busquedaTracks);
 				rd = request.getRequestDispatcher("/deezer.jsp");
 				request.setAttribute("playlist", PlayListsResource.getFirstPlayList(busquedaPlayList).getTitle());
-			//}
-			/*else {
-				log.log(Level.SEVERE, "Could not retrieve tracks from the playlist");
-				rd = request.getRequestDispatcher("/error.jsp");
-			}*/
+			
 		}
 		else {
 			log.log(Level.SEVERE, "Could not retrieve playlists with the search query " + query + " succesfully");

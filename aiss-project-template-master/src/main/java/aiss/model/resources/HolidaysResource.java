@@ -37,7 +37,7 @@ public class HolidaysResource {
 	}
 	
 	
-	public Holidays getClosestHoliday(Holidays[] holidays) throws UnsupportedEncodingException{
+	public String getClosestHoliday(Holidays[] holidays) throws UnsupportedEncodingException{
 		Holidays result = null;
 		List<Holidays> holidaysList = Arrays.asList(holidays);
 		List<Holidays> aux = new ArrayList<Holidays>();
@@ -47,15 +47,20 @@ public class HolidaysResource {
 		}else {
 			result = ClosestHolidayFilter(holidaysList);
 		}
-		return result;
+		return result.getName();
 	}
 	
 	
 	private Holidays ClosestHolidayFilter(List<Holidays> holidaysList) {
 		List<Holidays> res = new ArrayList<Holidays>();
+		Calendar calendar = Calendar.getInstance();
+		Integer day = calendar.get(Calendar.DAY_OF_MONTH);
+		Integer month = calendar.get(Calendar.MONTH);
 		for(int pos = 0; pos < holidaysList.size(); pos++) {
-			if((Integer.parseInt(holidaysList.get(pos).getDate().getDatetime().getDay()) > Calendar.DAY_OF_MONTH) && 
-					(Integer.parseInt(holidaysList.get(pos).getDate().getDatetime().getMonth()) >= Calendar.MONTH +1 )) {
+			if((Integer.parseInt(holidaysList.get(pos).getDate().getDatetime().getDay()) > day) && 
+					(Integer.parseInt(holidaysList.get(pos).getDate().getDatetime().getMonth()) == month +1 )) {
+				res.add(holidaysList.get(pos));
+			}else if((Integer.parseInt(holidaysList.get(pos).getDate().getDatetime().getMonth()) >= month +1 )) {
 				res.add(holidaysList.get(pos));
 			}
 		}
@@ -70,7 +75,7 @@ public class HolidaysResource {
 			Integer day = calendar.get(Calendar.DAY_OF_MONTH);
 			Integer month = calendar.get(Calendar.MONTH);
 			if((holidaysList.get(pos).getDate().getDatetime().getDay().equals(day.toString())) && 
-				(Integer.parseInt(holidaysList.get(pos).getDate().getDatetime().getMonth()) == month)) {
+				(Integer.parseInt(holidaysList.get(pos).getDate().getDatetime().getMonth()) == month + 1)) {
 				res.add(holidaysList.get(pos));
 			}
 		}

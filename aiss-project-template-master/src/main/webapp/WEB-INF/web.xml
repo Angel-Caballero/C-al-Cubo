@@ -12,13 +12,13 @@
   </servlet-mapping>
     <servlet>
     <description></description>
-    <display-name>HolidaysController</display-name>
-    <servlet-name>HolidaysController</servlet-name>
-    <servlet-class>aiss.controller.calendarific.HolidaysController</servlet-class>
+    <display-name>HolidaysMusicController</display-name>
+    <servlet-name>HolidaysMusicController</servlet-name>
+    <servlet-class>aiss.controller.calendarific.HolidaysMusicController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>HolidaysController</servlet-name>
-    <url-pattern>/HolidaysController</url-pattern>
+    <servlet-name>HolidaysMusicController</servlet-name>
+    <url-pattern>/HolidaysMusicController</url-pattern>
   </servlet-mapping>
     <servlet>
     <description></description>
