@@ -55,7 +55,7 @@ public class PlaylistController extends HttpServlet{
 				log.log(Level.FINE, "Retrieved tracks from the playlist succesfully");
 				request.setAttribute("tracks", busquedaTracks);
 				rd = request.getRequestDispatcher("/deezer.jsp");
-				request.setAttribute("playlist", PlayListsResource.getFirstPlayList(busquedaPlayList).getTitle());
+				request.setAttribute("playlist", PlayListsResource.getFirstPlayList(busquedaPlayList));
 			
 		}
 		else {

@@ -23,13 +23,13 @@
 </head>
 <body>
 
-	<h1>Tracks from "<c:out value="${requestScope.playlist}"/>"</h1>
+	<h1>Tracks from "<c:out value="${requestScope.playlist.title}"/>"</h1>
 	<c:forEach items="${requestScope.tracks}" var="track">
 		<span>Track Name: <c:out value="${track.title}"/></span><br/>
 	</c:forEach>
-	
-	<div id="dz-root"></div>
-	<div id="controlers">
+
+<div id="dz-root"></div>
+<div id="controlers">
     <input type="button" onclick="DZ.player.playAlbum(302127); return false;" value="Play Daft Punk - Discovery"/>
     <input type="button" onclick="DZ.player.playAlbum(301775); return false;" value="Play Daft Punk - Homework"/>
     <br/>
