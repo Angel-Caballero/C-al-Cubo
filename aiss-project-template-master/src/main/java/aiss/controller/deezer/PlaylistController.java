@@ -13,7 +13,6 @@ import aiss.controller.calendarific.HolidaysController;
 import aiss.model.deezer.PlayListSearch;
 import aiss.model.deezer.TrackData;
 import aiss.model.resources.PlayListsResource;
-import aiss.model.resources.TracksResource;
 
 
 
@@ -51,8 +50,7 @@ public class PlaylistController extends HttpServlet{
 		
 		if (busquedaPlayList != null) {
 			log.log(Level.FINE, "Retrieved playlists with the search query '" + query + "' succesfully");
-			TracksResource tr = new TracksResource();
-			List<TrackData> busquedaTracks = tr.getTracks(busquedaPlayList);
+			List<TrackData> busquedaTracks = plr.getTracks(busquedaPlayList);
 			
 				log.log(Level.FINE, "Retrieved tracks from the playlist succesfully");
 				request.setAttribute("tracks", busquedaTracks);

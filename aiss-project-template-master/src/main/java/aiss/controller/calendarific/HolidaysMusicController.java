@@ -4,19 +4,16 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import aiss.model.calendarific.Calendarific;
 import aiss.model.deezer.PlayListSearch;
 import aiss.model.deezer.TrackData;
 import aiss.model.resources.HolidaysResource;
 import aiss.model.resources.PlayListsResource;
-import aiss.model.resources.TracksResource;
 
 public class HolidaysMusicController extends HttpServlet{
 
@@ -60,8 +57,7 @@ public class HolidaysMusicController extends HttpServlet{
 			
 			if (busquedaPlayList != null) {
 				log.log(Level.FINE, "Retrieved playlists with the search query '" + closestHoliday + "' succesfully");
-				TracksResource tr = new TracksResource();
-				List<TrackData> busquedaTracks = tr.getTracks(busquedaPlayList);
+				List<TrackData> busquedaTracks = plr.getTracks(busquedaPlayList);
 				
 					log.log(Level.FINE, "Retrieved tracks from the playlist succesfully");
 					request.setAttribute("tracks", busquedaTracks);

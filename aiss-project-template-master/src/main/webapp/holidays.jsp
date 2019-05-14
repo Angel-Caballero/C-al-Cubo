@@ -5,17 +5,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Holidays Info</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-	<h1>Holidays from <c:out value="${param.country}"/></h1>
-	<h2>Closest holiday is <c:out value="${requestScope.closestHoliday}"/></h2>
+	<h1>C al Cubo</h1>
+	
+	<h2>Holidays from <c:out value="${param.country}"/></h2>
+	<h3>Closest holiday is <c:out value="${requestScope.closestHoliday}"/></h3>
 	<c:forEach items="${requestScope.holidays}" var="holiday">
 		<span>Holiday Name: <c:out value="${holiday.name}"/></span><br/>
 	</c:forEach>
 	
-	<h1>Tracks from "<c:out value="${requestScope.playlist}"/>"</h1>
+	<h2>Tracks from "<c:out value="${requestScope.playlist}"/>"</h2>
 	<c:forEach items="${requestScope.tracks}" var="track">
 		<span>Track Name: <c:out value="${track.title}"/></span><br/>
 	</c:forEach>

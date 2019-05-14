@@ -4,9 +4,12 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Weather Info</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<h1>C al Cubo</h1>
 	<div id="openweathermap-widget-11"></div>
 	<script src='//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/d3.min.js'></script>
 	<script>window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];  window.myWidgetParam.push({id: 11,cityid: '2643743',appid: 'eaddc12fe18c112838e912e6534cb747',units: 'metric',containerid: 'openweathermap-widget-11',  });  
