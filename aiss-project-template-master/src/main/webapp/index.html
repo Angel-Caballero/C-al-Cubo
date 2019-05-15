@@ -16,7 +16,7 @@
       </tr>
     </table>
     <form>
-      <input type="text" name="city" placeholder="Ciudad" required/>
+      <input type="text" id="city" name="city" placeholder="Ciudad" required/>
       <select name="country">
         <option value="AF">Afganistán</option>
       	<option value="AL">Albania</option>
@@ -270,7 +270,8 @@
       </select>
 		<br></br>
 		<input type="submit" onclick='this.form.action="/WeatherMusicController";' value="Weather Forecast" >
-		<input type="submit" onclick='this.form.action="/HolidaysMusicController";' value="Calendar" />
+		<input type="submit" onclick='this.form.action="/HolidaysMusicController";document.getElementById("city").removeAttribute("required");' value="Calendar" />
+		
     </form>
     <br></br>
    <table>

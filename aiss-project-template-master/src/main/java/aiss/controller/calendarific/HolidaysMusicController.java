@@ -57,11 +57,18 @@ public class HolidaysMusicController extends HttpServlet{
 			
 			if (busquedaPlayList != null) {
 				log.log(Level.FINE, "Retrieved playlists with the search query '" + closestHoliday + "' succesfully");
+				String playlist = PlayListsResource.getFirstPlayList(busquedaPlayList).getTitle();
 				List<TrackData> busquedaTracks = plr.getTracks(busquedaPlayList);
+				request.setAttribute("playlist", playlist);
 				
+				if (busquedaTracks != null) {
 					log.log(Level.FINE, "Retrieved tracks from the playlist succesfully");
 					request.setAttribute("tracks", busquedaTracks);
-					request.setAttribute("playlist", PlayListsResource.getFirstPlayList(busquedaPlayList).getTitle());
+					
+				}else {
+					log.log(Level.SEVERE, "Could not retrieve tracks from the playlist " + closestHoliday + " succesfully");
+					rd = request.getRequestDispatcher("/error.jsp");
+				}
 				
 			}else {
 				log.log(Level.SEVERE, "Could not retrieve playlists with the search query " + closestHoliday + " succesfully");
