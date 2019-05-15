@@ -6,19 +6,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
-import aiss.model.openweather.Forecast;
-import aiss.model.openweather.Weather;
+
+import aiss.model.weatherbit.Data;
+import aiss.model.weatherbit.Forecast;
+import aiss.model.weatherbit.Weather;
 
 public class WeatherResource{
-	  private static String URI = "api.openweathermap.org/data/2.5/weather?";
+	  private static String URI = "https://api.weatherbit.io/v2.0/current?";
 	 // api.openweathermap.org/data/2.5/weather?q={city name},{country code}
-	  private static String API_KEY = "eaddc12fe18c112838e912e6534cb747";
+	  private static String API_KEY = "bfb5114a9826437986cdf369cb47a6a3";
 	  private static final Logger log = Logger.getLogger(WeatherResource.class.getName());
 
 	public Forecast getForecast(String qCountry, String qCity)throws UnsupportedEncodingException {
-	  String country = URLEncoder.encode(qCountry.toLowerCase(), "UTF-8");
+	  String country = URLEncoder.encode(qCountry, "UTF-8");
 	  String city = URLEncoder.encode(qCity, "UTF-8");
-	  String uri = URI + "q="+ city + "," + country + "&appid=" + API_KEY;
+	  String uri = URI + "city="+ city + "&country=" + country + "&key=" + API_KEY;
 	  log.log(Level.FINE, "Open Weather URI: " + uri);
 
 	  ClientResource cr = null;
@@ -33,10 +35,10 @@ public class WeatherResource{
 	}
 
 	public String getWeather(Forecast forecast)throws UnsupportedEncodingException {
-		Weather[] aux = forecast.getWeather();
-		return aux[0].getMain();
+		Data[] aux = forecast.getData();
+		Weather aux2 = aux[0].getWeather();
+		return aux2.getDescription();
+		
 	}
-	public String getCityId (Forecast forecast) {
-		return forecast.getId();
-	}
+	
 }

@@ -1,14 +1,21 @@
-package aiss.model.openweather;
-
+package aiss.model.weatherbit;
 public class Weather
 {
+    private String code;
+
     private String icon;
 
     private String description;
 
-    private String main;
+    public String getCode ()
+    {
+        return code;
+    }
 
-    private String id;
+    public void setCode (String code)
+    {
+        this.code = code;
+    }
 
     public String getIcon ()
     {
@@ -30,29 +37,9 @@ public class Weather
         this.description = description;
     }
 
-    public String getMain ()
-    {
-        return main;
-    }
-
-    public void setMain (String main)
-    {
-        this.main = main;
-    }
-
-    public String getId ()
-    {
-        return id;
-    }
-
-    public void setId (String id)
-    {
-        this.id = id;
-    }
-
     @Override
     public String toString()
     {
-        return "ClassPojo [icon = "+icon+", description = "+description+", main = "+main+", id = "+id+"]";
+        return "ClassPojo [code = "+code+", icon = "+icon+", description = "+description+"]";
     }
 }

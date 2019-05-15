@@ -1,4 +1,4 @@
-package aiss.controller.openweather;
+package aiss.controller.weatherbit;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import aiss.model.openweather.Forecast;
 import aiss.model.resources.WeatherResource;
+import aiss.model.weatherbit.Forecast;
 
 public class WeatherController extends HttpServlet {
 
@@ -41,7 +41,6 @@ public class WeatherController extends HttpServlet {
 			log.log(Level.FINE, "Retrieved weather of " + city + ", "+ country + " succesfully");
 			rd = request.getRequestDispatcher("/weather.jsp");
 			request.setAttribute("weather", wr.getWeather(forecast));
-			request.setAttribute("cityId", wr.getCityId(forecast));
 		}
 		else {
 			log.log(Level.SEVERE, "No se pudo obtener el clima de "+ city + ", " + country + ".");

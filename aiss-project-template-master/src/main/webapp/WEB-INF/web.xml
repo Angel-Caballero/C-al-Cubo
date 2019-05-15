@@ -4,7 +4,7 @@
     <description></description>
     <display-name>WeatherController</display-name>
     <servlet-name>WeatherController</servlet-name>
-    <servlet-class>aiss.controller.openweather.WeatherController</servlet-class>
+    <servlet-class>aiss.controller.weatherbit.WeatherController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>WeatherController</servlet-name>
