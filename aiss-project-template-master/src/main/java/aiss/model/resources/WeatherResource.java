@@ -25,12 +25,12 @@ public class WeatherResource{
 
 	  ClientResource cr = null;
 	  Forecast weather = null;
-	  try {
+//	  try {
 	    cr = new ClientResource(uri);
 	    weather = cr.get(Forecast.class);
-	  } catch (ResourceException re) {
-	    System.err.println("Error when retrieving the weather: " + cr.getResponse().getStatus());
-	  }
+//	  } catch (ResourceException re) {
+//	    System.err.println("Error when retrieving the weather: " + cr.getResponse().getStatus());
+//	  }
 	    return weather;
 	}
 

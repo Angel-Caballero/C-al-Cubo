@@ -72,6 +72,8 @@ public class Data
     private String wind_cdir_full;
 
     private String ts;
+    
+    private String last_ob_time;
 
     public String getSunrise ()
     {
@@ -436,6 +438,14 @@ public class Data
     @Override
     public String toString()
     {
-        return "ClassPojo [sunrise = "+sunrise+", pod = "+pod+", pres = "+pres+", timezone = "+timezone+", ob_time = "+ob_time+", wind_cdir = "+wind_cdir+", lon = "+lon+", clouds = "+clouds+", wind_spd = "+wind_spd+", h_angle = "+h_angle+", city_name = "+city_name+", datetime = "+datetime+", precip = "+precip+", weather = "+weather+", station = "+station+", elev_angle = "+elev_angle+", lat = "+lat+", dni = "+dni+", vis = "+vis+", uv = "+uv+", temp = "+temp+", dhi = "+dhi+", ghi = "+ghi+", app_temp = "+app_temp+", dewpt = "+dewpt+", wind_dir = "+wind_dir+", solar_rad = "+solar_rad+", country_code = "+country_code+", rh = "+rh+", slp = "+slp+", snow = "+snow+", sunset = "+sunset+", aqi = "+aqi+", state_code = "+state_code+", wind_cdir_full = "+wind_cdir_full+", ts = "+ts+"]";
+        return "ClassPojo [sunrise = "+sunrise+", pod = "+pod+", pres = "+pres+", timezone = "+timezone+", ob_time = "+ob_time+", wind_cdir = "+wind_cdir+", lon = "+lon+", clouds = "+clouds+", wind_spd = "+wind_spd+", h_angle = "+h_angle+", city_name = "+city_name+", datetime = "+datetime+", precip = "+precip+", weather = "+weather+", station = "+station+", elev_angle = "+elev_angle+", lat = "+lat+", dni = "+dni+", vis = "+vis+", uv = "+uv+", temp = "+temp+", dhi = "+dhi+", ghi = "+ghi+", app_temp = "+app_temp+", dewpt = "+dewpt+", wind_dir = "+wind_dir+", solar_rad = "+solar_rad+", country_code = "+country_code+", rh = "+rh+", slp = "+slp+", snow = "+snow+", sunset = "+sunset+", aqi = "+aqi+", state_code = "+state_code+", wind_cdir_full = "+wind_cdir_full+", ts = "+ts+", last_ob_time = "+last_ob_time + "]";
     }
+
+	public String getLast_ob_time() {
+		return last_ob_time;
+	}
+
+	public void setLast_ob_time(String last_ob_time) {
+		this.last_ob_time = last_ob_time;
+	}
 }

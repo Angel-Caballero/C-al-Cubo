@@ -59,7 +59,6 @@ public class PlayListsResource {
 		while(search.getNext() != null) {
 			cr = new ClientResource(search.getNext());
 			search = cr.get(TrackSearch.class);
-			log.log(Level.FINE, "Deezer URI: " + search.getNext());
 			log.log(Level.FINE, "Deezer Response: " + search);
 			res.addAll(Arrays.asList(search.getData()));
 		}
