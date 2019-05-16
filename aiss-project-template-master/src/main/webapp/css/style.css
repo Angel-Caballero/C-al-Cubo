@@ -1,7 +1,10 @@
-h1{
-	text-align: center
+#logo{
+	width:9.25em;
+	height: 7.5em;
 }
 
-h3.error{
-	text-align: center
+.cabecera{
+	display: flex;
+justify-content: center;
+align-items: center;
 }
