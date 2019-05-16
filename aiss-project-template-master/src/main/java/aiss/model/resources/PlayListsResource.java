@@ -30,6 +30,7 @@ public class PlayListsResource {
 		try {
 			cr = new ClientResource(uri);
 			search = cr.get(PlayListSearch.class);
+			log.log(Level.FINE, "Deezer Response: " + Arrays.asList(search.getData()));
 		} catch (ResourceException re) {
 			System.err.println("Error when retrieving the playlists: " + cr.getResponse().getStatus());
 		}
@@ -43,26 +44,27 @@ public class PlayListsResource {
 	
 	public List<TrackData> getTracks(PlayListSearch busqPlayList) throws UnsupportedEncodingException {
 		List<TrackData> res = new ArrayList<TrackData>();
-		PlayListData playList= PlayListsResource.getFirstPlayList(busqPlayList);
-		String uri = playList.getTracklist();
-		log.log(Level.FINE, "Deezer URI: " + uri);
-		
-		ClientResource cr = null;
-		TrackSearch search = null;
-		cr = new ClientResource(uri);
-		search = cr.get(TrackSearch.class);
-		
-		
-		log.log(Level.FINE, "Deezer Response: " + search);
-		res.addAll(Arrays.asList(search.getData()));
-		
-		while(search.getNext() != null) {
-			cr = new ClientResource(search.getNext());
+		if(!Arrays.asList(busqPlayList.getData()).isEmpty()) {
+			PlayListData playList= PlayListsResource.getFirstPlayList(busqPlayList);
+			String uri = playList.getTracklist();
+			log.log(Level.FINE, "Deezer URI: " + uri);
+			
+			ClientResource cr = null;
+			TrackSearch search = null;
+			cr = new ClientResource(uri);
 			search = cr.get(TrackSearch.class);
+			
 			log.log(Level.FINE, "Deezer Response: " + search);
 			res.addAll(Arrays.asList(search.getData()));
+			
+			while(search.getNext() != null) {
+				cr = new ClientResource(search.getNext());
+				search = cr.get(TrackSearch.class);
+				log.log(Level.FINE, "Deezer Response: " + search);
+				res.addAll(Arrays.asList(search.getData()));
+			}
 		}
-		
+
 	    return res;
 	}
 

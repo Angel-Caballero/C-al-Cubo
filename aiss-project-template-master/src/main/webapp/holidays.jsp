@@ -19,10 +19,14 @@
 		<span>Holiday Name: <c:out value="${holiday.name}"/></span><br/>
 	</c:forEach>
 	
+	{% if ${requestScope.playlist} == "" %}
+	<h2><c:out value="${requestScope.error}"/></h2>
+	{% else %}
 	<h2>Tracks from "<c:out value="${requestScope.playlist}"/>"</h2>
 	<c:forEach items="${requestScope.tracks}" var="track">
 		<span>Track Name: <c:out value="${track.title}"/></span><br/>
 	</c:forEach>
+	{% endif %}
 
 </body>
 </html>
