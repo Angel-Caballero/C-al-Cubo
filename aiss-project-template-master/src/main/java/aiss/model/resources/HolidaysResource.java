@@ -100,10 +100,57 @@ public class HolidaysResource {
 		List<Holidays> res = new ArrayList<Holidays>();
 		for(int pos = 0; pos < holidaysList.size(); pos++) {
 			Calendar calendar = Calendar.getInstance();
-			Integer month = calendar.get(Calendar.MONTH);
+			Integer month = calendar.get(Calendar.MONTH) + 1;
 			if(Integer.parseInt(holidaysList.get(pos).getDate().getDatetime().getMonth()) == month) {
 				res.add(holidaysList.get(pos));
 			}
+		}
+		return res;
+	}
+	
+	public String getMonthName() {
+		String res = "";
+		Calendar calendar = Calendar.getInstance();
+		Integer month = calendar.get(Calendar.MONTH) + 1;
+		switch (month) {
+		case 1:
+			res = "Janury";
+			break;
+		case 2:
+			res = "February";
+			break;
+		case 3:
+			res = "March";
+			break;
+		case 4:
+			res = "April";
+			break;
+		case 5:
+			res = "May";
+			break;
+		case 6:
+			res = "June";
+			break;
+		case 7:
+			res = "July";
+			break;
+		case 8:
+			res = "August";
+			break;
+		case 9:
+			res = "September";
+			break;
+		case 10:
+			res = "October";
+			break;
+		case 11:
+			res = "November";
+			break;
+		case 12:
+			res = "December";
+			break;
+		default:
+			break;
 		}
 		return res;
 	}

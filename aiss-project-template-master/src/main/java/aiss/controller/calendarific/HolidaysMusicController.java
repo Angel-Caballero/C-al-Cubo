@@ -1,7 +1,6 @@
 package aiss.controller.calendarific;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
@@ -75,18 +74,31 @@ public class HolidaysMusicController extends HttpServlet{
 				
 			}else if(Arrays.asList(busquedaPlayList.getData()).isEmpty()) {
 				log.log(Level.FINE, "There are no playlists with the search query: '" + closestHoliday + "'");
-				request.setAttribute("playlist", "");
-				List<String> tracks = new ArrayList<String>();
-				tracks.add("");
-				request.setAttribute("tracks", tracks);
-				request.setAttribute("error", "There are no playlists with the search query: '" + closestHoliday + "'");
-			}else {
-				log.log(Level.SEVERE, "Could not retrieve playlists with the search query " + closestHoliday + " succesfully");
-				rd = request.getRequestDispatcher("/error.jsp");
-			}
+				String actualMonth = hr.getMonthName();
+				busquedaPlayList = plr.getPlayLists(actualMonth);
+				
+				if (busquedaPlayList != null && !Arrays.asList(busquedaPlayList.getData()).isEmpty()) {
+					log.log(Level.FINE, "Retrieved playlists with the search query '" + actualMonth + "' succesfully");
+					String playlist = PlayListsResource.getFirstPlayList(busquedaPlayList).getTitle();
+					List<TrackData> busquedaTracks = plr.getTracks(busquedaPlayList);
+					request.setAttribute("playlist", playlist);
+					
+					if (busquedaTracks != null) {
+						log.log(Level.FINE, "Retrieved tracks from the playlist succesfully");
+						request.setAttribute("tracks", busquedaTracks);
+						request.setAttribute("error", "There are no playlists with the search query: '" + closestHoliday + "'");
+						
+					}else {
+						log.log(Level.SEVERE, "Could not retrieve tracks from the playlist " + actualMonth + " succesfully");
+						rd = request.getRequestDispatcher("/error.jsp");
+					}
+				}else {
+					log.log(Level.SEVERE, "Could not retrieve playlists with the search query " + closestHoliday + " succesfully");
+					rd = request.getRequestDispatcher("/error.jsp");
+				}
 			
-		}
-		else {
+			}
+		}else {
 			log.log(Level.SEVERE, "El calendario del pais " + country + " no tiene datos");
 			rd = request.getRequestDispatcher("/error.jsp");
 		}
