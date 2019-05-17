@@ -14,6 +14,7 @@
 	<h2>Weather from <c:out value="${param.city}"/>, <c:out value="${param.country}"/></h2>
 	<h2><c:out value="${requestScope.weather}"/></h2>
 	
+	<h2><c:out value="${requestScope.error}"/></h2>
 	<h2>Tracks from "<c:out value="${requestScope.playlist}"/>"</h2>
 	<c:forEach items="${requestScope.tracks}" var="track">
 		<span>Track Name: <c:out value="${track.title}"/></span><br/>

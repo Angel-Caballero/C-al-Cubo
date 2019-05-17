@@ -44,6 +44,7 @@ public class HolidaysMusicController extends HttpServlet{
     	HolidaysResource hr = new HolidaysResource();
     	Calendarific calendar = hr.getHolidays(country);
 
+    	//Comprobamos que el calendario que se nos devuelve no sea null
     	if (calendar != null) {
     		log.log(Level.FINE, "Retrieved holidays of the country " + country + " succesfully");
     		rd = request.getRequestDispatcher("/holidays.jsp");
@@ -56,50 +57,67 @@ public class HolidaysMusicController extends HttpServlet{
     		PlayListsResource plr = new PlayListsResource();
     		PlayListSearch busquedaPlayList = plr.getPlayLists(closestHoliday);
 
+    		//Comprobamos si hay PlayList con el nombre de la festividad mas cercana o si se devuelve null
     		if (busquedaPlayList != null && !Arrays.asList(busquedaPlayList.getData()).isEmpty()) {
     			log.log(Level.FINE, "Retrieved playlists with the search query '" + closestHoliday + "' succesfully");
     			String playlist = PlayListsResource.getFirstPlayList(busquedaPlayList).getTitle();
     			List<TrackData> busquedaTracks = plr.getTracks(busquedaPlayList);
     			request.setAttribute("playlist", playlist);
 
+    			//Comprobamos si la lista de Tracks  que se devuelve no es null
     			if (busquedaTracks != null) {
     				log.log(Level.FINE, "Retrieved tracks from the playlist succesfully");
     				request.setAttribute("tracks", busquedaTracks);
     				request.setAttribute("error", "");
 
+    			//Caso de recibamos una lista nula 
     			}else {
     				log.log(Level.SEVERE, "Could not retrieve tracks from the playlist " + closestHoliday + " succesfully");
+    				request.setAttribute("mensajeError", "Could not retrieve tracks from the playlist " + closestHoliday + " succesfully");
     				rd = request.getRequestDispatcher("/error.jsp");
     			}
-
+    		
+    		//Caso de que no se encuentren PlayLists con la nombre de la festividad mas cercana
     		}else if(Arrays.asList(busquedaPlayList.getData()).isEmpty()) {
     			log.log(Level.FINE, "There are no playlists with the search query: '" + closestHoliday + "'");
     			String actualMonth = hr.getMonthName();
     			busquedaPlayList = plr.getPlayLists(actualMonth);
 
+    			//Comprobamos si hay PlayList con el nombre del mes actual o si se devuelve null
     			if (busquedaPlayList != null && !Arrays.asList(busquedaPlayList.getData()).isEmpty()) {
     				log.log(Level.FINE, "Retrieved playlists with the search query '" + actualMonth + "' succesfully");
     				String playlist = PlayListsResource.getFirstPlayList(busquedaPlayList).getTitle();
     				List<TrackData> busquedaTracks = plr.getTracks(busquedaPlayList);
     				request.setAttribute("playlist", playlist);
 
+    				//Comprobamos si la lista de Tracks  que se devuelve no es null
     				if (busquedaTracks != null) {
     					log.log(Level.FINE, "Retrieved tracks from the playlist succesfully");
     					request.setAttribute("tracks", busquedaTracks);
     					request.setAttribute("error", "There are no playlists with the search query: '" + closestHoliday + "'");
 
-    				}else {
+    				
+    				}
+    				//Caso de que se devuelva una lista nula con el nombre del mes actual
+    				else {
     					log.log(Level.SEVERE, "Could not retrieve tracks from the playlist " + actualMonth + " succesfully");
+    					request.setAttribute("mensajeError", "Could not retrieve tracks from the playlist " + actualMonth + " succesfully");
     					rd = request.getRequestDispatcher("/error.jsp");
     				}
-    			}else {
+    			}
+    			//Caso de que se devuelva una lista nula con la festividad mas cercana
+    			else {
     				log.log(Level.SEVERE, "Could not retrieve playlists with the search query " + closestHoliday + " succesfully");
+    				request.setAttribute("mensajeError", "Could not retrieve playlists with the search query " + closestHoliday + " succesfully");
     				rd = request.getRequestDispatcher("/error.jsp");
     			}
 
     		}
-    	}else {
+    	}
+    	//Caso de que se devuelva una lista nula del calendario del pais
+    	else {
     		log.log(Level.SEVERE, "El calendario del pais " + country + " no tiene datos");
+    		request.setAttribute("mensajeError", "El calendario del pais " + country + " no tiene datos");
     		rd = request.getRequestDispatcher("/error.jsp");
     	}
 
