@@ -34,84 +34,84 @@ public class HolidaysMusicController extends HttpServlet{
     /**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		// Request data
-		String country = request.getParameter("country");
-		RequestDispatcher rd = null;
-		log.log(Level.INFO, "Procesando HolidaysMusicController");
-		// Search for Holidays
-		HolidaysResource hr = new HolidaysResource();
-		Calendarific calendar = hr.getHolidays(country);
-		
-		if (calendar != null) {
-			log.log(Level.FINE, "Retrieved holidays of the country " + country + " succesfully");
-			rd = request.getRequestDispatcher("/holidays.jsp");
-			// Solamente se pasan las vacaciones del mes actual
-			request.setAttribute("holidays", hr.getHolidaysInActualMonth(calendar.getResponse().getHolidays()));
-			String closestHoliday = hr.getClosestHoliday(calendar.getResponse().getHolidays());
-			request.setAttribute("closestHoliday", closestHoliday);
-			
-			// Search for PlayLists
-			PlayListsResource plr = new PlayListsResource();
-			PlayListSearch busquedaPlayList = plr.getPlayLists(closestHoliday);
-			
-			if (busquedaPlayList != null && !Arrays.asList(busquedaPlayList.getData()).isEmpty()) {
-				log.log(Level.FINE, "Retrieved playlists with the search query '" + closestHoliday + "' succesfully");
-				String playlist = PlayListsResource.getFirstPlayList(busquedaPlayList).getTitle();
-				List<TrackData> busquedaTracks = plr.getTracks(busquedaPlayList);
-				request.setAttribute("playlist", playlist);
-				
-				if (busquedaTracks != null) {
-					log.log(Level.FINE, "Retrieved tracks from the playlist succesfully");
-					request.setAttribute("tracks", busquedaTracks);
-					request.setAttribute("error", "");
-					
-				}else {
-					log.log(Level.SEVERE, "Could not retrieve tracks from the playlist " + closestHoliday + " succesfully");
-					rd = request.getRequestDispatcher("/error.jsp");
-				}
-				
-			}else if(Arrays.asList(busquedaPlayList.getData()).isEmpty()) {
-				log.log(Level.FINE, "There are no playlists with the search query: '" + closestHoliday + "'");
-				String actualMonth = hr.getMonthName();
-				busquedaPlayList = plr.getPlayLists(actualMonth);
-				
-				if (busquedaPlayList != null && !Arrays.asList(busquedaPlayList.getData()).isEmpty()) {
-					log.log(Level.FINE, "Retrieved playlists with the search query '" + actualMonth + "' succesfully");
-					String playlist = PlayListsResource.getFirstPlayList(busquedaPlayList).getTitle();
-					List<TrackData> busquedaTracks = plr.getTracks(busquedaPlayList);
-					request.setAttribute("playlist", playlist);
-					
-					if (busquedaTracks != null) {
-						log.log(Level.FINE, "Retrieved tracks from the playlist succesfully");
-						request.setAttribute("tracks", busquedaTracks);
-						request.setAttribute("error", "There are no playlists with the search query: '" + closestHoliday + "'");
-						
-					}else {
-						log.log(Level.SEVERE, "Could not retrieve tracks from the playlist " + actualMonth + " succesfully");
-						rd = request.getRequestDispatcher("/error.jsp");
-					}
-				}else {
-					log.log(Level.SEVERE, "Could not retrieve playlists with the search query " + closestHoliday + " succesfully");
-					rd = request.getRequestDispatcher("/error.jsp");
-				}
-			
-			}
-		}else {
-			log.log(Level.SEVERE, "El calendario del pais " + country + " no tiene datos");
-			rd = request.getRequestDispatcher("/error.jsp");
-		}
-		
-		// Forward to holidays view
-		rd.forward(request, response);
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+    	// Request data
+    	String country = request.getParameter("country");
+    	RequestDispatcher rd = null;
+    	log.log(Level.INFO, "Procesando HolidaysMusicController");
+    	// Search for Holidays
+    	HolidaysResource hr = new HolidaysResource();
+    	Calendarific calendar = hr.getHolidays(country);
+
+    	if (calendar != null) {
+    		log.log(Level.FINE, "Retrieved holidays of the country " + country + " succesfully");
+    		rd = request.getRequestDispatcher("/holidays.jsp");
+    		// Solamente se pasan las vacaciones del mes actual
+    		request.setAttribute("holidays", hr.getHolidaysInActualMonth(calendar.getResponse().getHolidays()));
+    		String closestHoliday = hr.getClosestHoliday(calendar.getResponse().getHolidays());
+    		request.setAttribute("closestHoliday", closestHoliday);
+
+    		// Search for PlayLists
+    		PlayListsResource plr = new PlayListsResource();
+    		PlayListSearch busquedaPlayList = plr.getPlayLists(closestHoliday);
+
+    		if (busquedaPlayList != null && !Arrays.asList(busquedaPlayList.getData()).isEmpty()) {
+    			log.log(Level.FINE, "Retrieved playlists with the search query '" + closestHoliday + "' succesfully");
+    			String playlist = PlayListsResource.getFirstPlayList(busquedaPlayList).getTitle();
+    			List<TrackData> busquedaTracks = plr.getTracks(busquedaPlayList);
+    			request.setAttribute("playlist", playlist);
+
+    			if (busquedaTracks != null) {
+    				log.log(Level.FINE, "Retrieved tracks from the playlist succesfully");
+    				request.setAttribute("tracks", busquedaTracks);
+    				request.setAttribute("error", "");
+
+    			}else {
+    				log.log(Level.SEVERE, "Could not retrieve tracks from the playlist " + closestHoliday + " succesfully");
+    				rd = request.getRequestDispatcher("/error.jsp");
+    			}
+
+    		}else if(Arrays.asList(busquedaPlayList.getData()).isEmpty()) {
+    			log.log(Level.FINE, "There are no playlists with the search query: '" + closestHoliday + "'");
+    			String actualMonth = hr.getMonthName();
+    			busquedaPlayList = plr.getPlayLists(actualMonth);
+
+    			if (busquedaPlayList != null && !Arrays.asList(busquedaPlayList.getData()).isEmpty()) {
+    				log.log(Level.FINE, "Retrieved playlists with the search query '" + actualMonth + "' succesfully");
+    				String playlist = PlayListsResource.getFirstPlayList(busquedaPlayList).getTitle();
+    				List<TrackData> busquedaTracks = plr.getTracks(busquedaPlayList);
+    				request.setAttribute("playlist", playlist);
+
+    				if (busquedaTracks != null) {
+    					log.log(Level.FINE, "Retrieved tracks from the playlist succesfully");
+    					request.setAttribute("tracks", busquedaTracks);
+    					request.setAttribute("error", "There are no playlists with the search query: '" + closestHoliday + "'");
+
+    				}else {
+    					log.log(Level.SEVERE, "Could not retrieve tracks from the playlist " + actualMonth + " succesfully");
+    					rd = request.getRequestDispatcher("/error.jsp");
+    				}
+    			}else {
+    				log.log(Level.SEVERE, "Could not retrieve playlists with the search query " + closestHoliday + " succesfully");
+    				rd = request.getRequestDispatcher("/error.jsp");
+    			}
+
+    		}
+    	}else {
+    		log.log(Level.SEVERE, "El calendario del pais " + country + " no tiene datos");
+    		rd = request.getRequestDispatcher("/error.jsp");
+    	}
+
+    	// Forward to holidays view
+    	rd.forward(request, response);
+    }
+
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	// TODO Auto-generated method stub
+    	doGet(request, response);
+    }
 }

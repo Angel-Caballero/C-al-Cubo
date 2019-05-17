@@ -1,19 +1,19 @@
 package aiss.model.weatherbit;
 public class Data
 {
-    private String sunrise;
+	private String sunrise;
 
-    private String pod;
+	private String pod;
 
-    private String pres;
+	private String pres;
 
-    private String timezone;
+	private String timezone;
 
-    private String ob_time;
+	private String ob_time;
 
-    private String wind_cdir;
+	private String wind_cdir;
 
-    private String lon;
+	private String lon;
 
     private String clouds;
 
