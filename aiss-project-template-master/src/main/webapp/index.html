@@ -16,8 +16,8 @@
     <div class="w3-container w3-margin-top">
       <h2><b>Apis de Weatherbit y Calendarific:</b></h2>
       <form>
-        <input type="text" id="city" name="city" placeholder="Ciudad" required/ class="w3-round w3-khaki">
-        <select name="country" class="w3-round w3-khaki">
+        <input type="text" style="max-width: 300px; display: inline" name="city" placeholder="Ciudad" required/ class="w3-input w3-round w3-khaki">
+        <select name="country" style="max-width: 300px" class="w3-select w3-round w3-khaki w3-margin-top">
           <option value="AF">Afganistán</option>
           <option value="AL">Albania</option>
           <option value="DE">Alemania</option>
@@ -270,14 +270,14 @@
         </select>
     </div>
       <div class="w3-bar w3-margin-top">
-      <input class ="w3-button w3-light-green w3-round-large" type="submit" onclick='this.form.action="/WeatherMusicController";' value="Weather Forecast" >
-      <input class ="w3-button w3-light-green w3-round-large" type="submit" onclick='this.form.action="/HolidaysMusicController";document.getElementById("city").removeAttribute("required");' value="Calendar" />
+      <input class ="w3-button w3-light-green w3-round-large" type="submit" onclick='this.form.action="/WeatherMusicController";' value="Weather Forecast" style="width:175px;" />
+      <input class ="w3-button w3-light-green w3-round-large" type="submit" onclick='this.form.action="/HolidaysMusicController";document.getElementById("city").removeAttribute("required");' value="Calendar" style="width:175px;" />
     </div>
   </form>
   <div class="w3-container w3-margin-top">
     <h2><b>Api de Deezer:</b></h2>
     <form action="/PlaylistController">
-      <input type="text" name="query" placeholder="Busqueda en Deezer" required class="w3-round w3-khaki"/>
+      <input type="text" name="query" placeholder="Busqueda en Deezer" required class="w3-input w3-round w3-khaki" style="max-width: 300px; display: inline"/>
       <input type="submit" value="Buscar en Deezer" class ="w3-button w3-light-green w3-round-large"/>
     </form>
   </div>
