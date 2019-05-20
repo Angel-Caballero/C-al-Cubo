@@ -1,23 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Weather Info</title>
+<link rel="icon" href="images/icono.png">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
-<body>
-<h1>C al Cubo</h1>
-	<h2>Weather from <c:out value="${param.city}"/>, <c:out value="${param.country}"/></h2>
-	<h2><c:out value="${requestScope.weather}"/></h2>
-	
-	<h2><c:out value="${requestScope.error}"/></h2>
-	<h2>Tracks from "<c:out value="${requestScope.playlist}"/>"</h2>
-	<c:forEach items="${requestScope.tracks}" var="track">
-		<span>Track Name: <c:out value="${track.title}"/></span><br/>
-	</c:forEach>
+<body class="w3-brown w3-center">
+	<div class="contenido">
+		<div class="w3-container cabecera w3-padding-16">
+			<img src="images/C3 Logo.png" alt="Logo C3" id="logo" />
+			<h1>
+				<b>C al Cubo</b>
+			</h1>
+		</div>
+		<h2>
+			<b>Weather from <c:out value="${param.city}" />, <c:out
+					value="${param.country}" /></b>
+		</h2>
+		<h2>
+			<b><c:out value="${requestScope.weather}" /></b>
+		</h2>
+
+		<h2>
+			<b><c:out value="${requestScope.error}" /></b>
+		</h2>
+		<h2>
+			<b>Tracks from "<c:out value="${requestScope.playlist}" />"
+			</b>
+		</h2>
+		<table class="w3-table w3-striped w3-light-green w3-card-4"
+			style="width: 50%; margin-left: 25%;">
+			<tbody>
+				<c:forEach items="${requestScope.tracks}" var="track">
+					<tr>
+						<td>Track Name: <c:out value="${track.title}" /></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+	<div id="footer">
+		<p>
+			&copy 2019 C<sup>3</sup>.Inc. All rights Reserved. Powered by <img
+				src="images/dz_logo.png" / style="height: 20px;">
+		</p>
+	</div>
 </body>
 </html>
