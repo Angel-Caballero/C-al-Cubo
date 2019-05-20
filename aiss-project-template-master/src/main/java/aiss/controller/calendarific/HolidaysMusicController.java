@@ -36,6 +36,9 @@ public class HolidaysMusicController extends HttpServlet{
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    	String accessToken = "";
+//    			(String) request.getSession().getAttribute("Deezer-token");
+    	
     	// Request data
     	String country = request.getParameter("country");
     	RequestDispatcher rd = null;
@@ -54,7 +57,7 @@ public class HolidaysMusicController extends HttpServlet{
     		request.setAttribute("closestHoliday", closestHoliday);
 
     		// Search for PlayLists
-    		PlayListsResource plr = new PlayListsResource();
+    		PlayListsResource plr = new PlayListsResource(accessToken);
     		PlayListSearch busquedaPlayList = plr.getPlayLists(closestHoliday);
 
     		//Comprobamos si hay PlayList con el nombre de la festividad mas cercana o si se devuelve null

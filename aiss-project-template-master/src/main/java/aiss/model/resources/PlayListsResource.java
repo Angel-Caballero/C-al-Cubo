@@ -16,8 +16,16 @@ import aiss.model.deezer.TrackSearch;
 
 public class PlayListsResource {
 	
+	private final String access_token;
 	private static String URI_PLAYLISTS = "https://api.deezer.com/search/playlist?q=";
 	private static final Logger log = Logger.getLogger(PlayListsResource.class.getName());
+	
+	
+	public PlayListsResource(String access_token) {
+		super();
+		this.access_token = access_token;
+	}
+	
 	
 	public PlayListSearch getPlayLists(String query) throws UnsupportedEncodingException {
 		
@@ -66,6 +74,13 @@ public class PlayListsResource {
 		}
 
 	    return res;
+	}
+	
+	
+	public Boolean addTracksFavorite() {
+		Boolean res = true;
+		
+		return res;
 	}
 
 }

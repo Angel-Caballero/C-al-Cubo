@@ -79,8 +79,8 @@
     }
     document.addEventListener('DOMContentLoaded', function() {
         DZ.init({
-            appId  : '8',
-            channelUrl : 'https://developers.deezer.com/examples/channel.php',
+            appId  : '341062',
+            channelUrl : 'http://c-al-cubo.appspot.com//channel.html',
             player : {
                 onload : onPlayerLoaded
             }
