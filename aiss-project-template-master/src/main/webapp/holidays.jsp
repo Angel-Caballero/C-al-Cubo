@@ -14,7 +14,7 @@
 <body class="w3-brown w3-center">
 	<div class="contenido">
 		<div class="w3-container cabecera w3-padding-16">
-			<img src="images/C3 Logo.png" alt="Logo C3" id="logo" />
+    <a href="http://c-al-cubo.appspot.com"><img src="images/C3 Logo.png" alt="Logo C3" id="logo"/></a>
 			<h1>
 				<b>C al Cubo</b>
 			</h1>

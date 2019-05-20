@@ -9,15 +9,16 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body class="w3-brown w3-center" >
-  <div class="w3-container cabecera w3-margin-top">
-    <img src="images/C3 Logo.png" alt="Logo C3" id="logo"/>
+	<div class="contenido">
+  <div class="w3-container cabecera w3-padding-16">
+    <a href="http://c-al-cubo.appspot.com"><img src="images/C3 Logo.png" alt="Logo C3" id="logo"/></a>
     <h1><b>C al Cubo</b></h1>
   </div>
     <div class="w3-container w3-margin-top">
       <h2><b>Apis de Weatherbit y Calendarific:</b></h2>
       <form>
-        <input id="city" type="text" style="max-width: 300px; display: inline" name="city" placeholder="Ciudad" required/ class="w3-input w3-round w3-khaki">
-        <select name="country" style="max-width: 300px" class="w3-select w3-round w3-khaki w3-margin-top">
+        <input id="city" type="text" style="max-width: 300px; display: inline" name="city" placeholder="Ciudad" required/ class="w3-input w3-round w3-light-green">
+        <select name="country" style="max-width: 300px" class="w3-select w3-round w3-light-green w3-margin-top">
           <option value="AF">Afganistán</option>
           <option value="AL">Albania</option>
           <option value="DE">Alemania</option>
@@ -270,18 +271,19 @@
         </select>
     </div>
       <div class="w3-bar w3-margin-top">
-      <input class ="w3-button w3-light-green w3-round-large" type="submit" onclick='this.form.action="/WeatherMusicController";' value="Weather Forecast" style="width:175px;" />
-      <input class ="w3-button w3-light-green w3-round-large" type="submit" onclick='this.form.action="/HolidaysMusicController";document.getElementById("city").removeAttribute("required");document.getElementById("city").disabled = true;' value="Calendar" style="width:175px;" />
+      <input class ="w3-button w3-deep-orange w3-round-large" type="submit" onclick='this.form.action="/WeatherMusicController";' value="Weather Forecast" style="width:175px;" />
+      <input class ="w3-button w3-deep-orange w3-round-large" type="submit" onclick='this.form.action="/HolidaysMusicController";document.getElementById("city").removeAttribute("required");document.getElementById("city").disabled = true;' value="Calendar" style="width:175px;" />
     </div>
   </form>
   <div class="w3-container w3-margin-top">
     <h2><b>Api de Deezer:</b></h2>
     <form action="/PlaylistController">
-      <input type="text" name="query" placeholder="Busqueda en Deezer" required class="w3-input w3-round w3-khaki" style="max-width: 300px; display: inline"/>
-      <input type="submit" value="Buscar en Deezer" class ="w3-button w3-light-green w3-round-large"/>
+      <input type="text" name="query" placeholder="Busqueda en Deezer" required class="w3-input w3-round w3-light-green" style="max-width: 300px; display: inline"/>
+      <input type="submit" value="Buscar en Deezer" class ="w3-button w3-deep-orange w3-round-large"/>
     </form>
   </div>
-  <div class="w3-margin-top" style="position:fixed; width:100%; bottom:0;background: #000000; opacity:0.6;">
+</div>
+  <div id="footer">
     <p>©2019 C<sup>3</sup>.Inc. All rights Reserved. Powered by <img src="images/dz_logo.png"/ style="height:20px;"></p>
   </div>
 </body>
