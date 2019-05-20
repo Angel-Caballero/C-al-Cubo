@@ -27,8 +27,12 @@ public class WeatherMusicController extends HttpServlet{
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String accessToken = "";
+//		(String) request.getSession().getAttribute("Deezer-token");
+		
+		
 		RequestDispatcher rd = null;
-
 
 		log.log(Level.INFO, "Procesando WeatherController.");
 
@@ -48,7 +52,7 @@ public class WeatherMusicController extends HttpServlet{
 			request.setAttribute("weather", weather);
 
 			// Search for PlayLists
-			PlayListsResource plr = new PlayListsResource();
+			PlayListsResource plr = new PlayListsResource(accessToken);
 			PlayListSearch busquedaPlayList = plr.getPlayLists(weather);
 
 			//Comprobamos que la PlayList devuelta con el tiempo actual no sea nula y no este vacia

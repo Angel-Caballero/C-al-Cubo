@@ -39,30 +39,38 @@ public class PlaylistController extends HttpServlet{
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		// Request data
-		String query = request.getParameter("query");
-		RequestDispatcher rd = null;
-				
-		// Search for PlayLists
-		PlayListsResource plr = new PlayListsResource();
-		PlayListSearch busquedaPlayList = plr.getPlayLists(query);
 		
-		if (busquedaPlayList != null) {
-			log.log(Level.FINE, "Retrieved playlists with the search query '" + query + "' succesfully");
-			List<TrackData> busquedaTracks = plr.getTracks(busquedaPlayList);
+		String accessToken = (String) request.getSession().getAttribute("Deezer-token");
+		
+			// Request data
+			String query = request.getParameter("query");
+			RequestDispatcher rd = null;
 			
+			
+			if (accessToken != null && !"".equals(accessToken)) {
+			// Search for PlayLists
+			PlayListsResource plr = new PlayListsResource(accessToken);
+			PlayListSearch busquedaPlayList = plr.getPlayLists(query);
+
+			if (busquedaPlayList != null) {
+				log.log(Level.FINE, "Retrieved playlists with the search query '" + query + "' succesfully");
+				List<TrackData> busquedaTracks = plr.getTracks(busquedaPlayList);
+
 				log.log(Level.FINE, "Retrieved tracks from the playlist succesfully");
 				request.setAttribute("tracks", busquedaTracks);
 				rd = request.getRequestDispatcher("/deezer.jsp");
 				request.setAttribute("playlist", PlayListsResource.getFirstPlayList(busquedaPlayList));
-			
+
+			}
+			else {
+				log.log(Level.SEVERE, "Could not retrieve playlists with the search query " + query + " succesfully");
+				rd = request.getRequestDispatcher("/error.jsp");
+			}
+		}else {
+			log.info("Trying to access Drive without an access token, redirecting to OAuth servlet");
+			rd = request.getRequestDispatcher("/AuthController/Deezer");
 		}
-		else {
-			log.log(Level.SEVERE, "Could not retrieve playlists with the search query " + query + " succesfully");
-			rd = request.getRequestDispatcher("/error.jsp");
-		}
-		
+
 		// Forward to holidays view
 		rd.forward(request, response);
 	}

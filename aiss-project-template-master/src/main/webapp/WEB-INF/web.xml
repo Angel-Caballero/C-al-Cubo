@@ -62,11 +62,11 @@
         </init-param>
         <init-param>
             <param-name>onSuccess</param-name>
-            <param-value>redirect://spotifyPlaylistsGet</param-value>
+            <param-value>redirect://PlaylistController</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
-        <servlet-name>SpotifyOAuth2Callback</servlet-name>
+        <servlet-name>DeezerOAuth2Callback</servlet-name>
         <url-pattern>/oauth2callback/Deezer</url-pattern> 
     </servlet-mapping>
 </web-app>
