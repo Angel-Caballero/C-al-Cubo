@@ -37,4 +37,36 @@
     <exception-type>java.lang.Throwable</exception-type>
     <location>/error.jsp</location>
   </error-page>
+  <!-- DeezerAuthController-->
+    <servlet>
+        <description/>
+        <servlet-name>DeezerAuthController</servlet-name>
+        <servlet-class>aiss.controller.oauth.GenericAuthController</servlet-class>
+        <init-param>
+            <param-name>provider</param-name>
+            <param-value>Deezer</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeezerAuthController</servlet-name>
+        <url-pattern>/AuthController/Deezer</url-pattern>
+    </servlet-mapping>
+    <!--DeezerOAuth2Callback-->
+            <servlet>
+        <description/>
+        <servlet-name>DeezerOAuth2Callback</servlet-name>
+        <servlet-class>aiss.controller.oauth.OAuth2Callback</servlet-class>
+        <init-param>
+            <param-name>provider</param-name>
+            <param-value>Deezer</param-value>
+        </init-param>
+        <init-param>
+            <param-name>onSuccess</param-name>
+            <param-value>redirect://spotifyPlaylistsGet</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SpotifyOAuth2Callback</servlet-name>
+        <url-pattern>/oauth2callback/Deezer</url-pattern> 
+    </servlet-mapping>
 </web-app>

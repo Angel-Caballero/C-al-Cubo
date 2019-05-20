@@ -56,7 +56,7 @@ public class HolidaysResource {
 		Calendar calendar = Calendar.getInstance();
 		Integer day = calendar.get(Calendar.DAY_OF_MONTH);
 		Integer month = calendar.get(Calendar.MONTH) + 1;
-		log.log(Level.INFO, "Today is " + month + " the " + day +"th");
+		log.log(Level.INFO, "Today is " + day + "th of " + month);
 		for(int pos = 0; pos < holidaysList.size(); pos++) {
 			if((Integer.parseInt(holidaysList.get(pos).getDate().getDatetime().getDay()) > day) && 
 					(Integer.parseInt(holidaysList.get(pos).getDate().getDatetime().getMonth()) == month)) {
@@ -65,7 +65,7 @@ public class HolidaysResource {
 				res.add(holidaysList.get(pos));
 			}
 		}
-		log.log(Level.INFO, "Closest holiday is " + res.get(0).getName() + " in the " + res.get(0).getDate().getDatetime().getDay() +" of " + res.get(0).getDate().getDatetime().getMonth());
+		log.log(Level.INFO, "Closest holiday is " + res.get(0).getName() + " in the " + res.get(0).getDate().getDatetime().getDay() +"th of " + res.get(0).getDate().getDatetime().getMonth());
 		return res.get(0);
 	}
 
