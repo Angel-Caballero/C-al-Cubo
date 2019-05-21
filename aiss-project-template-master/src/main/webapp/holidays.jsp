@@ -48,7 +48,7 @@
 			<tbody>
 				<c:forEach items="${requestScope.tracks}" var="track">
 					<tr>
-						<td>Track Name: <c:out value="${track.title}" /></td>
+						<td><a href="#"><img src="images/like.png" style="height:20px; margin-right:5px"/></a>Track Name: <c:out value="${track.title}" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>
