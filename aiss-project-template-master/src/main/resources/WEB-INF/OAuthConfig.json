@@ -4,6 +4,6 @@
         "clientId": "341062",
         "clientSecret": "97c52812ec84007fdb30e42fac107d0f",
         "authorizationFormUrl": "https://connect.deezer.com/oauth/auth.php?",
-        "scopes": []
+        "scopes": ["manage_library"]
     }
 }		

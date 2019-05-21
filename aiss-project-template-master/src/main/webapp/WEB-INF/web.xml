@@ -62,7 +62,7 @@
         </init-param>
         <init-param>
             <param-name>onSuccess</param-name>
-            <param-value>redirect://PlaylistController</param-value>
+            <param-value>redirect:/PlaylistController</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
