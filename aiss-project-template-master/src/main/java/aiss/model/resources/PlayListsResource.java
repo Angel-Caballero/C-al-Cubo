@@ -7,17 +7,23 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.restlet.data.ChallengeResponse;
+import org.restlet.data.ChallengeScheme;
+import org.restlet.data.MediaType;
+import org.restlet.representation.StringRepresentation;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 import aiss.model.deezer.PlayListData;
 import aiss.model.deezer.PlayListSearch;
 import aiss.model.deezer.TrackData;
 import aiss.model.deezer.TrackSearch;
+import aiss.model.deezer.User;
 
 public class PlayListsResource {
 	
 	private final String access_token;
-	private static String URI_PLAYLISTS = "https://api.deezer.com/search/playlist?q=";
+	private static String URI_BASICA = "https://api.deezer.com/";
+	private static String URI_PLAYLISTS = URI_BASICA + "search/playlist?q=";
 	private static final Logger log = Logger.getLogger(PlayListsResource.class.getName());
 	
 	
@@ -73,13 +79,44 @@ public class PlayListsResource {
 			}
 		}
 
-	    return res;
+		return res;
 	}
-	
-	
-	public Boolean addTracksFavorite() {
+	public String getUserId() throws UnsupportedEncodingException{
+		String id = "";
+		String userUri = URI_BASICA + "user/me";
+		 ClientResource cr = new ClientResource(userUri);
+
+	        ChallengeResponse chr = new ChallengeResponse(ChallengeScheme.HTTP_OAUTH_BEARER);
+	        chr.setRawValue(access_token);
+	        cr.setChallengeResponse(chr);
+
+	        log.info("Retrieving user profile");
+
+	        try {
+	            return cr.get(User.class).getId();
+
+	        } catch (ResourceException re) {
+	            log.warning("Error when retrieving the user profile: " + cr.getResponse().getStatus());
+	            log.warning(userUri);
+	            return null;
+	        }
+	    }
+	public Boolean addTracksFavorite(String userId, String trackId) throws UnsupportedEncodingException{
 		Boolean res = true;
-		
+	    ClientResource cr = new ClientResource(URI_BASICA + "user/" + userId + "/tracks/" + trackId);
+        try {
+            ChallengeResponse chr = new ChallengeResponse(
+                    ChallengeScheme.HTTP_OAUTH_BEARER);
+            chr.setRawValue(access_token);
+            cr.setChallengeResponse(chr);
+//            StringRepresentation rep = new StringRepresentation(content, MediaType.TEXT_PLAIN);
+//            cr.put(rep);
+        } catch (ResourceException re) {
+            log.warning("Error when adding track " + trackId + " to favourites");
+            log.warning(re.getMessage());
+            return false;
+        }
+
 		return res;
 	}
 

@@ -41,13 +41,13 @@ public class PlaylistController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String accessToken = (String) request.getSession().getAttribute("Deezer-token");
-		
-			// Request data
-			String query = request.getParameter("query");
-			RequestDispatcher rd = null;
-			
-			
-			if (accessToken != null && !"".equals(accessToken)) {
+
+		// Request data
+		String query = request.getParameter("query");
+		RequestDispatcher rd = null;
+
+
+		if (accessToken != null && !"".equals(accessToken)) {
 			// Search for PlayLists
 			PlayListsResource plr = new PlayListsResource(accessToken);
 			PlayListSearch busquedaPlayList = plr.getPlayLists(query);
