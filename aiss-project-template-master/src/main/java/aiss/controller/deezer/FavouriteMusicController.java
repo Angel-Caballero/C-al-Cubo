@@ -48,9 +48,19 @@ public class FavouriteMusicController extends HttpServlet{
 		if (accessToken != null && !"".equals(accessToken)) {
 			PlayListsResource plr =new PlayListsResource(accessToken);
 			String userId = plr.getUserId();
-			if(userId != null) {
+			//Comprobamos que la id de usuario no es nula ni vacia 
+			if(userId != null && userId.equals("")) {
 				plr.addTracksFavorite(userId, trackId);
+//				String city = request.getParameter("city");
+//				String country = request.getParameter("country");
+				
+				
 				request.getRequestDispatcher("/index.html").forward(request, response);
+			}
+			//Caso de que la id de usuario sea nula o vacia
+			else {
+				log.info("There is a problem with the user id, redirecting to OAuth servlet");
+	            request.getRequestDispatcher("/AuthController/Deezer").forward(request, response);
 			}
 		}
 		//Caso de que el token sea null o vacio
