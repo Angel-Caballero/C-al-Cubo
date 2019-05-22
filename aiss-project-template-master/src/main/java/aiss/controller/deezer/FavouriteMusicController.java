@@ -1,6 +1,7 @@
 package aiss.controller.deezer;
 
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -40,21 +41,22 @@ public class FavouriteMusicController extends HttpServlet{
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String accessToken = (String) request.getSession().getAttribute("Deezer-token");
-		
+		// Request data
 		String trackId = request.getParameter("trackId");
-		RequestDispatcher rd = null;
 		
+		//Comprobamos que el token que se nos devuelve no sea null ni vacio
 		if (accessToken != null && !"".equals(accessToken)) {
 			PlayListsResource plr =new PlayListsResource(accessToken);
 			String userId = plr.getUserId();
 			if(userId != null) {
 				plr.addTracksFavorite(userId, trackId);
-				request.getRequestDispatcher("");
+				request.getRequestDispatcher("/index.html").forward(request, response);
 			}
 		}
+		//Caso de que el token sea null o vacio
 		else {
-			
+			log.info("Trying to access Google Drive without an access token, redirecting to OAuth servlet");
+            request.getRequestDispatcher("/AuthController/Deezer").forward(request, response);
 		}
-		rd.forward(request, response);
 	}
 }
