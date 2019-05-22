@@ -48,7 +48,7 @@ public class FavouriteMusicController extends HttpServlet{
 			PlayListsResource plr =new PlayListsResource(accessToken);
 			String userId = plr.getUserId();
 			if(userId != null) {
-				plr.addTracksFavorite(userId, userId);
+				plr.addTracksFavorite(userId, trackId);
 				request.getRequestDispatcher("");
 			}
 		}
