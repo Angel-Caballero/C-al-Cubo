@@ -1,6 +1,6 @@
 package aiss.model;
 
-public class Song {
+public class Track {
 
 	private String id;
 	private String title;
@@ -8,17 +8,17 @@ public class Song {
 	private String album;
 	private String year;
 
-	public Song() {
+	public Track() {
 	}
 
-	public Song(String title, String artist, String album, String year) {
+	public Track(String title, String artist, String album, String year) {
 		this.title = title;
 		this.artist = artist;
 		this.album = album;
 		this.year = year;
 	}
 	
-	public Song(String id, String title, String artist, String album, String year) {
+	public Track(String id, String title, String artist, String album, String year) {
 		this.id=id;
 		this.title = title;
 		this.artist = artist;

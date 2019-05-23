@@ -7,13 +7,15 @@ import java.util.Map;
 import org.w3c.dom.ls.LSOutput;
 
 import aiss.model.Playlist;
-import aiss.model.Song;
+import aiss.model.Track;
+import aiss.model.Weather;
 
 
 public class MapPlaylistRepository implements PlaylistRepository{
 
+	Map<String, Weather> weatherMap;
 	Map<String, Playlist> playlistMap;
-	Map<String, Song> songMap;
+	Map<String, Track> songMap;
 	private static MapPlaylistRepository instance=null;
 	private int index=0;			// Index to create playlists and songs' identifiers.
 	
@@ -31,43 +33,43 @@ public class MapPlaylistRepository implements PlaylistRepository{
 	public void init() {
 		
 		playlistMap = new HashMap<String,Playlist>();
-		songMap = new HashMap<String,Song>();
+		songMap = new HashMap<String,Track>();
 		
 		// Create songs
-		Song rollingInTheDeep=new Song();
+		Track rollingInTheDeep=new Track();
 		rollingInTheDeep.setTitle("Rolling in the Deep");
 		rollingInTheDeep.setArtist("Adele");
 		rollingInTheDeep.setYear("2011");
 		rollingInTheDeep.setAlbum("21");
-		addSong(rollingInTheDeep);
+		addTrack(rollingInTheDeep);
 		
-		Song one=new Song();
+		Track one=new Track();
 		one.setTitle("One");
 		one.setArtist("U2");
 		one.setYear("1992");
 		one.setAlbum("Achtung Baby");
-		addSong(one);
+		addTrack(one);
 		
-		Song losingMyReligion=new Song();
+		Track losingMyReligion=new Track();
 		losingMyReligion.setTitle("Losing my Religion");
 		losingMyReligion.setArtist("REM");
 		losingMyReligion.setYear("1991");
 		losingMyReligion.setAlbum("Out of Time");
-		addSong(losingMyReligion);
+		addTrack(losingMyReligion);
 		
-		Song smellLikeTeenSpirit=new Song();
+		Track smellLikeTeenSpirit=new Track();
 		smellLikeTeenSpirit.setTitle("Smell Like Teen Spirit");
 		smellLikeTeenSpirit.setArtist("Nirvana");
 		smellLikeTeenSpirit.setAlbum("Nevermind");
 		smellLikeTeenSpirit.setYear("1991");
-		addSong(smellLikeTeenSpirit);
+		addTrack(smellLikeTeenSpirit);
 		
-		Song gotye=new Song();
+		Track gotye=new Track();
 		gotye.setTitle("Someone that I used to know");
 		gotye.setArtist("Gotye");
 		gotye.setYear("2011");
 		gotye.setAlbum("Making Mirrors");
-		addSong(gotye);
+		addTrack(gotye);
 		
 		// Create playlists
 		Playlist japlaylist=new Playlist();
@@ -81,13 +83,13 @@ public class MapPlaylistRepository implements PlaylistRepository{
 		addPlaylist(playlist);
 		
 		// Add songs to playlists
-		addSong(japlaylist.getId(), rollingInTheDeep.getId());
-		addSong(japlaylist.getId(), one.getId());
-		addSong(japlaylist.getId(), smellLikeTeenSpirit.getId());
-		addSong(japlaylist.getId(), losingMyReligion.getId());
+		addTrack(japlaylist.getId(), rollingInTheDeep.getId());
+		addTrack(japlaylist.getId(), one.getId());
+		addTrack(japlaylist.getId(), smellLikeTeenSpirit.getId());
+		addTrack(japlaylist.getId(), losingMyReligion.getId());
 		
-		addSong(playlist.getId(), losingMyReligion.getId());
-		addSong(playlist.getId(), gotye.getId());
+		addTrack(playlist.getId(), losingMyReligion.getId());
+		addTrack(playlist.getId(), gotye.getId());
 	}
 	
 	// Playlist related operations
@@ -120,53 +122,85 @@ public class MapPlaylistRepository implements PlaylistRepository{
 	
 
 	@Override
-	public void addSong(String playlistId, String songId) {
+	public void addTrack(String playlistId, String trackId) {
 		Playlist playlist = getPlaylist(playlistId);
-		playlist.addSong(songMap.get(songId));
+		playlist.addSong(songMap.get(trackId));
 	}
 
 	@Override
-	public Collection<Song> getAll(String playlistId) {
-		return getPlaylist(playlistId).getSongs();
+	public Collection<Track> getAll(String playlistId) {
+		return getPlaylist(playlistId).getTracks();
 	}
 
 	@Override
-	public void removeSong(String playlistId, String songId) {
-		getPlaylist(playlistId).deleteSong(songId);
+	public void removeTrack(String playlistId, String trackId) {
+		getPlaylist(playlistId).deleteSong(trackId);
 	}
 
 	
 	// Song related operations
 	
 	@Override
-	public void addSong(Song s) {
+	public void addTrack(Track t) {
 		String id = "s" + index++;
-		s.setId(id);
-		songMap.put(id, s);
+		t.setId(id);
+		songMap.put(id, t);
 	}
 	
 	@Override
-	public Collection<Song> getAllSongs() {
+	public Collection<Track> getAllTracks() {
 			return songMap.values();
 	}
 
 	@Override
-	public Song getSong(String songId) {
-		return songMap.get(songId);
+	public Track getTrack(String trackId) {
+		return songMap.get(trackId);
 	}
 
 	@Override
-	public void updateSong(Song s) {
-		Song song = songMap.get(s.getId());
-		song.setTitle(s.getTitle());
-		song.setAlbum(s.getAlbum());
-		song.setArtist(s.getArtist());
-		song.setYear(s.getYear());
+	public void updateTrack(Track t) {
+		Track song = songMap.get(t.getId());
+		song.setTitle(t.getTitle());
+		song.setAlbum(t.getAlbum());
+		song.setArtist(t.getArtist());
+		song.setYear(t.getYear());
 	}
 
 	@Override
-	public void deleteSong(String songId) {
-		songMap.remove(songId);
+	public void deleteTrack(String trackId) {
+		songMap.remove(trackId);
+	}
+
+	
+	//Weather Related
+	@Override
+	public void addWeather(Weather w) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Collection<Weather> getAllWeather() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Track getWeather(String weatherId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateWeather(Weather w) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteWeather(String weatherId) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

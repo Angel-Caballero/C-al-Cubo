@@ -8,7 +8,7 @@ public class Playlist {
 	private String id;
 	private String name;
 	private String description;
-	private List<Song> songs;
+	private List<Track> tracks;
 	
 	public Playlist() {}
 	
@@ -16,8 +16,8 @@ public class Playlist {
 		this.name = name;
 	}
 	
-	protected void setSongs(List<Song> s) {
-		songs = s;
+	protected void setSongs(List<Track> s) {
+		tracks = s;
 	}
 	
 	public String getId() {
@@ -44,16 +44,17 @@ public class Playlist {
 		this.description = description;
 	}
 	
-	public List<Song> getSongs() {
-		return songs;
+	public List<Track> getTracks() {
+		return tracks;
 	}
 	
-	public Song getSong(String id) {
-		if (songs==null)
+	public Track getSong(String id) {
+		if (tracks==null) {
 			return null;
+		}
 		
-		Song song =null;
-		for(Song s: songs)
+		Track song =null;
+		for(Track s: tracks)
 			if (s.getId().equals(id))
 			{
 				song=s;
@@ -63,20 +64,20 @@ public class Playlist {
 		return song;
 	}
 	
-	public void addSong(Song s) {
-		if (songs==null)
-			songs = new ArrayList<Song>();
-		songs.add(s);
+	public void addSong(Track s) {
+		if (tracks==null)
+			tracks = new ArrayList<Track>();
+		tracks.add(s);
 	}
 	
-	public void deleteSong(Song s) {
-		songs.remove(s);
+	public void deleteSong(Track s) {
+		tracks.remove(s);
 	}
 	
 	public void deleteSong(String id) {
-		Song s = getSong(id);
+		Track s = getSong(id);
 		if (s!=null)
-			songs.remove(s);
+			tracks.remove(s);
 	}
 
 }
