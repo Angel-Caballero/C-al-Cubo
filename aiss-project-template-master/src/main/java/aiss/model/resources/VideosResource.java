@@ -55,8 +55,36 @@ public class VideosResource {
 	
 	public static String getPlaylistId(Response resp) throws UnsupportedEncodingException {
 		String id = "";
-		List<Items> playlists = new ArrayList<E>();
-	    return id;
+		List<Items> playlists = new ArrayList<>();
+		playlists.addAll(Arrays.asList(resp.getItems()));
+		if(resp.getNextPageToken() != null) {
+			ClientResource cr = null;
+			Response respAux = null;
+			while(resp.getNextPageToken() != null) {
+				String uri = URI_PLAYLISTS + "playlists?part=snippet%2CcontentDetails&mine=true&pageToken=" + resp.getNextPageToken() + 
+						"&key=" + API_KEY;
+				log.log(Level.FINE, "Youtube URI: " + uri);
+				
+				try {
+					cr = new ClientResource(uri);
+					respAux = cr.get(Response.class);
+					playlists.addAll(Arrays.asList(respAux.getItems()));
+					
+				} catch (ResourceException re) {
+					System.err.println("Error when retrieving the playlists: " + cr.getResponse().getStatus());
+				}
+			}
+			log.log(Level.FINE, "Youtube Response: " + Arrays.asList(resp));
+		}
+		
+		//playlists.stream().filter(i -> i.getSnippet().getTitle().equals("")).map(i -> i.getId()).findFirst().get();
+	    for(int pos = 0; pos < playlists.size(); pos++) {
+	    	if(playlists.get(pos).getSnippet().getTitle().equals("C al Cubo")) {
+	    		id=playlists.get(pos).getId();
+	    		break;
+	    	}
+	    }
+		return id;
 	}
 	
 	public List<TrackData> getTracks(PlayListSearch busqPlayList) throws UnsupportedEncodingException {
