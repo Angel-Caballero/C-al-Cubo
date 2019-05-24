@@ -30,6 +30,16 @@
     <servlet-name>PlaylistController</servlet-name>
     <url-pattern>/PlaylistController</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>LoginController</display-name>
+    <servlet-name>LoginController</servlet-name>
+    <servlet-class>aiss.controller.youtube.LoginController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginController</servlet-name>
+    <url-pattern>/LoginController</url-pattern>
+  </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
