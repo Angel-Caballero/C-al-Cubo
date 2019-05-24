@@ -1,9 +1,16 @@
 package aiss.model.youtube;
 
-public class UserSearch
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Response
 {
     private String kind;
 
+    private String prevPageToken;
+    
+    private String nextPageToken;
+    
     private PageInfo pageInfo;
 
     private String etag;
@@ -50,9 +57,25 @@ public class UserSearch
         this.items = items;
     }
 
-    @Override
+    public String getNextPageToken() {
+		return nextPageToken;
+	}
+
+	public void setNextPageToken(String nextPageToken) {
+		this.nextPageToken = nextPageToken;
+	}
+
+	public String getPrevPageToken() {
+		return prevPageToken;
+	}
+
+	public void setPrevPageToken(String prevPageToken) {
+		this.prevPageToken = prevPageToken;
+	}
+
+	@Override
     public String toString()
     {
-        return "ClassPojo [kind = "+kind+", pageInfo = "+pageInfo+", etag = "+etag+", items = "+items+"]";
+        return "ClassPojo [kind = "+kind+", pageInfo = "+pageInfo+", etag = "+etag+", nextPageToken = "+nextPageToken+", prevPageToken = "+prevPageToken+", items = "+items+"]";
     }
 }

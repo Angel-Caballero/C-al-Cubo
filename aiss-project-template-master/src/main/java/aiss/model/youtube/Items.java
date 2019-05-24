@@ -1,12 +1,29 @@
 package aiss.model.youtube;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Items
 {
+    private Snippet snippet;
+
     private String kind;
 
     private String etag;
 
     private String id;
+
+    private ContentDetails contentDetails;
+
+    public Snippet getSnippet ()
+    {
+        return snippet;
+    }
+
+    public void setSnippet (Snippet snippet)
+    {
+        this.snippet = snippet;
+    }
 
     public String getKind ()
     {
@@ -38,9 +55,19 @@ public class Items
         this.id = id;
     }
 
+    public ContentDetails getContentDetails ()
+    {
+        return contentDetails;
+    }
+
+    public void setContentDetails (ContentDetails contentDetails)
+    {
+        this.contentDetails = contentDetails;
+    }
+
     @Override
     public String toString()
     {
-        return "ClassPojo [kind = "+kind+", etag = "+etag+", id = "+id+"]";
+        return "ClassPojo [snippet = "+snippet+", kind = "+kind+", etag = "+etag+", id = "+id+", contentDetails = "+contentDetails+"]";
     }
 }
