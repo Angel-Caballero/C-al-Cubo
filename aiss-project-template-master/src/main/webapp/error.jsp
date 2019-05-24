@@ -19,7 +19,7 @@
   </div>
 </div>
 <div id="footer">
-  <p>&copy 2019 C<sup>3</sup>.Inc. All rights Reserved. Powered by <img src="images/dz_logo.png" / style="height: 20px;"><a href="#" style="margin-left:5px;">Documentación</a></p>
+  <p>&copy 2019 C<sup>3</sup>.Inc. All rights Reserved. Powered by <img src="images/dz_logo.png" style="height: 20px;"><a href="#" style="margin-left:5px;">Documentación</a></p>
 </div>
 </body>
 </html>

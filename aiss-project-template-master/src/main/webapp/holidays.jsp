@@ -48,14 +48,18 @@
 			<tbody>
 				<c:forEach items="${requestScope.tracks}" var="track">
 					<tr>
-						<td><a href="#"><img src="images/like.png" style="height:20px; margin-right:5px"/></a>Track Name: <c:out value="${track.title}" /></td>
+						<td><form action=>
+							<input type="text" name="track" value="<c:out value='${track.title}' />"/>
+							<input type="image" value="submit" src="images/like.png" alt="submit Button" onMouseOver="this.src='images/like.png'" style="height:20px; margin-right:5px"/>
+						</form>
+						Track Name: <c:out value="${track.title}" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
 	<div id="footer">
-		<p>&copy 2019 C<sup>3</sup>.Inc. All rights Reserved. Powered by <img src="images/dz_logo.png" / style="height: 20px;"><a href="#" style="margin-left:5px;">Documentación</a></p>
+		<p>&copy 2019 C<sup>3</sup>.Inc. All rights Reserved. Powered by <img src="images/dz_logo.png" style="height: 20px;"><a href="#" style="margin-left:5px;">Documentación</a></p>
 	</div>
 </body>
 </html>
