@@ -1,9 +1,9 @@
 {	
-    "Deezer": { 
-        "tokenUrl": "https://connect.deezer.com/oauth/access_token.php",
-        "clientId": "341062",
-        "clientSecret": "97c52812ec84007fdb30e42fac107d0f",
-        "authorizationFormUrl": "https://connect.deezer.com/oauth/auth.php?",
-        "scopes": ["manage_library"]
+    "Youtube": { 
+        "tokenUrl": "https://accounts.google.com/o/oauth2/token",
+        "clientId": "231381821171-v9s006gqijk773mcdppdjdkdrl4ngb8j.apps.googleusercontent.com",
+        "clientSecret": "LB9Xc8zkjIsN7T94slzpz5Vs",
+        "authorizationFormUrl": "https://accounts.google.com/o/oauth2/auth?",
+        "scopes": ["https://www.googleapis.com/auth/youtube"]
     }
 }		

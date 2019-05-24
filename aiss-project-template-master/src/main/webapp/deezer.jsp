@@ -24,6 +24,7 @@
 <body>
 
 	<h1>Tracks from "<c:out value="${requestScope.playlist.title}"/>"</h1>
+	<h4>Tracks from "<c:out value="${requestScope.token}"/>"</h4>
 	<c:forEach items="${requestScope.tracks}" var="track">
 		<span>Track Name: <c:out value="${track.title}"/></span><br/>
 	</c:forEach>

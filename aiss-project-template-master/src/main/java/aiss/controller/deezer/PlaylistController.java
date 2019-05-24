@@ -40,7 +40,7 @@ public class PlaylistController extends HttpServlet{
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String accessToken = (String) request.getSession().getAttribute("Deezer-token");
+		String accessToken = (String) request.getSession().getAttribute("Youtube-token");
 
 		// Request data
 		String query = request.getParameter("query");
@@ -49,7 +49,7 @@ public class PlaylistController extends HttpServlet{
 
 		if (accessToken != null && !"".equals(accessToken)) {
 			// Search for PlayLists
-			PlayListsResource plr = new PlayListsResource(accessToken);
+			PlayListsResource plr = new PlayListsResource("");
 			PlayListSearch busquedaPlayList = plr.getPlayLists(query);
 
 			if (busquedaPlayList != null) {
@@ -58,6 +58,7 @@ public class PlaylistController extends HttpServlet{
 
 				log.log(Level.FINE, "Retrieved tracks from the playlist succesfully");
 				request.setAttribute("tracks", busquedaTracks);
+				request.setAttribute("token", accessToken);
 				rd = request.getRequestDispatcher("/deezer.jsp");
 				request.setAttribute("playlist", PlayListsResource.getFirstPlayList(busquedaPlayList));
 
@@ -68,7 +69,7 @@ public class PlaylistController extends HttpServlet{
 			}
 		}else {
 			log.info("Trying to access Drive without an access token, redirecting to OAuth servlet");
-			rd = request.getRequestDispatcher("/AuthController/Deezer");
+			rd = request.getRequestDispatcher("/AuthController/Youtube");
 		}
 
 		// Forward to holidays view
