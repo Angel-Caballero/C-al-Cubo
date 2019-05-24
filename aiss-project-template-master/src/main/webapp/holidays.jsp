@@ -48,8 +48,8 @@
 			<tbody>
 				<c:forEach items="${requestScope.tracks}" var="track">
 					<tr>
-						<td><form action=>
-							<input type="text" name="track" value="<c:out value='${track.title}' />"/>
+						<td><form action="" style="display:inline">
+							<input type="text" name="track" value="<c:out value='${track.title}' />" style="display:none"/>
 							<input type="image" value="submit" src="images/like.png" alt="submit Button" onMouseOver="this.src='images/like.png'" style="height:20px; margin-right:5px"/>
 						</form>
 						Track Name: <c:out value="${track.title}" /></td>
