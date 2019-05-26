@@ -115,6 +115,7 @@ public class CalendarResource {
 			log.log(Level.FINE, "Google Calendar URI: " + uri);
 			ClientResource cr = new ClientResource(uri);
 			try {
+				
 				ChallengeResponse chr = new ChallengeResponse(ChallengeScheme.HTTP_OAUTH_BEARER);
 				chr.setRawValue(ACCES_TOKEN);
 				cr.setChallengeResponse(chr);
