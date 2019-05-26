@@ -53,7 +53,7 @@ public class WeatherMusicController extends HttpServlet{
 				request.setAttribute("weather", weather);
 
 				// Search for PlayLists
-				PlayListsResource plr = new PlayListsResource("");
+				PlayListsResource plr = new PlayListsResource();
 				PlayListSearch busquedaPlayList = plr.getPlayLists(weather);
 
 				//Comprobamos que la PlayList devuelta con el tiempo actual no sea nula y no este vacia

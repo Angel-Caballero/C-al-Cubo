@@ -21,10 +21,6 @@ public class PlayListsResource {
 	private static final Logger log = Logger.getLogger(PlayListsResource.class.getName());
 	
 	
-	public PlayListsResource() {
-		super();
-	}
-	
 	
 	public PlayListSearch getPlayLists(String query) throws UnsupportedEncodingException {
 		
