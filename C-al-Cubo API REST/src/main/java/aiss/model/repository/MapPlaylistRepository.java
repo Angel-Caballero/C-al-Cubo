@@ -175,31 +175,29 @@ public class MapPlaylistRepository implements PlaylistRepository{
 	//Weather Related
 	@Override
 	public void addWeather(Weather w) {
-		// TODO Auto-generated method stub
-		
+		String id = "w" + index++;
+		w.setId(id);
+		weatherMap.put(id, w);
 	}
 
 	@Override
 	public Collection<Weather> getAllWeather() {
-		// TODO Auto-generated method stub
-		return null;
+		return weatherMap.values();
 	}
 
 	@Override
-	public Track getWeather(String weatherId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Weather getWeather(String weatherId) {
+		return weatherMap.get(weatherId);
 	}
 
 	@Override
 	public void updateWeather(Weather w) {
-		// TODO Auto-generated method stub
-		
+		weatherMap.put(w.getId(),w);
 	}
 
 	@Override
 	public void deleteWeather(String weatherId) {
-		// TODO Auto-generated method stub
+		weatherMap.remove(weatherId);
 		
 	}
 	
