@@ -2,23 +2,25 @@ package aiss.controller.youtube;
 
 import java.io.IOException;
 import java.util.logging.Logger;
+import java.util.logging.Level;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import aiss.model.resources.VideosResource;
 
-public class LoginController extends HttpServlet{
+public class LoginYoutubeController extends HttpServlet{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = Logger.getLogger(LoginController.class.getName());
+	private static final Logger log = Logger.getLogger(LoginYoutubeController.class.getName());
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginController() {
+    public LoginYoutubeController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,8 +38,15 @@ public class LoginController extends HttpServlet{
 
 
     	if (accessToken != null && !"".equals(accessToken)) {
-    		rd = request.getRequestDispatcher("/index.html");
-
+    		VideosResource vr = new VideosResource(accessToken);
+    		Boolean booleano = vr.createPlayList();
+    		if(booleano) {
+    			rd = request.getRequestDispatcher("/index.html");
+    		}else {
+    			log.log(Level.SEVERE, "No se pudo crear la lista de reproduccion");
+    			rd = request.getRequestDispatcher("/error.jsp");
+    		}
+ 
     	}
     	else {
     		log.info("Trying to access Youtube without an access token, redirecting to OAuth servlet");

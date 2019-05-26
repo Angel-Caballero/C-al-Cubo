@@ -6,11 +6,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.restlet.data.ChallengeResponse;
 import org.restlet.data.ChallengeScheme;
 import org.restlet.data.MediaType;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
+
 import aiss.model.deezer.PlayListData;
 import aiss.model.deezer.PlayListSearch;
 import aiss.model.deezer.TrackData;
@@ -21,15 +23,14 @@ import aiss.model.youtube.Response;
 import aiss.model.youtube.Snippet;
 import aiss.model.youtube.Status;
 
-public class VideosResource {
-
+public class CalendarResource {
 	private static String ACCES_TOKEN;
-	private static final String API_KEY = "LB9Xc8zkjIsN7T94slzpz5Vs";
-	private static String URI_BASICA = "https://www.googleapis.com/youtube/v3/";
-	private static final Logger log = Logger.getLogger(VideosResource.class.getName());
+	private static final String API_KEY = "AIzaSyD_jORWq0E5wOvzIf3FgN_lIbL4rNCiRys";
+	private static String URI_BASICA = "https://www.googleapis.com/calendar/v3/";
+	private static final Logger log = Logger.getLogger(CalendarResource.class.getName());
 	
 	
-	public VideosResource(String token) {
+	public CalendarResource(String token) {
 		super();
 		ACCES_TOKEN = token;
 	}
@@ -188,3 +189,5 @@ public class VideosResource {
 	}
 
 }
+
+

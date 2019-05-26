@@ -5,5 +5,12 @@
         "clientSecret": "LB9Xc8zkjIsN7T94slzpz5Vs",
         "authorizationFormUrl": "https://accounts.google.com/o/oauth2/auth?",
         "scopes": ["https://www.googleapis.com/auth/youtube"]
+    },
+    "GoogleCalendar": { 
+        "tokenUrl": "https://accounts.google.com/o/oauth2/token",
+        "clientId": "231381821171-38167h0q9soh2dajiadrvnpd79lp48eg.apps.googleusercontent.com",
+        "clientSecret": "LULzwNNZkC_XRadeKiZCSrsH",
+        "authorizationFormUrl": "https://accounts.google.com/o/oauth2/auth?",
+        "scopes": ["https://www.googleapis.com/auth/calendar","https://www.googleapis.com/auth/calendar.events"]
     }
 }		

@@ -36,7 +36,7 @@ public class HolidaysMusicController extends HttpServlet{
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String accessToken = (String) request.getSession().getAttribute("Youtube-token");
+		String accessToken = (String) request.getSession().getAttribute("GoogleCalendar-token");
 
 		// Request data
 		String country = request.getParameter("country");
@@ -126,8 +126,8 @@ public class HolidaysMusicController extends HttpServlet{
 			}
 		}
 		else {
-			log.info("Trying to access Youtube without an access token, redirecting to OAuth servlet");
-			rd = request.getRequestDispatcher("/AuthController/Youtube");
+			log.info("Trying to access GoogleCalendar without an access token, redirecting to OAuth servlet");
+			rd = request.getRequestDispatcher("/AuthController/GoogleCalendar");
 		}
 		// Forward to holidays view
 		rd.forward(request, response);

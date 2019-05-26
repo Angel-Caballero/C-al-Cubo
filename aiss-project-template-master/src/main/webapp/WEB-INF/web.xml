@@ -32,13 +32,13 @@
   </servlet-mapping>
     <servlet>
     <description></description>
-    <display-name>LoginController</display-name>
-    <servlet-name>LoginController</servlet-name>
-    <servlet-class>aiss.controller.youtube.LoginController</servlet-class>
+    <display-name>LoginCalendarController</display-name>
+    <servlet-name>LoginCalendarController</servlet-name>
+    <servlet-class>aiss.controller.googlecalendar.LoginCalendarController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>LoginController</servlet-name>
-    <url-pattern>/LoginController</url-pattern>
+    <servlet-name>LoginCalendarController</servlet-name>
+    <url-pattern>/LoginCalendarController</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -47,28 +47,28 @@
     <exception-type>java.lang.Throwable</exception-type>
     <location>/error.jsp</location>
   </error-page>
-  <!-- YoutubeAuthController-->
+  <!-- GoogleCalendarAuthController-->
     <servlet>
         <description/>
-        <servlet-name>YoutubeAuthController</servlet-name>
+        <servlet-name>GoogleCalendarAuthController</servlet-name>
         <servlet-class>aiss.controller.oauth.GenericAuthController</servlet-class>
         <init-param>
             <param-name>provider</param-name>
-            <param-value>Youtube</param-value>
+            <param-value>GoogleCalendar</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
-        <servlet-name>YoutubeAuthController</servlet-name>
-        <url-pattern>/AuthController/Youtube</url-pattern>
+        <servlet-name>GoogleCalendarAuthController</servlet-name>
+        <url-pattern>/AuthController/GoogleCalendar</url-pattern>
     </servlet-mapping>
-    <!--DeezerOAuth2Callback-->
+    <!--GoogleCalendarOAuth2Callback-->
             <servlet>
         <description/>
-        <servlet-name>YoutubeOAuth2Callback</servlet-name>
+        <servlet-name>GoogleCalendarOAuth2Callback</servlet-name>
         <servlet-class>aiss.controller.oauth.OAuth2Callback</servlet-class>
         <init-param>
             <param-name>provider</param-name>
-            <param-value>Youtube</param-value>
+            <param-value>GoogleCalendar</param-value>
         </init-param>
         <init-param>
             <param-name>onSuccess</param-name>
@@ -76,7 +76,7 @@
         </init-param>
     </servlet>
     <servlet-mapping>
-        <servlet-name>YoutubeOAuth2Callback</servlet-name>
-        <url-pattern>/oauth2callback/Youtube</url-pattern> 
+        <servlet-name>GoogleCalendarOAuth2Callback</servlet-name>
+        <url-pattern>/oauth2callback/GoogleCalendar</url-pattern> 
     </servlet-mapping>
 </web-app>

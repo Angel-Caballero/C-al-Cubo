@@ -28,13 +28,13 @@ public class WeatherMusicController extends HttpServlet{
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String accessToken = (String) request.getSession().getAttribute("Youtube-token");
+//		String accessToken = (String) request.getSession().getAttribute("Youtube-token");
 
 
 		RequestDispatcher rd = null;
 
 		//Comprobamos que el token existe
-		if (accessToken != null && !"".equals(accessToken)) {
+//		if (accessToken != null && !"".equals(accessToken)) {
 			log.log(Level.INFO, "Procesando WeatherController.");
 
 			//Obtenemos los parámetros
@@ -53,7 +53,7 @@ public class WeatherMusicController extends HttpServlet{
 				request.setAttribute("weather", weather);
 
 				// Search for PlayLists
-				PlayListsResource plr = new PlayListsResource(accessToken);
+				PlayListsResource plr = new PlayListsResource("");
 				PlayListSearch busquedaPlayList = plr.getPlayLists(weather);
 
 				//Comprobamos que la PlayList devuelta con el tiempo actual no sea nula y no este vacia
@@ -117,11 +117,11 @@ public class WeatherMusicController extends HttpServlet{
 				request.setAttribute("mensajeError", "No se pudo obtener el clima de "+ city + ", " + country + ".");
 				rd = request.getRequestDispatcher("/error.jsp");
 			}
-		}	
-		else {
-			log.info("Trying to access Youtube without an access token, redirecting to OAuth servlet");
-			rd = request.getRequestDispatcher("/AuthController/Youtube");
-		}
+//		}	
+//		else {
+//			log.info("Trying to access Youtube without an access token, redirecting to OAuth servlet");
+//			rd = request.getRequestDispatcher("/AuthController/Youtube");
+//		}
 		rd.forward(request, response);
 	}
 }
