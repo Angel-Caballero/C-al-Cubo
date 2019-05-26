@@ -80,7 +80,6 @@ public class PlayListsResource {
 		return res;
 	}
 	public String getUserId() throws UnsupportedEncodingException{
-		String id = "";
 		String userUri = URI_BASICA + "user/me";
 		 ClientResource cr = new ClientResource(userUri);
 

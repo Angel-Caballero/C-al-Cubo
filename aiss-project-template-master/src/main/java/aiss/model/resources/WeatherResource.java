@@ -5,8 +5,6 @@ import java.net.URLEncoder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.restlet.resource.ClientResource;
-import org.restlet.resource.ResourceException;
-
 import aiss.model.weatherbit.Data;
 import aiss.model.weatherbit.Forecast;
 import aiss.model.weatherbit.Weather;
