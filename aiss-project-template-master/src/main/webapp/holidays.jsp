@@ -31,7 +31,7 @@
 			<tbody>
 				<c:forEach items="${requestScope.holidays}" var="holiday">
 					<tr>
-						<td><form action="" style="display:inline">
+						<td><form action="/CalendarController" style="display:inline">
 						<input type="text" name="country" value="<c:out value='${param.country}' />" style="display:none"/>
 						<input type="text" name="closestHoliday" value="<c:out value='${requestScope.closestHoliday}' />" style="display:none"/>
 							<input type="text" name="holidayName" value="<c:out value='${holiday.name}' />" style="display:none"/>
