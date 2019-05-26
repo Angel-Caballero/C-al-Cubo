@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import aiss.model.resources.CalendarResource;
+
 public class LoginCalendarController extends HttpServlet{
 
 	/**
@@ -36,6 +38,10 @@ public class LoginCalendarController extends HttpServlet{
 
 
 		if (accessToken != null && !"".equals(accessToken)) {
+			CalendarResource cr = new CalendarResource(accessToken);
+			if(!cr.existsCalendar()) {
+				cr.createCalendar();
+			}
 			rd = request.getRequestDispatcher("/index.html");
 
 		}

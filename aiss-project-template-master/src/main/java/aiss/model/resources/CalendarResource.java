@@ -6,22 +6,23 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.restlet.data.ChallengeResponse;
 import org.restlet.data.ChallengeScheme;
 import org.restlet.data.MediaType;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
-
+import aiss.model.calendarific.Holidays;
 import aiss.model.deezer.PlayListData;
 import aiss.model.deezer.PlayListSearch;
 import aiss.model.deezer.TrackData;
 import aiss.model.deezer.TrackSearch;
 import aiss.model.deezer.User;
-import aiss.model.youtube.Items;
-import aiss.model.youtube.Response;
-import aiss.model.youtube.Snippet;
-import aiss.model.youtube.Status;
+import aiss.model.googlecalendar.CalendarListResponse;
+import aiss.model.googlecalendar.End;
+import aiss.model.googlecalendar.Items;
+import aiss.model.googlecalendar.RequestCalendar;
+import aiss.model.googlecalendar.RequestEvent;
+import aiss.model.googlecalendar.Start;
 
 public class CalendarResource {
 	private static String ACCES_TOKEN;
@@ -36,81 +37,127 @@ public class CalendarResource {
 	}
 	
 	
-	public Response getPlayLists() throws UnsupportedEncodingException {
+	public List<Items> getCalendarList() throws UnsupportedEncodingException {
 		
-		String uri = URI_BASICA + "playlists?part=snippet%2CcontentDetails&mine=true&key=" + API_KEY;
-		log.log(Level.FINE, "Youtube URI: " + uri);
+//		https://www.googleapis.com/calendar/v3/users/me/calendarList?key={YOUR_API_KEY}
+//		https://www.googleapis.com/calendar/v3/users/me/calendarList?pageToken=54&key={YOUR_API_KEY}
+		String uri = URI_BASICA + "users/me/calendarList?key=" + API_KEY;
+		log.log(Level.FINE, "Google Calendar URI: " + uri);
 		
 		ClientResource cr = null;
-		Response resp = null;
+		CalendarListResponse response = null;
+		List<Items> res = new ArrayList<>();
 		try {
 			cr = new ClientResource(uri);
-			resp = cr.get(Response.class);
-			log.log(Level.FINE, "Youtube Response: " + Arrays.asList(resp));
-		} catch (ResourceException re) {
-			System.err.println("Error when retrieving the playlists: " + cr.getResponse().getStatus());
-		}
-	    return resp;
-	}
-	
-	public static String getPlaylistId(Response resp) throws UnsupportedEncodingException {
-		String id = "";
-		List<Items> playlists = new ArrayList<>();
-		playlists.addAll(Arrays.asList(resp.getItems()));
-		if(resp.getNextPageToken() != null) {
-			ClientResource cr = null;
-			Response respAux = null;
-			while(resp.getNextPageToken() != null) {
-				String uri = URI_BASICA + "playlists?part=snippet%2CcontentDetails&mine=true&pageToken=" + resp.getNextPageToken() + 
-						"&key=" + API_KEY;
-				log.log(Level.FINE, "Youtube URI: " + uri);
-				
-				try {
-					cr = new ClientResource(uri);
-					respAux = cr.get(Response.class);
-					playlists.addAll(Arrays.asList(respAux.getItems()));
-					
-				} catch (ResourceException re) {
-					System.err.println("Error when retrieving the playlists: " + cr.getResponse().getStatus());
+			response = cr.get(CalendarListResponse.class);
+			res.addAll(Arrays.asList(response.getItems()));
+			if(response.getNextPageToken() != null) {
+				String uri2 = "";
+				while (response.getNextPageToken() != null) {
+					uri2 = URI_BASICA + "users/me/calendarList?pageToken=" + response.getNextPageToken() + "&key=" + API_KEY;
+					cr = new ClientResource(uri2);
+					response = cr.get(CalendarListResponse.class);
+					res.addAll(Arrays.asList(response.getItems()));
 				}
 			}
-			log.log(Level.FINE, "Youtube Response: " + Arrays.asList(resp));
+			log.log(Level.FINE, "Calendar Lists: " + res);
+			
+		} catch (ResourceException re) {
+			System.err.println("Error when retrieving the calendar lists: " + cr.getResponse().getStatus());
 		}
-		
-		//playlists.stream().filter(i -> i.getSnippet().getTitle().equals("")).map(i -> i.getId()).findFirst().get();
-	    for(int pos = 0; pos < playlists.size(); pos++) {
-	    	if(playlists.get(pos).getSnippet().getTitle().equals("C al Cubo")) {
-	    		id=playlists.get(pos).getId();
-	    		break;
-	    	}
-	    }
-		return id;
+	    return res;
 	}
 	
-	public Boolean createPlayList() throws UnsupportedEncodingException{
-		Boolean res = true;
-//		playlists?part=snippet%2Cstatus&key={YOUR_API_KEY}
-		String uri = URI_BASICA + "playlists?part=snippet%2Cstatus&key=" + API_KEY;
-		log.log(Level.FINE, "Youtube URI: " + uri);
+	public Boolean existsCalendar() throws UnsupportedEncodingException{
+		Boolean res = null;
+		String id = "";
+		List<Items> calendars = new ArrayList<Items>();
+		Items calendar = null;
+		for(int pos = 0; pos<getCalendarList().size(); pos++) {
+			calendar = calendars.get(pos);
+			if(calendar.getSummary().equals("C al Cubo")) {
+				id = calendar.getId();
+				break;
+			}
+		}
+		
+		if(id.equals("")) {
+			res = false;
+		}else {
+			res = true;
+		}
+
+
+		return res;
+	}
+	
+	
+	public String getCalendarId() throws UnsupportedEncodingException{
+		String res = "";
+		List<Items> calendars = new ArrayList<Items>();
+		Items calendar = null;
+		for(int pos = 0; pos<getCalendarList().size(); pos++) {
+			calendar = calendars.get(pos);
+			if(calendar.getSummary().equals("C al Cubo")) {
+				res = calendar.getId();
+				break;
+			}
+		}
+
+		return res;
+	}
+
+	
+	public void createCalendar() throws UnsupportedEncodingException{
+		if(!existsCalendar()) {
+			//https://www.googleapis.com/calendar/v3/calendars?key={YOUR_API_KEY}
+			String uri = URI_BASICA + "calendars?key=" + API_KEY;
+			log.log(Level.FINE, "Google Calendar URI: " + uri);
+			ClientResource cr = new ClientResource(uri);
+			try {
+				ChallengeResponse chr = new ChallengeResponse(ChallengeScheme.HTTP_OAUTH_BEARER);
+				chr.setRawValue(ACCES_TOKEN);
+				cr.setChallengeResponse(chr);
+
+				RequestCalendar body = new RequestCalendar();
+				body.setSummary("C al Cubo");
+				body.setDescription("Calendario de los eventos favoritos del Mahsup de C al Cubo");
+				cr.post(body, MediaType.APPLICATION_ALL_JSON);
+				//StringRepresentation rep = new StringRepresentation(content, MediaType.TEXT_PLAIN);
+				//cr.put(rep);
+			} catch (ResourceException re) {
+				log.warning("Error when creating the Mashup Calendar");
+				log.warning(re.getMessage());
+			}
+		}
+	}
+	
+	public Boolean createEvent(String calendarId, Holidays holiday) throws UnsupportedEncodingException{
+		Boolean res = null;
+//		https://www.googleapis.com/calendar/v3/calendars/{calendarId}/events?key={YOUR_API_KEY}
+		String uri = URI_BASICA + "calendars/" + calendarId + "/events?key=" + API_KEY;
+		log.log(Level.FINE, "Google Calendar URI: " + uri);
 	    ClientResource cr = new ClientResource(uri);
         try {
             ChallengeResponse chr = new ChallengeResponse(ChallengeScheme.HTTP_OAUTH_BEARER);
             chr.setRawValue(ACCES_TOKEN);
             cr.setChallengeResponse(chr);
             
-            Snippet snippet = new Snippet();
-            snippet.setTitle("C al Cubo");
-            snippet.setDescription("C al Cubo playlist");
-            Status status = new Status();
-            status.setPrivacyStatus("private");
-            cr.post(snippet, MediaType.APPLICATION_ALL_JSON);
-            cr.post(status, MediaType.APPLICATION_ALL_JSON);
+            RequestEvent body = new RequestEvent();
+            body.setSummary(holiday.getName());
+            body.setDescription(holiday.getDescription());
+            Start start = new Start();
+            start.setDate(holiday.getDate().getIso());
+            End end = new End();
+            end.setDate(holiday.getDate().getIso());
+            cr.post(body, MediaType.APPLICATION_ALL_JSON);
 //            StringRepresentation rep = new StringRepresentation(content, MediaType.TEXT_PLAIN);
 //            cr.put(rep);
+            res = true;
         } catch (ResourceException re) {
-            log.warning("Error when creating the Mashup playlist");
+            log.warning("Error when creating the Mashup Event");
             log.warning(re.getMessage());
-            return false;
+            res = false;
         }
 
 		return res;
