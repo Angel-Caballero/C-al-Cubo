@@ -51,6 +51,10 @@ public class CalendarResource {
 				while (response.getNextPageToken() != null) {
 					uri2 = URI_BASICA + "users/me/calendarList?pageToken=" + response.getNextPageToken() + "&key=" + API_KEY;
 					cr = new ClientResource(uri2);
+					ChallengeResponse chr = new ChallengeResponse(ChallengeScheme.HTTP_OAUTH_BEARER);
+					chr.setRawValue(ACCES_TOKEN);
+					cr.setChallengeResponse(chr);
+
 					response = cr.get(CalendarListResponse.class);
 					res.addAll(Arrays.asList(response.getItems()));
 				}
@@ -90,6 +94,7 @@ public class CalendarResource {
 	public String getCalendarId() throws UnsupportedEncodingException{
 		String res = "";
 		List<Items> calendars = new ArrayList<Items>();
+		calendars.addAll(getCalendarList());
 		Items calendar = null;
 		for(int pos = 0; pos<getCalendarList().size(); pos++) {
 			calendar = calendars.get(pos);
