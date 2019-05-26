@@ -124,8 +124,6 @@ public class CalendarResource {
 				body.setSummary("C al Cubo");
 				body.setDescription("Calendario de los eventos favoritos del Mahsup de C al Cubo");
 				cr.post(body, MediaType.APPLICATION_ALL_JSON);
-				//StringRepresentation rep = new StringRepresentation(content, MediaType.TEXT_PLAIN);
-				//cr.put(rep);
 			} catch (ResourceException re) {
 				log.warning("Error when creating the Mashup Calendar");
 				log.warning(re.getMessage());
@@ -152,8 +150,6 @@ public class CalendarResource {
             End end = new End();
             end.setDate(holiday.getDate().getIso());
             cr.post(body, MediaType.APPLICATION_ALL_JSON);
-//            StringRepresentation rep = new StringRepresentation(content, MediaType.TEXT_PLAIN);
-//            cr.put(rep);
             res = true;
         } catch (ResourceException re) {
             log.warning("Error when creating the Mashup Event");
