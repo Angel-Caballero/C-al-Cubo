@@ -12,11 +12,6 @@ import org.restlet.data.MediaType;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 import aiss.model.calendarific.Holidays;
-import aiss.model.deezer.PlayListData;
-import aiss.model.deezer.PlayListSearch;
-import aiss.model.deezer.TrackData;
-import aiss.model.deezer.TrackSearch;
-import aiss.model.deezer.User;
 import aiss.model.googlecalendar.CalendarListResponse;
 import aiss.model.googlecalendar.End;
 import aiss.model.googlecalendar.Items;
@@ -37,7 +32,7 @@ public class CalendarResource {
 	}
 	
 	
-	public List<Items> getCalendarList() throws UnsupportedEncodingException {
+	private List<Items> getCalendarList() throws UnsupportedEncodingException {
 		
 //		https://www.googleapis.com/calendar/v3/users/me/calendarList?key={YOUR_API_KEY}
 //		https://www.googleapis.com/calendar/v3/users/me/calendarList?pageToken=54&key={YOUR_API_KEY}
@@ -162,79 +157,6 @@ public class CalendarResource {
 
 		return res;
 	}
-	
-	
-	
-	
-	
-	
-	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public List<TrackData> getTracks(PlayListSearch busqPlayList) throws UnsupportedEncodingException {
-		List<TrackData> res = new ArrayList<TrackData>();
-		if(!Arrays.asList(busqPlayList.getData()).isEmpty()) {
-			PlayListData playList= PlayListsResource.getFirstPlayList(busqPlayList);
-			String uri = playList.getTracklist();
-			log.log(Level.FINE, "Deezer URI: " + uri);
-			
-			ClientResource cr = null;
-			TrackSearch search = null;
-			cr = new ClientResource(uri);
-			search = cr.get(TrackSearch.class);
-			
-			log.log(Level.FINE, "Deezer Response: " + search);
-			res.addAll(Arrays.asList(search.getData()));
-			
-			while(search.getNext() != null) {
-				cr = new ClientResource(search.getNext());
-				search = cr.get(TrackSearch.class);
-				log.log(Level.FINE, "Deezer Response: " + search);
-				res.addAll(Arrays.asList(search.getData()));
-			}
-		}
-
-		return res;
-	}
-	public String getUserId() throws UnsupportedEncodingException{
-		String id = "";
-		String userUri = URI_BASICA + "user/me";
-		 ClientResource cr = new ClientResource(userUri);
-
-	        ChallengeResponse chr = new ChallengeResponse(ChallengeScheme.HTTP_OAUTH_BEARER);
-	        chr.setRawValue(ACCES_TOKEN);
-	        cr.setChallengeResponse(chr);
-
-	        log.info("Retrieving user profile");
-
-	        try {
-	            return cr.get(User.class).getId();
-
-	        } catch (ResourceException re) {
-	            log.warning("Error when retrieving the user profile: " + cr.getResponse().getStatus());
-	            log.warning(userUri);
-	            return null;
-	        }
-	    }
-	public Boolean addTracksFavorite(String userId, String trackId) throws UnsupportedEncodingException{
-		Boolean res = true;
-	    ClientResource cr = new ClientResource(URI_BASICA + "user/" + userId + "/tracks/" + trackId);
-        try {
-            ChallengeResponse chr = new ChallengeResponse(
-                    ChallengeScheme.HTTP_OAUTH_BEARER);
-            chr.setRawValue(ACCES_TOKEN);
-            cr.setChallengeResponse(chr);
-//            StringRepresentation rep = new StringRepresentation(content, MediaType.TEXT_PLAIN);
-//            cr.put(rep);
-        } catch (ResourceException re) {
-            log.warning("Error when adding track " + trackId + " to favourites");
-            log.warning(re.getMessage());
-            return false;
-        }
-
-		return res;
-	}
-
 }
 
 
