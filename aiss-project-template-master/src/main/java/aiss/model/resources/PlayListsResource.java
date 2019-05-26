@@ -98,23 +98,5 @@ public class PlayListsResource {
 	            return null;
 	        }
 	    }
-	public Boolean addTracksFavorite(String userId, String trackId) throws UnsupportedEncodingException{
-		Boolean res = true;
-	    ClientResource cr = new ClientResource(URI_BASICA + "user/" + userId + "/tracks/" + trackId);
-        try {
-            ChallengeResponse chr = new ChallengeResponse(
-                    ChallengeScheme.HTTP_OAUTH_BEARER);
-            chr.setRawValue(access_token);
-            cr.setChallengeResponse(chr);
-//            StringRepresentation rep = new StringRepresentation(content, MediaType.TEXT_PLAIN);
-//            cr.put(rep);
-        } catch (ResourceException re) {
-            log.warning("Error when adding track " + trackId + " to favourites");
-            log.warning(re.getMessage());
-            return false;
-        }
-
-		return res;
-	}
 
 }
