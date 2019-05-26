@@ -75,7 +75,7 @@ public class CalendarController extends HttpServlet{
 				Calendarific calendar = hr.getHolidays(country);
 				request.setAttribute("holidays", hr.getHolidaysInActualMonth(calendar.getResponse().getHolidays()));
 				// Search for PlayLists
-				PlayListsResource plr = new PlayListsResource(accessToken);
+				PlayListsResource plr = new PlayListsResource();
 				PlayListSearch busquedaPlayList = plr.getPlayLists(closestHoliday);
 
 				//Comprobamos si hay PlayList con el nombre de la festividad mas cercana o si se devuelve null

@@ -58,7 +58,7 @@ public class HolidaysMusicController extends HttpServlet{
 				request.setAttribute("closestHoliday", closestHoliday);
 
 				// Search for PlayLists
-				PlayListsResource plr = new PlayListsResource(accessToken);
+				PlayListsResource plr = new PlayListsResource();
 				PlayListSearch busquedaPlayList = plr.getPlayLists(closestHoliday);
 
 				//Comprobamos si hay PlayList con el nombre de la festividad mas cercana o si se devuelve null

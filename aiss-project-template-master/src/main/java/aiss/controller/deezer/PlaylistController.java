@@ -49,7 +49,7 @@ public class PlaylistController extends HttpServlet{
 
 		if (accessToken != null && !"".equals(accessToken)) {
 			// Search for PlayLists
-			PlayListsResource plr = new PlayListsResource("");
+			PlayListsResource plr = new PlayListsResource();
 			PlayListSearch busquedaPlayList = plr.getPlayLists(query);
 
 			if (busquedaPlayList != null) {

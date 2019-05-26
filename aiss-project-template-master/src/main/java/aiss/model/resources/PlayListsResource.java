@@ -7,27 +7,22 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.restlet.data.ChallengeResponse;
-import org.restlet.data.ChallengeScheme;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 import aiss.model.deezer.PlayListData;
 import aiss.model.deezer.PlayListSearch;
 import aiss.model.deezer.TrackData;
 import aiss.model.deezer.TrackSearch;
-import aiss.model.deezer.User;
 
 public class PlayListsResource {
 	
-	private final String access_token;
 	private static String URI_BASICA = "https://api.deezer.com/";
 	private static String URI_PLAYLISTS = URI_BASICA + "search/playlist?q=";
 	private static final Logger log = Logger.getLogger(PlayListsResource.class.getName());
 	
 	
-	public PlayListsResource(String access_token) {
+	public PlayListsResource() {
 		super();
-		this.access_token = access_token;
 	}
 	
 	
@@ -79,24 +74,5 @@ public class PlayListsResource {
 
 		return res;
 	}
-	public String getUserId() throws UnsupportedEncodingException{
-		String userUri = URI_BASICA + "user/me";
-		 ClientResource cr = new ClientResource(userUri);
-
-	        ChallengeResponse chr = new ChallengeResponse(ChallengeScheme.HTTP_OAUTH_BEARER);
-	        chr.setRawValue(access_token);
-	        cr.setChallengeResponse(chr);
-
-	        log.info("Retrieving user profile");
-
-	        try {
-	            return cr.get(User.class).getId();
-
-	        } catch (ResourceException re) {
-	            log.warning("Error when retrieving the user profile: " + cr.getResponse().getStatus());
-	            log.warning(userUri);
-	            return null;
-	        }
-	    }
 
 }
