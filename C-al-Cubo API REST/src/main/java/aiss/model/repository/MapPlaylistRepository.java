@@ -74,13 +74,13 @@ public class MapPlaylistRepository implements PlaylistRepository{
 		
 		// Create playlists
 		Playlist japlaylist=new Playlist();
-		japlaylist.setName("AISSPlayList");
-		japlaylist.setDescription("AISS PlayList");
+		japlaylist.setName("Lista1");
+		japlaylist.setDescription("Lista1");
 		addPlaylist(japlaylist);
 		
 		Playlist playlist = new Playlist();
-		playlist.setName("Favourites");
-		playlist.setDescription("A sample playlist");
+		playlist.setName("Lista2");
+		playlist.setDescription("Lista2");
 		addPlaylist(playlist);
 		
 		//Create weathers
