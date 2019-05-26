@@ -34,6 +34,7 @@ public class MapPlaylistRepository implements PlaylistRepository{
 		
 		playlistMap = new HashMap<String,Playlist>();
 		songMap = new HashMap<String,Track>();
+		weatherMap = new HashMap<String,Weather>();
 		
 		// Create songs
 		Track rollingInTheDeep=new Track();
@@ -81,6 +82,27 @@ public class MapPlaylistRepository implements PlaylistRepository{
 		playlist.setName("Favourites");
 		playlist.setDescription("A sample playlist");
 		addPlaylist(playlist);
+		
+		//Create weathers
+		Weather Clear = new Weather();
+		Clear.setName("Clear sky");
+		addWeather(Clear);
+		
+		Weather Overcast = new Weather();
+		Overcast.setName("Overcast clouds");
+		addWeather(Overcast);
+		
+		Weather Scattered = new Weather();
+		Scattered.setName("Scattered clouds");
+		addWeather(Scattered);
+		
+		Weather Few = new Weather();
+		Few.setName("Few clouds");
+		addWeather(Few);
+		
+		Weather Thunderstorm = new Weather();
+		Thunderstorm.setName("Thunderstorm with heavy rain");
+		addWeather(Thunderstorm);
 		
 		// Add songs to playlists
 		addTrack(japlaylist.getId(), rollingInTheDeep.getId());
