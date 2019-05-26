@@ -1,6 +1,13 @@
 package aiss.model.repository;
 
 import java.util.Collection;
+import java.util.List;
+
+import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
 import aiss.model.Playlist;
 import aiss.model.Track;
 import aiss.model.Weather;
@@ -14,6 +21,15 @@ public interface PlaylistRepository {
 	public Weather getWeather(String weatherId);
 	public void updateWeather(Weather w);
 	public void deleteWeather(String weatherId);
+	public List<Playlist> getWeatherPlaylists (String weather_type);
+	public void updateWeatherPlaylists (String weather_type, Weather aux);
+	public Response addWeatherPlaylists(List<Playlist> playlists, String weather_type);
+	public Playlist getWeatherPlaylist (String weather_type, String id);
+	public Response removeWeatherPlaylist(String id, String weather_type);
+	public List<Track> getWeatherTracks (String weather_type);
+	public Track getWeatherTrack (String weather_type, String id);
+	public Response addWeatherPlaylistTrack(Track track, String weather_type, String id);
+	public Response removeWeatherPlaylistTrack(String id, String weather_type, String track_id);		
 	
 	// Songs
 	public void addTrack(Track t);

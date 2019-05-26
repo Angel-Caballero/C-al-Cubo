@@ -1,6 +1,7 @@
 package aiss.api.resources;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -22,6 +23,7 @@ import org.jboss.resteasy.spi.BadRequestException;
 import org.jboss.resteasy.spi.NotFoundException;
 
 import aiss.model.Playlist;
+import aiss.model.Track;
 import aiss.model.Weather;
 import aiss.model.repository.MapPlaylistRepository;
 import aiss.model.repository.PlaylistRepository;
@@ -120,12 +122,131 @@ public Response removeWeather(@PathParam("id") String id) {
 @Path("/{weather_type}/playlists")
 @Produces("application/json")
 public List<Playlist> getWeatherPlaylists (@PathParam("weather_type") String weather_type){
-	//habría que obtener el parametro playlists del weather_type que nos pasan.
-	return null;
+	Weather weather = repository.getWeather(weather_type);
+	return weather.getPlaylists();
+}
+
+@PUT
+@Path("/{weather_type}/playlists")
+@Consumes("application/json")
+public Response updateWeatherPlaylists (@PathParam("weather_type") String weather_type, Weather aux) {
+	Weather weather = repository.getWeather(weather_type);
+	Weather oldWeather = repository.getWeather(weather.getId());
+	
+	if (oldWeather == null) {
+		throw new NotFoundException("The weather with id="+ weather.getId() +" was not found");			
+	}
+	
+	if (weather.getPlaylists()!=null)
+		oldWeather.setPlaylists(aux.getPlaylists());
+
+	return Response.noContent().build();
+}
+
+@POST
+@Path("/{weather_type}/playlists")
+@Consumes("application/json")
+@Produces("application/json")
+public Response addWeatherPlaylists(@Context UriInfo uriInfo, List<Playlist> playlists, @PathParam("weather_type") String weather_type) {
+	Weather weather = repository.getWeather(weather_type);
+	
+	if(weather.getName() == null || "".equals(weather.getName()))
+		throw new BadRequestException("The name of the weather must not be null");
+	for(Playlist p : playlists)
+	repository.getWeather(weather.getId()).addPlaylist(p);
+	
+	//Builds the response. Returns the weather that has just been added.
+	UriBuilder ub = uriInfo.getAbsolutePathBuilder().path(this.getClass(), "get");
+	URI uri = ub.build(weather.getId());
+	ResponseBuilder resp = Response.created(uri);
+	resp.entity(weather);
+	
+	return resp.build();
+}
+
+@GET
+@Path("/{weather_type}/playlists/{id}")
+@Produces("application/json")
+public Playlist getWeatherPlaylist (@PathParam("weather_type") String weather_type, @PathParam("id") String id){
+	Weather weather = repository.getWeather(weather_type);
+	return weather.getPlaylist(id);
+}
+
+@DELETE
+@Path("/{weather_type}/playlists/{id}")
+public Response removeWeatherPlaylist(@PathParam("id") String id, @PathParam("weather_type") String weather_type) {
+	Weather toberemoved=repository.getWeather(weather_type);
+	if (toberemoved == null)
+		throw new NotFoundException("The weather with id="+ id +" was not found");
+	else
+		repository.getWeather(toberemoved.getId()).deleteSong(id);
+	
+	return Response.noContent().build();
 }
 
 @GET
 @Path("/{weather_type}/tracks")
 @Produces("application(json")
-//No entiendo que tiene que devolver este método
+public List<Track> getWeatherTracks (@PathParam("weather_type") String weather_type){
+	Weather weather = repository.getWeather(weather_type);
+	List<Playlist> aux =weather.getPlaylists();
+	List<Track> resultado = new ArrayList<Track>();
+	for(Playlist p : aux) {
+		resultado.addAll(p.getTracks());
+	}
+	return resultado;
+}
+
+@GET
+@Path("/{weather_type}/tracks/{id}")
+@Produces("application(json")
+public Track getWeatherTrack (@PathParam("weather_type") String weather_type, @PathParam("id") String id){
+	Weather weather = repository.getWeather(weather_type);
+	List<Playlist> aux =weather.getPlaylists();
+	List<Track> aux2 = new ArrayList<Track>();
+	Track resultado = null;
+	for(Playlist p : aux) {
+		aux2.addAll(p.getTracks());
+	}
+	for (Track t : aux2) {
+		if(t.getId() == id) {
+			resultado = t;
+			break;
+		}
+			
+	}
+	return resultado;
+}
+
+@POST
+@Path("/{weather_type}/playlists/{id}")
+@Consumes("application/json")
+@Produces("application/json")
+public Response addWeatherPlaylistTrack(@Context UriInfo uriInfo, Track track, @PathParam("weather_type") String weather_type, @PathParam("id") String id) {
+	Weather weather = repository.getWeather(weather_type);
+	
+	if(weather.getName() == null || "".equals(weather.getName()))
+		throw new BadRequestException("The name of the weather must not be null");
+	repository.getWeather(weather.getId()).getPlaylist(id).addSong(track);
+	
+	//Builds the response. Returns the weather that has just been added.
+	UriBuilder ub = uriInfo.getAbsolutePathBuilder().path(this.getClass(), "get");
+	URI uri = ub.build(weather.getId());
+	ResponseBuilder resp = Response.created(uri);
+	resp.entity(weather);
+	
+	return resp.build();
+}
+
+@DELETE
+@Path("/{weather_type}/playlists/{id}/{track_id}")
+public Response removeWeatherPlaylistTrack(@PathParam("id") String id, @PathParam("weather_type") String weather_type, @PathParam("track_id") String track_id) {
+	Weather toberemoved=repository.getWeather(weather_type);
+	if (toberemoved == null)
+		throw new NotFoundException("The weather with id="+ id +" was not found");
+	else
+		repository.getWeather(toberemoved.getId()).getPlaylist(id).deleteSong(track_id);
+	
+	return Response.noContent().build();
+}
 }

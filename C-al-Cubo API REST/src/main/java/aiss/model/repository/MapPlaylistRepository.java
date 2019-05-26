@@ -2,7 +2,10 @@ package aiss.model.repository;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.ws.rs.core.Response;
 
 import org.w3c.dom.ls.LSOutput;
 
@@ -221,6 +224,60 @@ public class MapPlaylistRepository implements PlaylistRepository{
 	public void deleteWeather(String weatherId) {
 		weatherMap.remove(weatherId);
 		
+	}
+
+	@Override
+	public List<Playlist> getWeatherPlaylists(String weather_type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateWeatherPlaylists(String weather_type, Weather aux) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Response addWeatherPlaylists(List<Playlist> playlists, String weather_type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Playlist getWeatherPlaylist(String weather_type, String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Response removeWeatherPlaylist(String id, String weather_type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Track> getWeatherTracks(String weather_type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Track getWeatherTrack(String weather_type, String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Response addWeatherPlaylistTrack(Track track, String weather_type, String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Response removeWeatherPlaylistTrack(String id, String weather_type, String track_id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
