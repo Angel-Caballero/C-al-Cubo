@@ -32,9 +32,11 @@
 				<c:forEach items="${requestScope.holidays}" var="holiday">
 					<tr>
 						<td><form action="" style="display:inline">
-						<input type="text" name="holiday" value="<c:out value='${param.country}' />" style="display:none"/>
-						<input type="text" name="holiday" value="<c:out value='${requestScope.closestHoliday}' />" style="display:none"/>
-							<input type="text" name="holiday" value="<c:out value='${holiday}' />" style="display:none"/>
+						<input type="text" name="country" value="<c:out value='${param.country}' />" style="display:none"/>
+						<input type="text" name="closestHoliday" value="<c:out value='${requestScope.closestHoliday}' />" style="display:none"/>
+							<input type="text" name="holidayName" value="<c:out value='${holiday.name}' />" style="display:none"/>
+							<input type="text" name="holidayDescription" value="<c:out value='${holiday.description}' />" style="display:none"/>
+							<input type="text" name="holidayIso" value="<c:out value='${holiday.date.iso}' />" style="display:none"/>
 							<input type="image" value="submit" src="images/like.png" alt="submit Button" onMouseOver="this.src='images/like.png'" style="height:20px; margin-right:5px"/>
 						</form>Holiday Name: <c:out value="${holiday.name}" /></td>
 					</tr>
