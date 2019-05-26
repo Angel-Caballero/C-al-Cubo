@@ -26,7 +26,7 @@ import aiss.model.repository.MapPlaylistRepository;
 import aiss.model.repository.PlaylistRepository;
 
 
-@Path("/lists")
+@Path("/playlists")
 public class PlaylistResource {
 	
 	/* Singleton */

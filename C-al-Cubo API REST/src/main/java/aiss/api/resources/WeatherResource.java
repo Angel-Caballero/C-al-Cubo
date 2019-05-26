@@ -2,6 +2,7 @@ package aiss.api.resources;
 
 import java.net.URI;
 import java.util.Collection;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -19,6 +20,8 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.jboss.resteasy.spi.BadRequestException;
 import org.jboss.resteasy.spi.NotFoundException;
+
+import aiss.model.Playlist;
 import aiss.model.Weather;
 import aiss.model.repository.MapPlaylistRepository;
 import aiss.model.repository.PlaylistRepository;
@@ -112,4 +115,17 @@ public Response removeWeather(@PathParam("id") String id) {
 	
 	return Response.noContent().build();
 }
+
+@GET
+@Path("/{weather_type}/playlists")
+@Produces("application/json")
+public List<Playlist> getWeatherPlaylists (@PathParam("weather_type") String weather_type){
+	//habría que obtener el parametro playlists del weather_type que nos pasan.
+	return null;
+}
+
+@GET
+@Path("/{weather_type}/tracks")
+@Produces("application(json")
+//No entiendo que tiene que devolver este método
 }
