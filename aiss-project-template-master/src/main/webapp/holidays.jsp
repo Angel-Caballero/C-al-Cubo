@@ -31,7 +31,10 @@
 			<tbody>
 				<c:forEach items="${requestScope.holidays}" var="holiday">
 					<tr>
-						<td>Holiday Name: <c:out value="${holiday.name}" /></td>
+						<td><form action="" style="display:inline">
+							<input type="text" name="holiday" value="<c:out value='${holiday.name}' />" style="display:none"/>
+							<input type="image" value="submit" src="images/like.png" alt="submit Button" onMouseOver="this.src='images/like.png'" style="height:20px; margin-right:5px"/>
+						</form>Holiday Name: <c:out value="${holiday.name}" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -48,11 +51,7 @@
 			<tbody>
 				<c:forEach items="${requestScope.tracks}" var="track">
 					<tr>
-						<td><form action="" style="display:inline">
-							<input type="text" name="track" value="<c:out value='${track.title}' />" style="display:none"/>
-							<input type="image" value="submit" src="images/like.png" alt="submit Button" onMouseOver="this.src='images/like.png'" style="height:20px; margin-right:5px"/>
-						</form>
-						Track Name: <c:out value="${track.title}" /></td>
+						<td>Track Name: <c:out value="${track.title}" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>
