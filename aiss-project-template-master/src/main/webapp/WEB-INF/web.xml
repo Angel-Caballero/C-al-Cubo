@@ -40,6 +40,16 @@
     <servlet-name>LoginCalendarController</servlet-name>
     <url-pattern>/LoginCalendarController</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>CalendarController</display-name>
+    <servlet-name>CalendarController</servlet-name>
+    <servlet-class>aiss.controller.googlecalendar.CalendarController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CalendarController</servlet-name>
+    <url-pattern>/CalendarController</url-pattern>
+  </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
