@@ -11,7 +11,7 @@ public interface PlaylistRepository {
 	//Weather
 	public void addWeather(Weather w);
 	public Collection<Weather> getAllWeather();
-	public Track getWeather(String weatherId);
+	public Weather getWeather(String weatherId);
 	public void updateWeather(Weather w);
 	public void deleteWeather(String weatherId);
 	
