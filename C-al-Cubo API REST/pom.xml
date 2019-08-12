@@ -7,7 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<groupId>aiss</groupId>
-	<artifactId>lab7</artifactId>
+	<artifactId>C-al-Cubo-APIREST</artifactId>
 
 	<!-- Restlet repository -->
 	<repositories>
