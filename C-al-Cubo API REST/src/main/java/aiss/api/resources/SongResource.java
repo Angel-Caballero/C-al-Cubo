@@ -13,13 +13,18 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.Response.ResponseBuilder;
+
 import org.jboss.resteasy.spi.BadRequestException;
 import org.jboss.resteasy.spi.NotFoundException;
-import aiss.model.Track;
+
+import aiss.model.Playlist;
+import aiss.model.Song;
 import aiss.model.repository.MapPlaylistRepository;
 import aiss.model.repository.PlaylistRepository;
+
 import java.net.URI;
 import java.util.Collection;
+import java.util.List;
 
 
 @Path("/songs")
@@ -41,21 +46,21 @@ public class SongResource {
 	
 	@GET
 	@Produces("application/json")
-	public Collection<Track> getAll()
+	public Collection<Song> getAll()
 	{
-		return repository.getAllTracks();
+		return repository.getAllSongs();
 	}
 	
 	
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
-	public Track get(@PathParam("id") String trackId)
+	public Song get(@PathParam("id") String songId)
 	{
-		Track song = repository.getTrack(trackId);
+		Song song = repository.getSong(songId);
 		
 		if(song == null) {
-			throw new NotFoundException("The song with id= " + trackId + " was not found");
+			throw new NotFoundException("The song with id= " + songId + " was not found");
 		}
 		return song;
 	}
@@ -63,32 +68,32 @@ public class SongResource {
 	@POST
 	@Consumes("application/json")
 	@Produces("application/json")
-	public Response addTrack(@Context UriInfo uriInfo, Track track) {
-		if(track.getTitle() == null || "".equals(track.getTitle())) {
+	public Response addSong(@Context UriInfo uriInfo, Song song) {
+		if(song.getTitle() == null || "".equals(song.getTitle())) {
 			throw new BadRequestException("The title of the song must not be null.");
 		}
 		
-		repository.addTrack(track);
+		repository.addSong(song);
 		
 		UriBuilder ub = uriInfo.getAbsolutePathBuilder().path(this.getClass(), "get");
-		URI uri = ub.build(track.getId());
+		URI uri = ub.build(song.getId());
 		ResponseBuilder resp = Response.created(uri);
-		resp.entity(track);			
+		resp.entity(song);			
 		return resp.build();
 	}
 	
 	
 	@PUT
 	@Consumes("application/json")
-	public Response updateTrack(Track track) {
-		Track oldSong = repository.getTrack(track.getId());
+	public Response updateSong(Song song) {
+		Song oldSong = repository.getSong(song.getId());
 		
 		if(oldSong == null) {
-			throw new NotFoundException("The song with id= " + track.getId() + " was not found");
+			throw new NotFoundException("The song with id= " + song.getId() + " was not found");
 		}
 		
-		if(track.getTitle() != null) {
-			oldSong.setTitle(track.getTitle());
+		if(song.getTitle() != null) {
+			oldSong.setTitle(song.getTitle());
 		}
 		
 		return Response.noContent().build();
@@ -96,14 +101,14 @@ public class SongResource {
 	
 	@DELETE
 	@Path("/{id}")
-	public Response removeTrack(@PathParam("id") String trackId) {
-		Track oldSong = repository.getTrack(trackId);
+	public Response removeSong(@PathParam("id") String songId) {
+		Song oldSong = repository.getSong(songId);
 		
 		if(oldSong == null) {
-			throw new NotFoundException("The song with id= " + trackId + " was not found");
+			throw new NotFoundException("The song with id= " + songId + " was not found");
 		}
 		
-		repository.deleteTrack(trackId);
+		repository.deleteSong(songId);
 		
 		return Response.noContent().build();
 	}

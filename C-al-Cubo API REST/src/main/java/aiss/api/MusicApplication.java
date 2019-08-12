@@ -6,7 +6,6 @@ import java.util.Set;
 import javax.ws.rs.core.Application;
 import aiss.api.resources.PlaylistResource;
 import aiss.api.resources.SongResource;
-import aiss.api.resources.WeatherResource;
 
 
 public class MusicApplication extends Application {
@@ -19,7 +18,6 @@ public class MusicApplication extends Application {
 
 		singletons.add(PlaylistResource.getInstance());
 		singletons.add(SongResource.getInstance());
-		singletons.add(WeatherResource.getInstance());
 	}
 
 	@Override

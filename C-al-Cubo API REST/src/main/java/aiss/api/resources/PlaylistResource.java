@@ -21,12 +21,12 @@ import org.jboss.resteasy.spi.BadRequestException;
 import org.jboss.resteasy.spi.NotFoundException;
 
 import aiss.model.Playlist;
-import aiss.model.Track;
+import aiss.model.Song;
 import aiss.model.repository.MapPlaylistRepository;
 import aiss.model.repository.PlaylistRepository;
 
 
-@Path("/playlists")
+@Path("/lists")
 public class PlaylistResource {
 	
 	/* Singleton */
@@ -75,7 +75,7 @@ public class PlaylistResource {
 		if (playlist.getName() == null || "".equals(playlist.getName()))
 			throw new BadRequestException("The name of the playlist must not be null");
 		
-		if (playlist.getTracks()!=null)
+		if (playlist.getSongs()!=null)
 			throw new BadRequestException("The songs property is not editable.");
 
 		repository.addPlaylist(playlist);
@@ -97,7 +97,7 @@ public class PlaylistResource {
 			throw new NotFoundException("The playlist with id="+ playlist.getId() +" was not found");			
 		}
 		
-		if (playlist.getTracks()!=null)
+		if (playlist.getSongs()!=null)
 			throw new BadRequestException("The songs property is not editable.");
 		
 		// Update name
@@ -128,22 +128,22 @@ public class PlaylistResource {
 	@Path("/{playlistId}/{songId}")
 	@Consumes("text/plain")
 	@Produces("application/json")
-	public Response addSong(@Context UriInfo uriInfo,@PathParam("playlistId") String playlistId, @PathParam("trackId") String trackId)
+	public Response addSong(@Context UriInfo uriInfo,@PathParam("playlistId") String playlistId, @PathParam("songId") String songId)
 	{				
 		
 		Playlist playlist = repository.getPlaylist(playlistId);
-		Track song = repository.getTrack(trackId);
+		Song song = repository.getSong(songId);
 		
 		if (playlist==null)
 			throw new NotFoundException("The playlist with id=" + playlistId + " was not found");
 		
 		if (song == null)
-			throw new NotFoundException("The song with id=" + trackId + " was not found");
+			throw new NotFoundException("The song with id=" + songId + " was not found");
 		
-		if (playlist.getSong(trackId)!=null)
+		if (playlist.getSong(songId)!=null)
 			throw new BadRequestException("The song is already included in the playlist.");
 			
-		repository.addTrack(playlistId, trackId);		
+		repository.addSong(playlistId, songId);		
 
 		// Builds the response
 		UriBuilder ub = uriInfo.getAbsolutePathBuilder().path(this.getClass(), "get");
@@ -156,18 +156,18 @@ public class PlaylistResource {
 	
 	@DELETE
 	@Path("/{playlistId}/{songId}")
-	public Response removeSong(@PathParam("playlistId") String playlistId, @PathParam("trackId") String trackId) {
+	public Response removeSong(@PathParam("playlistId") String playlistId, @PathParam("songId") String songId) {
 		Playlist playlist = repository.getPlaylist(playlistId);
-		Track song = repository.getTrack(trackId);
+		Song song = repository.getSong(songId);
 		
 		if (playlist==null)
 			throw new NotFoundException("The playlist with id=" + playlistId + " was not found");
 		
 		if (song == null)
-			throw new NotFoundException("The song with id=" + trackId + " was not found");
+			throw new NotFoundException("The song with id=" + songId + " was not found");
 		
 		
-		repository.removeTrack(playlistId, trackId);		
+		repository.removeSong(playlistId, songId);		
 		
 		return Response.noContent().build();
 	}
