@@ -15,4 +15,5 @@ public interface WeatherRepository {
 	public Playlist getWeatherPlaylist(String weatherId, String playlistId);
 	public void addPlaylist(String weatherId, String playlistId);
 	public void removePlaylist(String weatherId, String playlistId);
+	
 }
