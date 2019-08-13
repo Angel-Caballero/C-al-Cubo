@@ -7,76 +7,59 @@ public class Playlist {
 
 	private String id;
 	private String name;
-	private String description;
-	private List<Song> songs;
+	private List<Track> tracks;
 	
-	public Playlist() {}
-	
-	public Playlist(String name) {
-		this.name = name;
-	}
-	
-	protected void setSongs(List<Song> s) {
-		songs = s;
-	}
 	
 	public String getId() {
 		return id;
 	}
-
 	public void setId(String id) {
 		this.id = id;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public String getDescription() {
-		return description;
+	public List<Track> getTracks() {
+		return tracks;
 	}
-
-	public void setDescription(String description) {
-		this.description = description;
+	public void setTracks(List<Track> tracks) {
+		this.tracks = tracks;
 	}
 	
-	public List<Song> getSongs() {
-		return songs;
-	}
 	
-	public Song getSong(String id) {
-		if (songs==null)
+	public Track getTrack(String id) {
+		if(tracks == null) {
 			return null;
+		}
 		
-		Song song =null;
-		for(Song s: songs)
-			if (s.getId().equals(id))
-			{
-				song=s;
+		Track track = null;
+		for(Track t : tracks) {
+			if(t.getId().equals(id)) {
+				track = t;
 				break;
 			}
-		
-		return song;
+		}
+		return track;
 	}
 	
-	public void addSong(Song s) {
-		if (songs==null)
-			songs = new ArrayList<Song>();
-		songs.add(s);
+	public void addTrack(Track t) {
+		if(tracks == null) {
+			tracks = new ArrayList<Track>();
+		}
+		tracks.add(t);
 	}
 	
-	public void deleteSong(Song s) {
-		songs.remove(s);
+	public void deleteTrack(Track t) {
+		tracks.remove(t);
 	}
 	
-	public void deleteSong(String id) {
-		Song s = getSong(id);
-		if (s!=null)
-			songs.remove(s);
+	public void deleteTrack(String trackId) {
+		Track t = getTrack(id);
+		if(t != null) {
+			deleteTrack(t);
+		}
 	}
-
 }
