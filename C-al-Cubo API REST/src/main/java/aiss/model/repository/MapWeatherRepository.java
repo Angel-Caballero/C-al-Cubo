@@ -86,7 +86,7 @@ public class MapWeatherRepository implements WeatherRepository{
 
 
 	@Override
-	public Collection<Track> getWeatherTracks(String weatherId, String playlistId) {
+	public Collection<Track> getWeatherTracks(String weatherId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
