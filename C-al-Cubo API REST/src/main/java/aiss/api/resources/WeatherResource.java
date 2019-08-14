@@ -2,7 +2,6 @@ package aiss.api.resources;
 
 import java.net.URI;
 import java.util.Collection;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -16,12 +15,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.Response.ResponseBuilder;
-
 import org.jboss.resteasy.spi.BadRequestException;
 import org.jboss.resteasy.spi.NotFoundException;
-import org.restlet.resource.Put;
-
-import aiss.model.Playlist;
 import aiss.model.Weather;
 import aiss.model.repository.MapWeatherRepository;
 import aiss.model.repository.WeatherRepository;
@@ -68,7 +63,7 @@ public class WeatherResource {
 		if(weather.getName() == null || "".equals(weather.getName())) {
 			throw new BadRequestException("The name of the weather must not be null");
 		}
-		if(weather.getPlaylist() != null) {
+		if(weather.getPlaylists() != null) {
 			throw new BadRequestException("The playlist property is not editable.");
 		}
 		
@@ -89,7 +84,7 @@ public class WeatherResource {
 		if(oldWeather == null) {
 			throw new NotFoundException("The weather with id="+ weather.getId() +" was not found");
 		}
-		if(weather.getPlaylist() != null) {
+		if(weather.getPlaylists() != null) {
 			throw new BadRequestException("The playlist property is not editable.");
 		}
 		
