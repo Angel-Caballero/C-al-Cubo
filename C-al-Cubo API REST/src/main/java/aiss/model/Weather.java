@@ -25,11 +25,11 @@ public class Weather {
 		this.name = name;
 	}
 	
-	public List<Playlist> getPlaylist() {
+	public List<Playlist> getPlaylists() {
 		return playlists;
 	}
 	
-	public void setPlaylist(List<Playlist> playlists) {
+	public void setPlaylists(List<Playlist> playlists) {
 		this.playlists = playlists;
 	}
 	
@@ -56,10 +56,15 @@ public class Weather {
 		playlists.add(p);
 	}
 	
+	public void deletePlaylist(Playlist p) {
+		playlists.remove(p);
+		
+	}
+	
 	public void deletePlaylist(String id) {
 		Playlist p = getPlaylist(id);
 		if(p != null) {
-			playlists.remove(p);
+			deletePlaylist(p);
 		}
 	}
 	

@@ -65,7 +65,7 @@ public class MapWeatherRepository implements WeatherRepository{
 
 
 	@Override
-	public Playlist getWeatherPlaylist(String weatherId, String playlistId) {
+	public Collection<Playlist> getWeatherPlaylists(String weatherId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -83,4 +83,28 @@ public class MapWeatherRepository implements WeatherRepository{
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	@Override
+	public Collection<Track> getWeatherTracks(String weatherId, String playlistId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void addSong(String weatherId, String playlistId, String trackId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void removeSong(String weatherId, String playlistId, String trackId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
 }
