@@ -23,18 +23,20 @@ import org.jboss.resteasy.spi.NotFoundException;
 import aiss.model.Playlist;
 import aiss.model.Song;
 import aiss.model.repository.MapPlaylistRepository;
+import aiss.model.repository.MapWeatherRepository;
 import aiss.model.repository.PlaylistRepository;
+import aiss.model.repository.WeatherRepository;
 
 
-@Path("/lists")
+@Path("/playlists")
 public class PlaylistResource {
 	
 	/* Singleton */
 	private static PlaylistResource _instance=null;
-	PlaylistRepository repository;
+	WeatherRepository repository;
 	
 	private PlaylistResource() {
-		repository=MapPlaylistRepository.getInstance();
+		repository = MapWeatherRepository.getInstance();
 
 	}
 	
@@ -48,8 +50,7 @@ public class PlaylistResource {
 
 	@GET
 	@Produces("application/json")
-	public Collection<Playlist> getAll()
-	{
+	public Collection<Playlist> getAllPlaylists(){
 		return repository.getAllPlaylists();
 	}
 	
@@ -59,25 +60,27 @@ public class PlaylistResource {
 	@Produces("application/json")
 	public Playlist get(@PathParam("id") String id)
 	{
-		Playlist list = repository.getPlaylist(id);
+		Playlist playlist = repository.getPlaylist(id);
 		
-		if (list == null) {
-			throw new NotFoundException("The playlist wit id="+ id +" was not found");			
+		if (playlist == null) {
+			throw new NotFoundException("The playlist wit id="+ id +" was not found.");			
 		}
 		
-		return list;
+		return playlist;
 	}
 	
 	@POST
 	@Consumes("application/json")
 	@Produces("application/json")
 	public Response addPlaylist(@Context UriInfo uriInfo, Playlist playlist) {
-		if (playlist.getName() == null || "".equals(playlist.getName()))
-			throw new BadRequestException("The name of the playlist must not be null");
+		if (playlist.getName() == null || "".equals(playlist.getName())) {
+			throw new BadRequestException("The name of the playlist must not be null.");
+		}
 		
-		if (playlist.getSongs()!=null)
-			throw new BadRequestException("The songs property is not editable.");
-
+		if (playlist.getTracks()!=null) {
+			throw new BadRequestException("The tracks property is not editable.");
+		}
+		
 		repository.addPlaylist(playlist);
 
 		// Builds the response. Returns the playlist the has just been added.
@@ -94,12 +97,14 @@ public class PlaylistResource {
 	public Response updatePlaylist(Playlist playlist) {
 		Playlist oldplaylist = repository.getPlaylist(playlist.getId());
 		if (oldplaylist == null) {
-			throw new NotFoundException("The playlist with id="+ playlist.getId() +" was not found");			
+			throw new NotFoundException("The playlist with id="+ playlist.getId() +" was not found.");			
 		}
 		
-		if (playlist.getSongs()!=null)
-			throw new BadRequestException("The songs property is not editable.");
+		if (playlist.getTracks()!=null) {
+			throw new BadRequestException("The tracks property is not editable.");
+		}
 		
+		repository.updatePlaylist(p);
 		// Update name
 		if (playlist.getName()!=null)
 			oldplaylist.setName(playlist.getName());

@@ -114,13 +114,6 @@ public class WeatherResource {
 	
 	
 	//Methods related to playlist
-	@GET
-	@Path("/playlists")
-	@Produces("application/json")
-	public Collection<Playlist> getAllPlaylists(){
-		return repository.getAllPlaylists();
-	}
-	
 	@POST
 	@Path("/{weatherId}/{playlistId}")
 	@Consumes("text/plain")
@@ -171,14 +164,6 @@ public class WeatherResource {
 	
 	
 	//Methods related to track
-	@GET
-	@Path("/tracks")
-	@Produces("application/json")
-	public Collection<Track> getAllTracks(){
-		return repository.getAllTracks();
-	}
-	
-	
 	@POST
 	@Path("/{playlistId}/{trackId}")
 	@Consumes("text/plain")
