@@ -65,46 +65,132 @@ public class MapWeatherRepository implements WeatherRepository{
 
 
 	@Override
-	public Collection<Playlist> getWeatherPlaylists(String weatherId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Playlist getWeatherPlaylist(String weatherId) {
+		return getWeather(weatherId).getPlaylist();
 	}
 
 
 	@Override
-	public void addPlaylist(String weatherId, String playlistId) {
-		// TODO Auto-generated method stub
-		
+	public void setPlaylist(String weatherId, String playlistId) {
+		Weather w = getWeather(weatherId);
+		w.setPlaylist(playlistMap.get(playlistId));
 	}
-
-
+	
+	
 	@Override
-	public void removePlaylist(String weatherId, String playlistId) {
-		// TODO Auto-generated method stub
-		
+	public void removePlaylist(String weatherId) {
+		Weather w = getWeather(weatherId);
+		w.setPlaylist(null);
 	}
 
 
 	@Override
 	public Collection<Track> getWeatherTracks(String weatherId) {
-		// TODO Auto-generated method stub
-		return null;
+		return getWeatherPlaylist(weatherId).getTracks();
+	}
+
+	
+//	@Override
+//	public void addSong(String weatherId, String playlistId, String trackId) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//
+//	@Override
+//	public void removeSong(String weatherId, String playlistId, String trackId) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+
+
+	//Methods related to playlist
+	@Override
+	public void addPlaylist(Playlist p) {
+		String id = "p" + index++;
+		p.setId(id);
+		playlistMap.put(id, p);
 	}
 
 
 	@Override
-	public void addSong(String weatherId, String playlistId, String trackId) {
-		// TODO Auto-generated method stub
-		
+	public Collection<Playlist> getAllPlaylists() {
+		return playlistMap.values();
 	}
 
 
 	@Override
-	public void removeSong(String weatherId, String playlistId, String trackId) {
-		// TODO Auto-generated method stub
-		
+	public Playlist getPlaylist(String playlistId) {
+		return playlistMap.get(playlistId);
 	}
 
 
+	@Override
+	public void updatePlaylist(Playlist p) {
+		playlistMap.put(p.getId(), p);
+	}
+
+
+	@Override
+	public void deletePlaylist(Playlist p) {
+		playlistMap.remove(p.getId());
+	}
+
+
+	@Override
+	public Collection<Track> getTracks(String playlistId) {
+		return getPlaylist(playlistId).getTracks();
+	}
+
+
+	@Override
+	public void addTrack(String playlistId, String trackId) {
+		Playlist p = getPlaylist(playlistId);
+		p.addTrack(trackMap.get(trackId));
+	}
+
+
+	@Override
+	public void removeTrack(String playlistId, String trackId) {
+		Playlist p = getPlaylist(playlistId);
+		p.deleteTrack(trackMap.get(trackId));
+	}
+
+
+	//Methods related to playlist
+	@Override
+	public void addTrack(Track t) {
+		String id = "t" + index++;
+		t.setId(id);
+		trackMap.put(id, t);
+	}
+
+
+	@Override
+	public Collection<Track> getAllTracks() {
+		return trackMap.values();
+	}
+
+
+	@Override
+	public Track getTrack(String trackId) {
+		return trackMap.get(trackId);
+	}
+
+
+	@Override
+	public void updateTrack(Track t) {
+		Track track = trackMap.get(t.getId());
+		track.setAlbum(t.getAlbum());
+		track.setArtist(t.getArtist());
+		track.setTitle(t.getTitle());
+		track.setYear(t.getYear());
+	}
+
+
+	@Override
+	public void deleteTrack(String trackId) {
+		trackMap.remove(trackId);	
+	}
 
 }
