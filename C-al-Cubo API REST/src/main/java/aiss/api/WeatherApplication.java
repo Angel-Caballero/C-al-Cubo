@@ -2,10 +2,10 @@ package aiss.api;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.ws.rs.core.Application;
 import aiss.api.resources.PlaylistResource;
-import aiss.api.resources.SongResource;
+import aiss.api.resources.TrackResource;
+import aiss.api.resources.WeatherResource;
 
 
 public class WeatherApplication extends Application {
@@ -16,8 +16,9 @@ public class WeatherApplication extends Application {
 	// so that they can be found by RESTEasy.
 	public WeatherApplication() {
 
+		singletons.add(WeatherResource.getInstance());
 		singletons.add(PlaylistResource.getInstance());
-		singletons.add(SongResource.getInstance());
+		singletons.add(TrackResource.getInstance());
 	}
 
 	@Override
