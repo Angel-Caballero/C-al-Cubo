@@ -1,13 +1,10 @@
 package aiss.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Weather {
 
 	private String id;
 	private String name;
-	private List<Playlist> playlists;
+	private Playlist playlist;
 	
 	public String getName() {
 		return name;
@@ -25,47 +22,14 @@ public class Weather {
 		this.name = name;
 	}
 	
-	public List<Playlist> getPlaylists() {
-		return playlists;
-	}
-	
-	public void setPlaylists(List<Playlist> playlists) {
-		this.playlists = playlists;
-	}
-	
-	//Methods for the playlists inside each weather
-	public Playlist getPlaylist(String id) {
-		if(playlists == null) {
-			return null;
-		}
-		
-		Playlist playlist = null;
-		for(Playlist p : playlists) {
-			if(p.getId().equals(id)) {
-				playlist = p;
-				break;
-			}
-		}
+	public Playlist getPlaylist() {
 		return playlist;
 	}
 	
-	public void addPlaylist(Playlist p) {
-		if(playlists == null) {
-			playlists  = new ArrayList<Playlist>();
-		}
-		playlists.add(p);
+	public void setPlaylist(Playlist playlist) {
+		this.playlist = playlist;
 	}
 	
-	public void deletePlaylist(Playlist p) {
-		playlists.remove(p);
-		
-	}
-	
-	public void deletePlaylist(String id) {
-		Playlist p = getPlaylist(id);
-		if(p != null) {
-			deletePlaylist(p);
-		}
-	}
+
 	
 }
