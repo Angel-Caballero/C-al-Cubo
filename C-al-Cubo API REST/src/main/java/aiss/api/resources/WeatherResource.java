@@ -18,7 +18,6 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import org.jboss.resteasy.spi.BadRequestException;
 import org.jboss.resteasy.spi.NotFoundException;
 import aiss.model.Playlist;
-import aiss.model.Track;
 import aiss.model.Weather;
 import aiss.model.repository.MapWeatherRepository;
 import aiss.model.repository.WeatherRepository;
@@ -42,7 +41,7 @@ public class WeatherResource {
 	}
 	
 	
-	//Methods related to weather
+	//Methods related to weathers
 	@GET
 	@Produces("application/json")
 	public Collection<Weather> getAllWeather(){
@@ -113,7 +112,7 @@ public class WeatherResource {
 	}
 	
 	
-	//Methods related to playlist
+	//Methods related to playlists inside the weather
 	@POST
 	@Path("/{weatherId}/{playlistId}")
 	@Consumes("text/plain")
@@ -161,56 +160,4 @@ public class WeatherResource {
 		repository.removePlaylist(weatherId);
 		return Response.noContent().build();
 	}
-	
-	
-	//Methods related to track
-	@POST
-	@Path("/{playlistId}/{trackId}")
-	@Consumes("text/plain")
-	@Produces("application/json")
-	public Response addTrack(@Context UriInfo uriInfo, @PathParam("playlistId") String playlistId, @PathParam("trackId") String trackId) {
-		Playlist playlist = repository.getPlaylist(playlistId);
-		Track track = repository.getTrack(trackId);
-		
-		if(playlist==null) {
-			throw new NotFoundException("The playlist with id=" + playlistId + " was not found.");
-		}
-		
-		if(track == null) {
-			throw new NotFoundException("The song with id=" + trackId + " was not found.");
-		}
-		
-		if(playlist.getTrack(trackId) != null) {
-			throw new BadRequestException("The track is already included in the playlist.");
-		}
-		
-		repository.addTrack(playlistId, trackId);
-		
-		// Builds the response
-		UriBuilder ub = uriInfo.getAbsolutePathBuilder().path(this.getClass(), "get");
-		URI uri = ub.build(playlistId);
-		ResponseBuilder resp = Response.created(uri);
-		resp.entity(playlist);			
-		return resp.build();
-	}
-	
-	
-	@DELETE
-	@Path("/{playlistId}/{trackId}")
-	public Response removeSong(@PathParam("playlistId") String playlistId, @PathParam("trackId") String trackId) {
-		Playlist playlist = repository.getPlaylist(playlistId);
-		Track track = repository.getTrack(trackId);
-		
-		if(playlist==null) {
-			throw new NotFoundException("The playlist with id=" + playlistId + " was not found.");
-		}
-		
-		if(track == null) {
-			throw new NotFoundException("The song with id=" + trackId + " was not found.");
-		}
-		
-		repository.removeTrack(playlistId, trackId);
-		return Response.noContent().build();
-	}
-	
 }
