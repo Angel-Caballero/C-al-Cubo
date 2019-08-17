@@ -48,9 +48,9 @@ public class TrackResource {
 	
 	
 	@GET
-	@Path("/{id}")
+	@Path("/{trackId}")
 	@Produces("application/json")
-	public Track get(@PathParam("id") String trackId) {
+	public Track getTrack(@PathParam("trackId") String trackId) {
 		Track track = repository.getTrack(trackId);
 		
 		if(track == null) {
@@ -109,8 +109,8 @@ public class TrackResource {
 	
 	
 	@DELETE
-	@Path("/{id}")
-	public Response deleteTrack(@PathParam("id") String trackId) {
+	@Path("/{trackId}")
+	public Response deleteTrack(@PathParam("trackId") String trackId) {
 		Track track = repository.getTrack(trackId);
 		
 		if(track == null) {

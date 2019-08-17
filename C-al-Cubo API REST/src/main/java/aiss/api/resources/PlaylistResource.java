@@ -52,9 +52,9 @@ public class PlaylistResource {
 	
 	
 	@GET
-	@Path("/{id}")
+	@Path("/{playlistId}")
 	@Produces("application/json")
-	public Playlist get(@PathParam("id") String id)
+	public Playlist getPlaylist(@PathParam("playlistId") String id)
 	{
 		Playlist playlist = repository.getPlaylist(id);
 		
@@ -110,8 +110,8 @@ public class PlaylistResource {
 	}
 	
 	@DELETE
-	@Path("/{id}")
-	public Response deletePlaylist(@PathParam("id") String id) {
+	@Path("/{playlistId}")
+	public Response deletePlaylist(@PathParam("playlistId") String id) {
 		Playlist playlist = repository.getPlaylist(id);
 		
 		if (playlist == null) {

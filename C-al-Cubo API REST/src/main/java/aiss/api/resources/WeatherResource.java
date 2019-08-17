@@ -49,9 +49,9 @@ public class WeatherResource {
 	}
 	
 	@GET
-	@Path("/{id}")
+	@Path("/{weatherId}")
 	@Produces("application/json")
-	public Weather get(@PathParam("id") String id) {
+	public Weather getWeather(@PathParam("weatherId") String id) {
 		Weather weather = repository.getWeather(id);
 		if(weather == null) {
 			throw new NotFoundException("The weather with id="+ id +" was not found.");
@@ -100,8 +100,8 @@ public class WeatherResource {
 	}
 	
 	@DELETE
-	@Path("/{id}")
-	public Response deleteWeather(@PathParam("id") String id) {
+	@Path("/{weatherId}")
+	public Response deleteWeather(@PathParam("weatherId") String id) {
 		Weather oldWeather = repository.getWeather(id);
 		if(oldWeather == null) {
 			throw new NotFoundException("The weather with id="+ id +" was not found.");
