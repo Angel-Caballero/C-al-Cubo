@@ -145,7 +145,7 @@ public class WeatherResource {
 	
 	
 	@DELETE
-	@Path("/{weatherId}")
+	@Path("/{weatherId}/playlist")
 	public Response removePlaylist(@PathParam("weatherId") String weatherId) {
 		Weather weather = repository.getWeather(weatherId);
 		
@@ -154,7 +154,7 @@ public class WeatherResource {
 		}
 		
 		if(weather.getPlaylist() == null) {
-			throw new BadRequestException("This weather doesn´t have playlist already.");
+			throw new BadRequestException("This weather doesn´t have playlist yet.");
 		}
 		
 		repository.removePlaylist(weatherId);
