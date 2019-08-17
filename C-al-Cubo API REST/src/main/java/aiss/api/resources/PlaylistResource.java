@@ -2,7 +2,6 @@ package aiss.api.resources;
 
 import java.net.URI;
 import java.util.Collection;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -16,15 +15,11 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.Response.ResponseBuilder;
-
 import org.jboss.resteasy.spi.BadRequestException;
 import org.jboss.resteasy.spi.NotFoundException;
-
 import aiss.model.Playlist;
-import aiss.model.Song;
-import aiss.model.repository.MapPlaylistRepository;
+import aiss.model.Track;
 import aiss.model.repository.MapWeatherRepository;
-import aiss.model.repository.PlaylistRepository;
 import aiss.model.repository.WeatherRepository;
 
 
@@ -48,6 +43,7 @@ public class PlaylistResource {
 	}
 	
 
+	//Methods related to playlists
 	@GET
 	@Produces("application/json")
 	public Collection<Playlist> getAllPlaylists(){
@@ -104,52 +100,53 @@ public class PlaylistResource {
 			throw new BadRequestException("The tracks property is not editable.");
 		}
 		
-		repository.updatePlaylist(p);
-		// Update name
-		if (playlist.getName()!=null)
-			oldplaylist.setName(playlist.getName());
 		
-		// Update description
-		if (playlist.getDescription()!=null)
-			oldplaylist.setDescription(playlist.getDescription());
+		// Update name
+		if (playlist.getName()!=null) {
+			oldplaylist.setName(playlist.getName());
+		}
 		
 		return Response.noContent().build();
 	}
 	
 	@DELETE
 	@Path("/{id}")
-	public Response removePlaylist(@PathParam("id") String id) {
-		Playlist toberemoved=repository.getPlaylist(id);
-		if (toberemoved == null)
-			throw new NotFoundException("The playlist with id="+ id +" was not found");
-		else
-			repository.deletePlaylist(id);
+	public Response deletePlaylist(@PathParam("id") String id) {
+		Playlist playlist = repository.getPlaylist(id);
+		
+		if (playlist == null) {
+			throw new NotFoundException("The playlist with id="+ id +" was not found.");
+		}else {
+			repository.deletePlaylist(playlist);
+		}
 		
 		return Response.noContent().build();
 	}
 	
 	
-	@POST	
-	@Path("/{playlistId}/{songId}")
+	//Methods related to tracks inside the playlists
+	@POST
+	@Path("/{playlistId}/{trackId}")
 	@Consumes("text/plain")
 	@Produces("application/json")
-	public Response addSong(@Context UriInfo uriInfo,@PathParam("playlistId") String playlistId, @PathParam("songId") String songId)
-	{				
-		
+	public Response addTrack(@Context UriInfo uriInfo, @PathParam("playlistId") String playlistId, @PathParam("trackId") String trackId) {
 		Playlist playlist = repository.getPlaylist(playlistId);
-		Song song = repository.getSong(songId);
+		Track track = repository.getTrack(trackId);
 		
-		if (playlist==null)
-			throw new NotFoundException("The playlist with id=" + playlistId + " was not found");
+		if(playlist==null) {
+			throw new NotFoundException("The playlist with id=" + playlistId + " was not found.");
+		}
 		
-		if (song == null)
-			throw new NotFoundException("The song with id=" + songId + " was not found");
+		if(track == null) {
+			throw new NotFoundException("The song with id=" + trackId + " was not found.");
+		}
 		
-		if (playlist.getSong(songId)!=null)
-			throw new BadRequestException("The song is already included in the playlist.");
-			
-		repository.addSong(playlistId, songId);		
-
+		if(playlist.getTrack(trackId) != null) {
+			throw new BadRequestException("The track is already included in the playlist.");
+		}
+		
+		repository.addTrack(playlistId, trackId);
+		
 		// Builds the response
 		UriBuilder ub = uriInfo.getAbsolutePathBuilder().path(this.getClass(), "get");
 		URI uri = ub.build(playlistId);
@@ -160,20 +157,20 @@ public class PlaylistResource {
 	
 	
 	@DELETE
-	@Path("/{playlistId}/{songId}")
-	public Response removeSong(@PathParam("playlistId") String playlistId, @PathParam("songId") String songId) {
+	@Path("/{playlistId}/{trackId}")
+	public Response removeTrack(@PathParam("playlistId") String playlistId, @PathParam("trackId") String trackId) {
 		Playlist playlist = repository.getPlaylist(playlistId);
-		Song song = repository.getSong(songId);
+		Track track = repository.getTrack(trackId);
 		
-		if (playlist==null)
-			throw new NotFoundException("The playlist with id=" + playlistId + " was not found");
+		if(playlist==null) {
+			throw new NotFoundException("The playlist with id=" + playlistId + " was not found.");
+		}
 		
-		if (song == null)
-			throw new NotFoundException("The song with id=" + songId + " was not found");
+		if(track == null) {
+			throw new NotFoundException("The song with id=" + trackId + " was not found.");
+		}
 		
-		
-		repository.removeSong(playlistId, songId);		
-		
+		repository.removeTrack(playlistId, trackId);
 		return Response.noContent().build();
 	}
 }
