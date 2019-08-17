@@ -1,8 +1,8 @@
 package aiss.model.repository;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
-
 import aiss.model.Playlist;
 import aiss.model.Track;
 import aiss.model.Weather;
@@ -26,8 +26,70 @@ public class MapWeatherRepository implements WeatherRepository{
 
 
 	private void init() {
-		// TODO Auto-generated method stub
+		weatherMap = new HashMap<String,Weather>();
+		playlistMap = new HashMap<String,Playlist>();
+		trackMap = new HashMap<String,Track>();
 		
+		// Create songs
+		Track rollingInTheDeep = new Track();
+		rollingInTheDeep.setTitle("Rolling in the Deep");
+		rollingInTheDeep.setArtist("Adele");
+		rollingInTheDeep.setYear("2011");
+		rollingInTheDeep.setAlbum("21");
+		addTrack(rollingInTheDeep);
+		
+		Track one=new Track();
+		one.setTitle("One");
+		one.setArtist("U2");
+		one.setYear("1992");
+		one.setAlbum("Achtung Baby");
+		addTrack(one);
+		
+		Track losingMyReligion = new Track();
+		losingMyReligion.setTitle("Losing my Religion");
+		losingMyReligion.setArtist("REM");
+		losingMyReligion.setYear("1991");
+		losingMyReligion.setAlbum("Out of Time");
+		addTrack(losingMyReligion);
+		
+		Track smellLikeTeenSpirit = new Track();
+		smellLikeTeenSpirit.setTitle("Smell Like Teen Spirit");
+		smellLikeTeenSpirit.setArtist("Nirvana");
+		smellLikeTeenSpirit.setAlbum("Nevermind");
+		smellLikeTeenSpirit.setYear("1991");
+		addTrack(smellLikeTeenSpirit);
+		
+		Track gotye = new Track();
+		gotye.setTitle("Someone that I used to know");
+		gotye.setArtist("Gotye");
+		gotye.setYear("2011");
+		gotye.setAlbum("Making Mirrors");
+		addTrack(gotye);
+		
+		// Create playlists
+		Playlist japlaylist=new Playlist();
+		japlaylist.setName("AISSPlayList");
+		addPlaylist(japlaylist);
+		
+		Playlist playlist = new Playlist();
+		playlist.setName("Favourites");
+		addPlaylist(playlist);
+		
+		// Create weathers
+		Weather cloudy = new Weather();
+		cloudy.setName("Cloudy");
+		
+		Weather sunny = new Weather();
+		sunny.setName("Sunny");
+		
+		// Add songs to playlists
+		addTrack(japlaylist.getId(), rollingInTheDeep.getId());
+		addTrack(japlaylist.getId(), one.getId());
+		addTrack(japlaylist.getId(), smellLikeTeenSpirit.getId());
+		addTrack(japlaylist.getId(), losingMyReligion.getId());
+		
+		addTrack(playlist.getId(), losingMyReligion.getId());
+		addTrack(playlist.getId(), gotye.getId());
 	}
 
 	//Methods related to weather
