@@ -101,7 +101,7 @@ public class WeatherResource {
 	
 	@DELETE
 	@Path("/{id}")
-	public Response removeWeather(@PathParam("id") String id) {
+	public Response deleteWeather(@PathParam("id") String id) {
 		Weather oldWeather = repository.getWeather(id);
 		if(oldWeather == null) {
 			throw new NotFoundException("The weather with id="+ id +" was not found.");
