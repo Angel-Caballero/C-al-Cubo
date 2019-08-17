@@ -1,0 +1,516 @@
+swagger: '2.0'
+info:
+  description: "Una api que te permite escuchar y encontrar musica en base al clima y/o al día durante el que se use la api o en base a un clima y/o día especificado."
+  version: 1.0.0
+  title: "C al Cubo"
+  # put the contact info for your development or API team
+  contact:
+    email: you@your-company.com
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# tags are used for organizing operations
+tags:
+- name: Weather
+  description: All operations related to the weathers
+- name: Playlist
+  description: All operations related to the playlists
+- name: Track
+  description: All operations related to the tracks  
+paths:
+  /weather:
+    get:
+      tags:
+      - Weather
+      summary: gets all weathers
+      operationId: getAllWeather
+      description: |
+        By using this operation, you get all the weathers in the system
+      produces:
+      - application/json
+      responses:
+        200:
+          description: all weathers retrieved
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Weather'
+    post:
+      tags:
+      - Weather
+      summary: creates weather
+      operationId: addWeather
+      description: |
+        Creates a weather in the system
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: weather
+        required: true
+        description: weather to add
+        schema:
+          $ref: '#/definitions/Weather'
+      responses:
+        201:
+          description: weather created
+        400:
+          description: the name of the weather must not be null, the playlist property is not editable
+    put:
+      tags:
+      - Weather
+      summary: updates weather
+      operationId: updateWeather
+      description: |
+        Updates a weather inside the system
+      consumes:
+      - application/json
+      parameters:
+      - in: body
+        name: weather
+        required: true
+        description: weather used to update
+        schema:
+          $ref: '#/definitions/Weather'
+      responses:
+        201:
+          description: weather updated
+        400:
+          description: the playlist property is not editable
+        404:
+          description: the weather to update was not found
+  /weather/{weatherId}:
+    get:
+      tags:
+      - Weather
+      summary: gets a specific weather
+      operationId: getWeather
+      description: |
+        By passing a weather ID, search for
+        a specific weather
+      produces:
+      - application/json
+      parameters:
+        - in: path
+          name: weatherId
+          type: string
+          required: true
+          description: ID of the weather to get
+      responses:
+        200:
+          description: weather retrieved suscesfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Weather'
+        404:
+          description: weather not found
+    delete:
+      tags:
+      - Weather
+      summary: deletes weather 
+      operationId: deleteWeather
+      description: |
+        By passing a weather ID, deletes a specific weather from the system
+      parameters:
+        - in: path
+          name: weatherId
+          type: string
+          required: true
+          description: ID of the weather to delete
+      responses:
+        200:
+          description: weather deleted suscesfully
+        404:
+          description: weather not found
+  /weather/{weatherId}/playlist:
+    delete:
+      tags:
+      - Weather
+      summary: removes playlist from weather
+      operationId: removePlaylist
+      description: |
+        By passing a weather ID, removes its playlist
+      parameters:
+        - in: path
+          name: weatherId
+          type: string
+          required: true
+          description: ID of the weather to delete
+      responses:
+        200:
+          description: weather updated suscesfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Weather'
+        400:
+          description: weather without playlist
+        404:
+          description: weather not found
+  /weather/{weatherId}/{playlistId}:
+    post:
+      tags:
+      - Weather
+      summary: sets a weather´s playlist
+      operationId: setPlaylist
+      description: |
+        By passing a weather ID and a playlist ID, puts the playlist in the weather
+      consumes:
+      - text/plain
+      produces:
+      - application/json
+      parameters:
+        - in: path
+          name: weatherId
+          type: string
+          required: true
+          description: ID of the weather to update
+        - in: path
+          name: playlistId
+          type: string
+          required: true
+          description: ID of the playlist to use
+      responses:
+        200:
+          description: weather updated suscesfully
+        400:
+          description: This playlist is the weather´s playlist already
+        404:
+          description: weather not found, playlist not found
+  /playlists:
+    get:
+      tags:
+      - Playlist
+      summary: gets all playlists
+      operationId: getAllPlaylists
+      description: |
+        By using this operation, you get all the playlists in the system
+      produces:
+      - application/json
+      responses:
+        200:
+          description: all playlists retrieved
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Playlist'
+    post:
+      tags:
+      - Playlist
+      summary: adds a playlist to the system
+      operationId: addPlaylist
+      description: |
+        Adds a playlist to the system
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: playlist
+        description: Playlist to add
+        schema:
+          $ref: '#/definitions/Playlist'
+      responses:
+        201:
+          description: playlist created
+        400:
+          description: The name of the playlist must not be null, The tracks property is not editable
+    put:
+      tags:
+      - Playlist
+      summary: updates a playlist in the system
+      operationId: updatePlaylist
+      description: |
+        Updates a playlist in the system
+      consumes:
+      - application/json
+      parameters:
+      - in: body
+        name: playlist
+        description: Playlist used to update
+        schema:
+          $ref: '#/definitions/Playlist'
+      responses:
+        201:
+          description: Playlist updated
+        400:
+          description: The tracks property is not editable
+        404:
+          description: The playlist to update was not found
+  /playlists/{playlistId}:
+    get:
+      tags:
+      - Playlist
+      summary: gets a specific playlist
+      operationId: getPlaylist
+      description: |
+        By passing a playlist ID, you can search for
+        a specific playlist
+      produces:
+      - application/json
+      parameters:
+        - in: path
+          name: playlistId
+          type: string
+          required: true
+          description: ID of the playlist to get
+      responses:
+        200:
+          description: playlist retrieved suscesfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Playlist'
+        404:
+          description: playlist not found
+    delete:
+      tags:
+      - Playlist
+      summary: deletes a playlist from the system
+      operationId: deletePlaylist
+      description: |
+        By passing a playlist ID, deletes a specific playlist from the system
+      parameters:
+        - in: path
+          name: playlistId
+          type: string
+          required: true
+          description: ID of the playlist to delete
+      responses:
+        200:
+          description: playlist deleted suscesfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Playlist'
+        404:
+          description: playlist not found
+  /playlists/{playlistId}/{trackId}:
+    post:
+      tags:
+      - Playlist
+      summary: adds a track to a playlist
+      operationId: addTrack
+      description: |
+        By passing a playlist ID and a track ID, adds the track to the playlist
+      parameters:
+        - in: path
+          name: playlistId
+          type: string
+          required: true
+          description: ID of the playlist to update
+        - in: path
+          name: trackId
+          type: string
+          required: true
+          description: ID of the track to add
+      responses:
+        200:
+          description: track added to playlist suscesfully
+        400:
+          description: The track is already included in the playlist
+        404:
+          description: playlist not found, track not found
+    delete:
+      tags:
+      - Playlist
+      summary: removes a track to a playlist
+      operationId: removeTrack
+      description: |
+        By passing a playlist ID and a track ID, removes the track from the playlist
+      consumes:
+      - text/plain
+      produces:
+      - application/json
+      parameters:
+        - in: path
+          name: playlistId
+          type: string
+          required: true
+          description: ID of the playlist to update
+        - in: path
+          name: trackId
+          type: string
+          required: true
+          description: ID of the track to remove
+      responses:
+        200:
+          description: track removed to playlist suscesfully
+        404:
+          description: playlist not found, track not found
+  /tracks:
+    get:
+      tags:
+      - Track
+      summary: gets all tracks
+      operationId: getAllTracks
+      description: |
+        By using this operation, you get all the tracks in the system
+      produces:
+      - application/json
+      responses:
+        200:
+          description: all tracks retrieved
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Track'
+    post:
+      tags:
+      - Track
+      summary: creates a track to the system
+      operationId: createTrack
+      description: |
+        Creates a track to the system
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: track
+        description: Track to create
+        schema:
+          $ref: '#/definitions/Track'
+      responses:
+        201:
+          description: track created
+        400:
+          description: The title of the track must not be null
+    put:
+      tags:
+      - Track
+      summary: updates a track from the system
+      operationId: updateTrack
+      description: |
+        Updates a track from the system
+      consumes:
+      - application/json
+      parameters:
+      - in: body
+        name: track
+        description: Track used to update
+        schema:
+          $ref: '#/definitions/Track'
+      responses:
+        201:
+          description: Track updated
+        404:
+          description: The track to update was not found
+  /tracks/{trackId}:
+    get:
+      tags:
+      - Track
+      summary: gets a specific track
+      operationId: getTrack
+      description: |
+        By passing a track ID, you can search for
+        a specific track
+      produces:
+      - application/json
+      parameters:
+        - in: path
+          name: trackId
+          type: string
+          required: true
+          description: ID of the track to get
+      responses:
+        200:
+          description: track retrieved suscesfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Track'
+        404:
+          description: track not found
+    delete:
+      tags:
+      - Track
+      summary: deletes a track from the system
+      operationId: deleteTrack
+      description: |
+        By passing a track ID, deletes a specific track from the system
+      parameters:
+        - in: path
+          name: trackId
+          type: string
+          required: true
+          description: ID of the track to delete
+      responses:
+        200:
+          description: track deleted suscesfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Track'
+        404:
+          description: track not found
+definitions:
+  Weather:
+    type: object
+    required:
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: w23
+      name:
+        type: string
+        example: Overcast Clouds
+      playlists:
+        type: array
+        items:
+          $ref: '#/definitions/Playlist'
+  Playlist:
+    required:
+      - name
+    properties:
+      id:
+        type: string
+        example: p21
+      name:
+        type: string
+        example: Playlist1
+      tracks:
+        type: array
+        items:
+          $ref: '#/definitions/Track' 
+  Track:
+    required:
+      - artist
+      - album
+      - title
+      - year
+    properties:
+      id:
+        type: string
+        example: t12
+      artist:
+        type: string
+        example: Queen
+      album:
+        type: string
+        example: A night at the opera
+      title:
+        type: string
+        example: Death on Two Legs
+      year:
+        type: string
+        example: 1975
+  
+# Added by API Auto Mocking Plugin
+# host: https://c-al-cubo-apirest.appspot.com/
+# basePath: /api
+schemes:
+ - https
+# Added by API Auto Mocking Plugin
+basePath: /Angel-Caballero/CAlCubo/1.0.0
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
