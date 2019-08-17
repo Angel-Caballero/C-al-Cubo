@@ -64,7 +64,7 @@ public class TrackResource {
 	@POST
 	@Consumes("application/json")
 	@Produces("application/json")
-	public Response addTrack(@Context UriInfo uriInfo, Track track) {
+	public Response createTrack(@Context UriInfo uriInfo, Track track) {
 		if(track.getTitle() == null || "".equals(track.getTitle())) {
 			throw new BadRequestException("The tittle of the track must not be null.");
 		}
