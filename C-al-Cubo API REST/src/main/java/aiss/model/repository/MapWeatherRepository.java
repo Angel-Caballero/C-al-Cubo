@@ -78,9 +78,11 @@ public class MapWeatherRepository implements WeatherRepository{
 		// Create weathers
 		Weather cloudy = new Weather();
 		cloudy.setName("Cloudy");
+		addWeather(cloudy);
 		
 		Weather sunny = new Weather();
 		sunny.setName("Sunny");
+		addWeather(sunny);
 		
 		// Add songs to playlists
 		addTrack(japlaylist.getId(), rollingInTheDeep.getId());
