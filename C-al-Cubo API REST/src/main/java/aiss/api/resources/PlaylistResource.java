@@ -51,20 +51,6 @@ public class PlaylistResource {
 	}
 	
 	
-	@GET
-	@Path("/{playlistId}")
-	@Produces("application/json")
-	public Playlist getPlaylist(@PathParam("playlistId") String id)
-	{
-		Playlist playlist = repository.getPlaylist(id);
-		
-		if (playlist == null) {
-			throw new NotFoundException("The playlist wit id="+ id +" was not found.");			
-		}
-		
-		return playlist;
-	}
-	
 	@POST
 	@Consumes("application/json")
 	@Produces("application/json")
@@ -86,7 +72,7 @@ public class PlaylistResource {
 		resp.entity(playlist);			
 		return resp.build();
 	}
-
+	
 	
 	@PUT
 	@Consumes("application/json")
@@ -109,6 +95,23 @@ public class PlaylistResource {
 		return Response.noContent().build();
 	}
 	
+	
+	@GET
+	@Path("/{playlistId}")
+	@Produces("application/json")
+	public Playlist getPlaylist(@PathParam("playlistId") String id)
+	{
+		Playlist playlist = repository.getPlaylist(id);
+		
+		if (playlist == null) {
+			throw new NotFoundException("The playlist wit id="+ id +" was not found.");			
+		}
+		
+		return playlist;
+	}
+	
+
+
 	@DELETE
 	@Path("/{playlistId}")
 	public Response deletePlaylist(@PathParam("playlistId") String id) {

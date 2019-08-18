@@ -48,16 +48,6 @@ public class WeatherResource {
 		return repository.getAllWeathers();
 	}
 	
-	@GET
-	@Path("/{weatherId}")
-	@Produces("application/json")
-	public Weather getWeather(@PathParam("weatherId") String id) {
-		Weather weather = repository.getWeather(id);
-		if(weather == null) {
-			throw new NotFoundException("The weather with id="+ id +" was not found.");
-		}
-		return weather;
-	}
 	
 	@POST
 	@Consumes("application/json")
@@ -80,6 +70,7 @@ public class WeatherResource {
 		return resp.build();
 	}
 	
+	
 	@PUT
 	@Consumes("application/json")
 	public Response updateWeather(Weather weather) {
@@ -99,6 +90,19 @@ public class WeatherResource {
 		return Response.noContent().build();
 	}
 	
+	
+	@GET
+	@Path("/{weatherId}")
+	@Produces("application/json")
+	public Weather getWeather(@PathParam("weatherId") String id) {
+		Weather weather = repository.getWeather(id);
+		if(weather == null) {
+			throw new NotFoundException("The weather with id="+ id +" was not found.");
+		}
+		return weather;
+	}
+	
+	
 	@DELETE
 	@Path("/{weatherId}")
 	public Response deleteWeather(@PathParam("weatherId") String id) {
@@ -112,7 +116,6 @@ public class WeatherResource {
 	}
 	
 	
-	//Methods related to playlists inside the weather
 	@POST
 	@Path("/{weatherId}/{playlistId}")
 	@Consumes("text/plain")

@@ -47,20 +47,6 @@ public class TrackResource {
 	}
 	
 	
-	@GET
-	@Path("/{trackId}")
-	@Produces("application/json")
-	public Track getTrack(@PathParam("trackId") String trackId) {
-		Track track = repository.getTrack(trackId);
-		
-		if(track == null) {
-			throw new NotFoundException("The track with id = " + trackId + " was not found.");
-		}
-		
-		return track;
-	}
-	
-	
 	@POST
 	@Consumes("application/json")
 	@Produces("application/json")
@@ -108,6 +94,21 @@ public class TrackResource {
 	}
 	
 	
+	@GET
+	@Path("/{trackId}")
+	@Produces("application/json")
+	public Track getTrack(@PathParam("trackId") String trackId) {
+		Track track = repository.getTrack(trackId);
+		
+		if(track == null) {
+			throw new NotFoundException("The track with id = " + trackId + " was not found.");
+		}
+		
+		return track;
+	}
+	
+	
+
 	@DELETE
 	@Path("/{trackId}")
 	public Response deleteTrack(@PathParam("trackId") String trackId) {
