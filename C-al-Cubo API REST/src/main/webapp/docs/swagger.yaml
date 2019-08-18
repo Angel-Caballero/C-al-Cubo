@@ -144,10 +144,6 @@ paths:
       responses:
         200:
           description: weather updated suscesfully
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Weather'
         400:
           description: weather without playlist
         404:
@@ -179,7 +175,7 @@ paths:
         200:
           description: weather updated suscesfully
         400:
-          description: This playlist is the weather´s playlist already
+          description: this playlist is the weather´s playlist already
         404:
           description: weather not found, playlist not found
   /playlists:
@@ -213,14 +209,14 @@ paths:
       parameters:
       - in: body
         name: playlist
-        description: Playlist to add
+        description: playlist to add
         schema:
           $ref: '#/definitions/Playlist'
       responses:
         201:
           description: playlist created
         400:
-          description: The name of the playlist must not be null, The tracks property is not editable
+          description: the name of the playlist must not be null, the tracks property is not editable
     put:
       tags:
       - Playlist
@@ -233,16 +229,16 @@ paths:
       parameters:
       - in: body
         name: playlist
-        description: Playlist used to update
+        description: playlist used to update
         schema:
           $ref: '#/definitions/Playlist'
       responses:
         201:
-          description: Playlist updated
+          description: playlist updated
         400:
-          description: The tracks property is not editable
+          description: the tracks property is not editable
         404:
-          description: The playlist to update was not found
+          description: the playlist to update was not found
   /playlists/{playlistId}:
     get:
       tags:
@@ -285,10 +281,6 @@ paths:
       responses:
         200:
           description: playlist deleted suscesfully
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Playlist'
         404:
           description: playlist not found
   /playlists/{playlistId}/{trackId}:
@@ -299,6 +291,10 @@ paths:
       operationId: addTrack
       description: |
         By passing a playlist ID and a track ID, adds the track to the playlist
+      consumes:
+      - text/plain
+      produces:
+      - application/json
       parameters:
         - in: path
           name: playlistId
@@ -314,7 +310,7 @@ paths:
         200:
           description: track added to playlist suscesfully
         400:
-          description: The track is already included in the playlist
+          description: the track is already included in the playlist
         404:
           description: playlist not found, track not found
     delete:
@@ -324,10 +320,6 @@ paths:
       operationId: removeTrack
       description: |
         By passing a playlist ID and a track ID, removes the track from the playlist
-      consumes:
-      - text/plain
-      produces:
-      - application/json
       parameters:
         - in: path
           name: playlistId
@@ -375,14 +367,14 @@ paths:
       parameters:
       - in: body
         name: track
-        description: Track to create
+        description: track to create
         schema:
           $ref: '#/definitions/Track'
       responses:
         201:
           description: track created
         400:
-          description: The title of the track must not be null
+          description: the title of the track must not be null
     put:
       tags:
       - Track
@@ -395,14 +387,14 @@ paths:
       parameters:
       - in: body
         name: track
-        description: Track used to update
+        description: track used to update
         schema:
           $ref: '#/definitions/Track'
       responses:
         201:
-          description: Track updated
+          description: track updated
         404:
-          description: The track to update was not found
+          description: the track to update was not found
   /tracks/{trackId}:
     get:
       tags:
@@ -445,10 +437,6 @@ paths:
       responses:
         200:
           description: track deleted suscesfully
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Track'
         404:
           description: track not found
 definitions:
@@ -504,13 +492,11 @@ definitions:
       year:
         type: string
         example: 1975
-  
 # Added by API Auto Mocking Plugin
-# host: https://c-al-cubo-apirest.appspot.com/
+# host: c-al-cubo-apirest.appspot.com
 # basePath: /api
 schemes:
  - https
 # Added by API Auto Mocking Plugin
-basePath: /Angel-Caballero/CAlCubo/1.0.0
-# Added by API Auto Mocking Plugin
 host: virtserver.swaggerhub.com
+basePath: /Angel-Caballero/CAlCubo/1.0.0
