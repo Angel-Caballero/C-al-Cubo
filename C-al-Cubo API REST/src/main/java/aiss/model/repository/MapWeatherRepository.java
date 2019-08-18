@@ -31,34 +31,6 @@ public class MapWeatherRepository implements WeatherRepository{
 		trackMap = new HashMap<String,Track>();
 		
 		// Create songs
-		Track rollingInTheDeep = new Track();
-		rollingInTheDeep.setTitle("Rolling in the Deep");
-		rollingInTheDeep.setArtist("Adele");
-		rollingInTheDeep.setYear("2011");
-		rollingInTheDeep.setAlbum("21");
-		addTrack(rollingInTheDeep);
-		
-		Track one=new Track();
-		one.setTitle("One");
-		one.setArtist("U2");
-		one.setYear("1992");
-		one.setAlbum("Achtung Baby");
-		addTrack(one);
-		
-		Track losingMyReligion = new Track();
-		losingMyReligion.setTitle("Losing my Religion");
-		losingMyReligion.setArtist("REM");
-		losingMyReligion.setYear("1991");
-		losingMyReligion.setAlbum("Out of Time");
-		addTrack(losingMyReligion);
-		
-		Track smellLikeTeenSpirit = new Track();
-		smellLikeTeenSpirit.setTitle("Smell Like Teen Spirit");
-		smellLikeTeenSpirit.setArtist("Nirvana");
-		smellLikeTeenSpirit.setAlbum("Nevermind");
-		smellLikeTeenSpirit.setYear("1991");
-		addTrack(smellLikeTeenSpirit);
-		
 		Track gotye = new Track();
 		gotye.setTitle("Someone that I used to know");
 		gotye.setArtist("Gotye");
@@ -66,14 +38,60 @@ public class MapWeatherRepository implements WeatherRepository{
 		gotye.setAlbum("Making Mirrors");
 		addTrack(gotye);
 		
-		// Create playlists
-		Playlist japlaylist=new Playlist();
-		japlaylist.setName("AISSPlayList");
-		addPlaylist(japlaylist);
+		Track comeTogether = new Track();
+		comeTogether.setTitle("Come Together");
+		comeTogether.setArtist("The Beatles");
+		comeTogether.setYear("1969");
+		comeTogether.setAlbum("Abbey Road");
+		addTrack(comeTogether);
 		
-		Playlist playlist = new Playlist();
-		playlist.setName("Favourites");
-		addPlaylist(playlist);
+		Track bohemianRhapsody = new Track();
+		bohemianRhapsody.setTitle("Bohemian Rhapsody");
+		bohemianRhapsody.setArtist("Queen");
+		bohemianRhapsody.setYear("1975");
+		bohemianRhapsody.setAlbum("A Night at the Opera");
+		addTrack(bohemianRhapsody);
+		
+		Track dreams = new Track();
+		dreams.setTitle("Dreams");
+		dreams.setArtist("Fleetwood Mac");
+		dreams.setYear("1977");
+		dreams.setAlbum("Rumours");
+		addTrack(dreams);
+		
+		Track oops = new Track();
+		oops.setTitle("Oops!... I Did It Again");
+		oops.setArtist("Britney Spears");
+		oops.setYear("2000");
+		oops.setAlbum("Oops!... I Did It Again");
+		addTrack(oops);
+		
+		Track everybody = new Track();
+		everybody.setTitle("Everybody (Backstreet's Back)");
+		everybody.setArtist("Backstreet Boys");
+		everybody.setYear("1997");
+		everybody.setAlbum("Backstreet Boys");
+		addTrack(everybody);
+		
+		Track black = new Track();
+		black.setTitle("Back In Black");
+		black.setArtist("AC/DC");
+		black.setYear("1980");
+		black.setAlbum("Back in Black");
+		addTrack(black);
+		
+		// Create playlists
+		Playlist cAlCubo = new Playlist();
+		cAlCubo.setName("C al Cubo");
+		addPlaylist(cAlCubo);
+		
+		Playlist favourites = new Playlist();
+		favourites.setName("Favourites");
+		addPlaylist(favourites);
+		
+		Playlist sunnyD = new Playlist();
+		sunnyD.setName("Sunny Days");
+		addPlaylist(sunnyD);
 		
 		// Create weathers
 		Weather cloudy = new Weather();
@@ -85,13 +103,18 @@ public class MapWeatherRepository implements WeatherRepository{
 		addWeather(sunny);
 		
 		// Add songs to playlists
-		addTrack(japlaylist.getId(), rollingInTheDeep.getId());
-		addTrack(japlaylist.getId(), one.getId());
-		addTrack(japlaylist.getId(), smellLikeTeenSpirit.getId());
-		addTrack(japlaylist.getId(), losingMyReligion.getId());
+		addTrack(cAlCubo.getId(), gotye.getId());
+		addTrack(cAlCubo.getId(), comeTogether.getId());
+		addTrack(cAlCubo.getId(), dreams.getId());
 		
-		addTrack(playlist.getId(), losingMyReligion.getId());
-		addTrack(playlist.getId(), gotye.getId());
+		addTrack(favourites.getId(), oops.getId());
+		addTrack(favourites.getId(), everybody.getId());
+		addTrack(favourites.getId(), black.getId());
+		
+		addTrack(sunnyD.getId(), bohemianRhapsody.getId());
+		
+		// Sets playlists in weather
+		setPlaylist(sunny.getId(), sunnyD.getId());
 	}
 
 	//Methods related to weather
