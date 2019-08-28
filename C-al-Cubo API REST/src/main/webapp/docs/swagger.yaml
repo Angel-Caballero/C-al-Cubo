@@ -123,7 +123,7 @@ paths:
           required: true
           description: ID of the weather to delete
       responses:
-        200:
+        204:
           description: weather deleted suscesfully
         404:
           description: weather not found
@@ -142,7 +142,7 @@ paths:
           required: true
           description: ID of the weather to delete
       responses:
-        200:
+        204:
           description: weather updated suscesfully
         400:
           description: weather without playlist
@@ -172,7 +172,7 @@ paths:
           required: true
           description: ID of the playlist to use
       responses:
-        200:
+        204:
           description: weather updated suscesfully
         400:
           description: this playlist is the weather´s playlist already
@@ -233,7 +233,7 @@ paths:
         schema:
           $ref: '#/definitions/Playlist'
       responses:
-        201:
+        204:
           description: playlist updated
         400:
           description: the tracks property is not editable
@@ -279,7 +279,7 @@ paths:
           required: true
           description: ID of the playlist to delete
       responses:
-        200:
+        204:
           description: playlist deleted suscesfully
         404:
           description: playlist not found
@@ -391,7 +391,7 @@ paths:
         schema:
           $ref: '#/definitions/Track'
       responses:
-        201:
+        204:
           description: track updated
         404:
           description: the track to update was not found
@@ -435,7 +435,7 @@ paths:
           required: true
           description: ID of the track to delete
       responses:
-        200:
+        204:
           description: track deleted suscesfully
         404:
           description: track not found
@@ -447,7 +447,6 @@ definitions:
     properties:
       id:
         type: string
-        format: uuid
         example: w23
       name:
         type: string
